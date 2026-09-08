@@ -12,16 +12,11 @@
         <!-- TITULO 1 CABECERA -->
 
             <div class= "cabecera"  id="cabecera"> 
+                <!-- TITULO CONTENEDOR LOGO CABECERA -->
                 <div class="contenedor_logo_cabecera" id="contenedor_logo_cabecera">
                     <?php include __DIR__ . '/../../../php/inicio_sesion/cabecera/logo_cabecera.php'; ?>
                 </div>
-
             </div>
-
-
-
-
-
         <script>
             <?php include __DIR__ . '/../../../js/inicio_sesion/cabecera/cabecera.js'; ?>
         </script>

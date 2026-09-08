@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title></title>
+    <link rel="stylesheet" href="/conserje_smart/css/inicio_sesion/pie_pagina/contactos_pie_pagina.css">
 </head>
 <body>
 
