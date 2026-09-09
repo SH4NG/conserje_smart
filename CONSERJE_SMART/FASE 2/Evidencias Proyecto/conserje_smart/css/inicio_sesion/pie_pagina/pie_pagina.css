@@ -7,23 +7,23 @@
     display: flex;
     flex-direction: column;
     background: #000000; /* establece el color de fondo */
-    color: white; /* establece el color del texto */
+    color: #e5ba31; /* establece el color del texto */
     justify-content: space-between; /* distribuye las partes del pie de pagina */
     align-items: center; /* centra las partes horizontalmente */
     margin-top: 2%; /* agrega espacio entre el contenido y el footer */
     font-family: 'Syne', sans-serif; /* establece la tipografia del footer */
+    padding-top: 1%; /* agrega espacio entre el contenido y el footer */
 }
 
 /* TITULO 2 PARTE SUPERIOR PIE PAGINA */
 
     /* estilo parte superior del pie de pagina */
     .parte_superior_pie_pagina {
-        width: 100%;
+        width: 97%;
         height: 80%;
         display: flex;
         padding-top: 1%;
         flex-direction: row;
-        justify-content: space-between; /* distribuye navegacion, logo y contacto */
         align-items: center; /* centra los contenedores verticalmente */
     }
 
@@ -31,18 +31,19 @@
 
     /* estilo contenedor de navegacion del pie de pagina */
     .contenedor_navegacion_pie_pagina {
-        width: 30%;
+        width: 40%;
         height: 100%;
         display: flex;
-        justify-content: flex-start; /* coloca la navegacion a la izquierda */
+        justify-content: center; /* coloca la navegacion a la izquierda */
         align-items: center; /* centra la navegacion verticalmente */
+
     }
 
 /* TITULO 4 CONTENEDOR LOGO PIE PAGINA */
 
     /* estilo contenedor del logo del pie de pagina */
     .contenedor_logo_pie_pagina {
-        width: 40%;
+        width: 20%;
         height: 100%;
         display: flex;
         justify-content: center; /* centra el logo horizontalmente */
@@ -53,11 +54,12 @@
 
     /* estilo contenedor de contacto del pie de pagina */
     .contenedor_contacto_pie_pagina {
-        width: 30%;
+        width: 40%;
         height: 100%;
         display: flex;
         justify-content: flex-end; /* coloca el contacto a la derecha */
         align-items: center; /* centra el contacto verticalmente */
+        
     }
 
 /* TITULO 6 PARTE INFERIOR PIE PAGINA */
