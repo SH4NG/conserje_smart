@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="/conserje_smart/css/inicio_sesion/inicio_sesion.css">
 </head>
 
     <body>
@@ -27,7 +28,7 @@
             <!-- se llama al pie de pagina mediante include -->
             <?php
             include 'pie_pagina/pie_pagina.php';
-            ?>    
+            ?>
     
     </body>
     
