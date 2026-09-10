@@ -32,5 +32,6 @@
         </div>
 
     </div>
+    <script><?php include __DIR__ . '/../../../js/inicio_sesion/pie_pagina/contactos_pie_pagina.js'; ?></script>
 </body>
 </html>

@@ -1,0 +1,14 @@
+/*TITULO BOTON INICIAR SESION AUTENTIFICACION*/
+.boton_iniciar_sesion_autentificacion{
+    width: 100%;
+    background: #e5ba31;
+    color: #1a1a1a;
+    border: none;
+    border-radius: 0.4vw;
+    padding: 1.1vh 0.6vw;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.9vw;
+    cursor: pointer;
+    
+}

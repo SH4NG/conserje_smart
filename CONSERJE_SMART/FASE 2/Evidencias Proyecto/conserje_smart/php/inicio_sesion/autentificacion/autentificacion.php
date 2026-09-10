@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title></title>
-    <link rel="stylesheet" href="/conserje_smart/css/autentificacion/autentificacion.css">
+    <link rel="stylesheet" href="/conserje_smart/css/inicio_sesion/autentificacion/autentificacion.css">
 </head>
 
     <!-- TITULO AUTENTIFICACION -->

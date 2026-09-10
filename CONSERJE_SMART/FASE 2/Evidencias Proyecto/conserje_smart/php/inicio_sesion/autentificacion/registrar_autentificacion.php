@@ -7,9 +7,10 @@
     <link rel="stylesheet" href="/conserje_smart/css/inicio_sesion/autentificacion/registrar_autentificacion.css">
 </head>
 <body>
-    
-    <div class="clase registrar_autentificacion" id="clase registrar_autentificacion">
+    <!-- TITULO REGISTRAR AUTENTIFICACION -->
+    <div class="registrar_autentificacion" id="registrar_autentificacion">
         ¿Aun no tienes cuenta?
+        <!-- TITULO TEXTO REGISTRAR AUTENTIFICACION -->
         <div class="texto_registrar_autentificacion" id="texto_registrar_autentificacion">
             Registrate Aqui
         </div>

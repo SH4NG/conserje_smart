@@ -7,9 +7,9 @@
     <link rel="stylesheet" href="/conserje_smart/css/inicio_sesion/autentificacion/recuperar_autentificacion.css">
 </head>
 <body>
-    
-    <div class="clase recuperar_autentificacion" id="clase recuperar_autentificacion">
-        recuperar contraseña
+    <!-- TITULO RECORDAR AUTENTIFICACION -->
+    <div class="recuperar_autentificacion" id="recuperar_autentificacion">
+        Recuperar Contraseña
     </div>
 
     <script>

@@ -2,6 +2,8 @@
 body{
   margin: 0;
   padding: 0;
+  background-image: url('../../imagenes/inicio_sesion/inicio_sesion.png');
+  background-size: cover;
 }
 
 html {

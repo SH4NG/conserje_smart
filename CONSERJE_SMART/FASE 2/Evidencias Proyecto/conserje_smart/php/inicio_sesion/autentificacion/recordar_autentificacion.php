@@ -7,10 +7,11 @@
     <link rel="stylesheet" href="/conserje_smart/css/inicio_sesion/autentificacion/recordar_autentificacion.css">
 </head>
 <body>
-    
+    <!-- TITULO RECORDAR AUTENTIFICACION -->
     <div class="recordar_autentificacion" id="recordar_autentificacion">
+        <!-- CASILLA RECORDAR AUTENTIFICACION -->
         <div class="casilla_recordar_autentificacion" id="casilla_recordar_autentificacion">
-            recordar contraseña
+            Recordar Contraseña
         </div>
     </div>
 

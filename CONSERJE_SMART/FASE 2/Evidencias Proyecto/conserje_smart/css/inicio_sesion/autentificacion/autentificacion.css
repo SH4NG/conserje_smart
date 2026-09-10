@@ -1,0 +1,82 @@
+/*TITULO AUTENTIFICACION*/
+.autentificacion{
+    background: #ffffff;
+    border-radius: 0.85vw;
+    padding: 3.7vh 1.9vw;
+    width: 100%;
+    max-width: 30vw;
+    margin: 5.5vh auto;
+    box-shadow: 0 0.5vw 1.6vw rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    font-family: 'Syne', sans-serif;
+    position: relative;
+    z-index: 1;
+    
+}
+/*CONTENEDOR LOGO AUTENTIFICACION*/
+.contenedor_logo_autentificacion{
+    margin-bottom: 1.1vh;
+
+}
+
+/*CONTENEDOR TITULO AUTENTIFICACION*/
+.contenedor_titulo_autentificacion{
+    margin-bottom: 2.2vh;
+
+}
+
+/*CONTENEDOR CAMPO CORREO AUTENTIFICACION*/
+.contenedor_campo_correo_autentificacion{
+    width: 100%;
+
+}
+
+/*CONTENEDOR CAMPO CONTRASEÑA AUTENTIFICACION*/
+.contenedor_campo_contrasena_autentificacion{
+    width: 100%;
+
+}
+
+/*CONTENEDOR RECORDAR RECUPERAR AUTENTIFICACION*/
+.contenedor_recordar_recuperar_autentificacion{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.85vh;
+    font-size: 0.75vw;
+    flex-direction: row;
+
+}
+
+/*CONTENEDOR RECORDAR AUTENTIFICACION*/
+.contenedor_recordar_autentificacion {
+    width: auto; /* ocupa solamente el espacio necesario */
+    height: auto; /* mantiene la altura de su contenido */
+    display: flex; /* permite organizar el contenido */
+    align-items: center; /* centra el contenido verticalmente */
+}
+
+/*CONTENEDOR RECUPERAR AUTENTIFICACION*/
+.contenedor_recuperar_autentificacion {
+    width: auto; /* ocupa solamente el espacio necesario */
+    height: auto; /* mantiene la altura de su contenido */
+    display: flex; /* permite organizar el contenido */
+    align-items: center; /* centra el contenido verticalmente */
+
+}
+
+/*CONTENEDOR BOTON INICIAR SESION AUTENTIFICACION*/
+.contenedor_boton_iniciar_sesion_autentificacion{
+    width: 100%;
+    margin-bottom: 1.5vh;
+}
+
+/*CONTENEDOR REGISTRAR AUTENTIFICACION*/
+.contenedor_registrar_autentificacion{
+    font-size: 0.75vw;
+
+}

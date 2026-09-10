@@ -7,9 +7,9 @@
     <title></title>
 </head>
 <body>
-    
+    <!-- TITULO BOTON INICIAR SESION AUTENTIFICACION -->
     <button class="boton_iniciar_sesion_autentificacion" id="boton_iniciar_sesion_autentificacion">
-        iniciar sesion
+        iniciar sesion →
     </button>
 
     <script>
