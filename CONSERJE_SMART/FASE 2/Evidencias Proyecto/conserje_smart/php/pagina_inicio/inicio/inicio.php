@@ -22,7 +22,7 @@
 
             <!-- se llama al quienes_somos mediante include -->
         <div class="contenedor_quienes_somos" id="contenedor_quienes_somos">
-            <?php include __DIR__ . '/quienes_somos.php'; ?>
+            <?php include __DIR__ . '/quienes_somos/quienes_somos.php'; ?>
     
         </div>
 
