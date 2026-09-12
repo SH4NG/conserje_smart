@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title></title>
-    <link rel="stylesheet" href="/conserje_smart/css/pagina_inicio/pie_pagina/navegacion_pie_pagina.css">
+    <link rel="stylesheet" href="/conserje_smart/css/inicio_sesion/pie_pagina/navegacion_pie_pagina.css">
 </head>
 <body>
 
@@ -38,6 +38,6 @@
         </div>
     </div>
 
-    <script src="/conserje_smart/js/pagina_inicio/pie_pagina/navegacion_pie_pagina.js"></script>
+    <script src="/conserje_smart/js/inicio_sesion/pie_pagina/navegacion_pie_pagina.js"></script>
 </body>
 </html>

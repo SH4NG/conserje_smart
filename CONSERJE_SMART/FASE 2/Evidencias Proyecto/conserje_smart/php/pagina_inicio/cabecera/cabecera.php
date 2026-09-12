@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <!-- estilo de la cabecera -->
-        <link rel="stylesheet" href="/conserje_smart/css/inicio_sesion/cabecera/cabecera.css">
+        <link rel="stylesheet" href="/conserje_smart/css/pagina_inicio/cabecera/cabecera.css">
 </head>
     <body>
 
@@ -14,11 +14,11 @@
             <div class= "cabecera"  id="cabecera"> 
                 <!-- TITULO CONTENEDOR LOGO CABECERA -->
                 <div class="contenedor_logo_cabecera" id="contenedor_logo_cabecera">
-                    <?php include __DIR__ . '/../../../php/inicio_sesion/cabecera/logo_cabecera.php'; ?>
+                    <?php include __DIR__ . '/../../../php/pagina_inicio/cabecera/logo_cabecera.php'; ?>
                 </div>
             </div>
         <script>
-            <?php include __DIR__ . '/../../../js/inicio_sesion/cabecera/cabecera.js'; ?>
+            <?php include __DIR__ . '/../../../js/pagina_inicio/cabecera/cabecera.js'; ?>
         </script>
     </body>
 </html>

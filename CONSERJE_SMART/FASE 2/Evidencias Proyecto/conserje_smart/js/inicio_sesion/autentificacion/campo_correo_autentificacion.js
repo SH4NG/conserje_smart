@@ -19,7 +19,7 @@
     function obtenerCorreoAutentificacion() {
 
         // obtiene el campo de correo mediante su id
-        const entradaCorreoAutentificacion = document.getElementById("texto_entrada_correo_autentificacion");
+        const entradaCorreoAutentificacion = document.getElementById("texto_entrada_campo_correo_autentificacion");
 
         // verifica que el campo exista
         if (!entradaCorreoAutentificacion) {
@@ -36,7 +36,7 @@
     function validarCorreoAutentificacion(correo) {
 
         // crea la expresion que permite solamente los dominios autorizados
-        const expresionCorreo = /^[^\s@]+@(conserje|residente|admin)\.cl$/;
+        const expresionCorreo = /^[^\s@]+@(conserje\.smart\.cl|admin\.conserje\.smart\.cl|residente\.conserje\.smart\.cl)$/;
 
         // devuelve verdadero si el correo tiene un dominio autorizado
         return expresionCorreo.test(correo);
@@ -62,7 +62,7 @@
         if (!validarCorreoAutentificacion(correo)) {
 
             // muestra un mensaje indicando los dominios permitidos
-            alert("Ingrese un correo electrónico válido. Solo se permiten correos @conserje.cl, @residente.cl o @admin.cl.");
+            alert("Ingrese un correo electrónico válido. Solo se permiten correos @conserje.smart.cl, @residente.conserje.smart.cl o @admin.conserje.smart.cl.");
 
             // indica que la validacion no fue correcta
             return false;

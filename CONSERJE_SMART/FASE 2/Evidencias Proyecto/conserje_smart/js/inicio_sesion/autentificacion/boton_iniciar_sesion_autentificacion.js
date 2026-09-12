@@ -1,6 +1,3 @@
-
-// TITULO 1 CAMPO BOTON INICIAR SESION AUTENTIFICACION
-
 // espera a que el contenido de la pagina termine de cargar
 document.addEventListener("DOMContentLoaded", function () {
 
@@ -84,8 +81,7 @@ async function validarAutentificacion() {
         if (resultado.exito) {
 
             // comprueba si el usuario tiene rol de administracion
-            if (resultado.rol === "admin
-                ") {
+            if (resultado.rol === "admin") {
 
                 // redirige al inicio de administracion
                 window.location.href = "/conserje_smart/php/programa/admin/inicio_admin/inicio_admin.php";
@@ -132,4 +128,3 @@ async function validarAutentificacion() {
         alert("Ocurrió un error en la conexión. Abre la Consola del navegador (F12) para ver más detalles.");
     }
 }
-

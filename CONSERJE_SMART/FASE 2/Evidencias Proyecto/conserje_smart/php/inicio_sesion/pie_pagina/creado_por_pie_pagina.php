@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title></title>
-    <link rel="stylesheet" href="/conserje_smart/css/pagina_inicio/pie_pagina/creado_por_pie_pagina.css">
+    <link rel="stylesheet" href="/conserje_smart/css/inicio_sesion/pie_pagina/creado_por_pie_pagina.css">
 </head>
 <body>
 
@@ -14,7 +14,7 @@
         Creado por Conserje Smart 2026 
     </div>
 
-    <script><?php include __DIR__ . '/../../../js/pagina_inicio/pie_pagina/creado_por_pie_pagina.js'; ?></script>
+    <script><?php include __DIR__ . '/../../../js/inicio_sesion/pie_pagina/creado_por_pie_pagina.js'; ?></script>
 
 </body>
 </html>
