@@ -2,18 +2,18 @@
 .navegacion_pie_pagina{
         display:flex;
         flex-direction:column; /* organiza los elementos de forma vertical */
-        color:white; /*establece el color del titulo */
-        padding-left: 5%;
-        font-size: 0.56vw; /*establece el tamaño de la letra */
+        gap: 1.2vh;
+        color:#e5ba31; /* establece el color del titulo */
+        font-size: 1.2vw; /* establece el tamaño de la letra */
+        text-align: center; /* alinea el titulo al centro */
 
-        font-style:italic; /*aplica el estilo italico al titulo */
 }
 
 /*TITULO QUIENES_SOMOS PIE PAGINA*/
 .btn_navegacion1{
-        color:#d9d9d9; /* establece el color de los enlaces */
+        color:#e5ba31; /* establece el color de los enlaces */
         text-decoration:none; /* elimina el subrayado de los enlaces */
-        margin:1.7% 0; /* establece el espacio vertical entre los enlaces */
+        margin-top: 15%; /* establece el espacio vertical entre los enlaces */
         font-size: 0.85vw; /* establece el tamaño de la letra */
         font-family: 'Syne', sans-serif;
         cursor: pointer; /* muestra el cursor de boton */
@@ -22,9 +22,9 @@
 
 /*TITULO NUESTRO_OBJETIVO PIE PAGINA*/
 .btn_navegacion2{
-        color:#d9d9d9; /* establece el color de los enlaces */
+        color:#e5ba31; /* establece el color de los enlaces */
         text-decoration:none; /* elimina el subrayado de los enlaces */
-        margin:1.7% 0; /* establece el espacio vertical entre los enlaces */
+        margin-top: 15%; /* establece el espacio vertical entre los enlaces */
         font-size: 0.85vw; /* establece el tamaño de la letra */
         font-family: 'Syne', sans-serif;
         cursor: pointer; /* muestra el cursor de boton */
@@ -33,9 +33,9 @@
 
 /*TITULO NUESTRA_VISION PIE PAGINA*/
 .btn_navegacion3{
-        color:#d9d9d9; /* establece el color de los enlaces */
+        color:#e5ba31; /* establece el color de los enlaces */
         text-decoration:none; /* elimina el subrayado de los enlaces */
-        margin:1.7% 0; /* establece el espacio vertical entre los enlaces */
+        margin-top: 15%; /* establece el espacio vertical entre los enlaces */
         font-size: 0.85vw; /* establece el tamaño de la letra */
         font-family: 'Syne', sans-serif;
         cursor: pointer; /* muestra el cursor de boton */
@@ -44,9 +44,9 @@
 
 /*TITULO CONSULTAS PIE PAGINA*/
 .btn_navegacion4{
-        color:#d9d9d9; /* establece el color de los enlaces */
+        color:#e5ba31; /* establece el color de los enlaces */
         text-decoration:none; /* elimina el subrayado de los enlaces */
-        margin:1.7% 0; /* establece el espacio vertical entre los enlaces */
+        margin-top: 15%; /* establece el espacio vertical entre los enlaces */
         font-size: 0.85vw; /* establece el tamaño de la letra */
         font-family: 'Syne', sans-serif;
         cursor: pointer; /* muestra el cursor de boton */

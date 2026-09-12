@@ -2,49 +2,88 @@
 .contactos_pie_pagina{
         display:flex;
         flex-direction:column; /* organiza los elementos de forma vertical */
-        color:white; /*establece el color del titulo */
-        padding-left: 5%;
-        font-size: 0.56vw; /*establece el tamaño de la letra */
+        color:#e5ba31; /*establece el color del titulo */
+        font-size: 1.2vw; /*establece el tamaño de la letra */
+        text-align: center; /*alinea el titulo al centro */        
+        gap: 1.2vh; /* establece el espacio entre los elementos */
+        margin-left: 10vw; /* establece el espacio derecho del contenedor */
 
-        font-style:italic; /*aplica el estilo italico al titulo */
 }
 
 /*TITULO QUIENES_SOMOS PIE PAGINA*/
+.Icono_contacto_correo{
+        width: 5vw; /* establece el ancho del logo */
+        padding-top: 1%; /* establece el espacio superior del logo */
+        padding-left: 4%; /* establece el espacio izquierdo del logo */
+        height: auto; /* mantiene la proporcion del logo */
+        display: block; /* elimina espacios innecesarios de la imagen */
+        text-align: center; /* centra el logo horizontalmente */
+        
+}
+
 .btn_contactos1{
-        color:#d9d9d9; /* establece el color de los enlaces */
+        color:#e5ba31; /* establece el color de los enlaces */
         text-decoration:none; /* elimina el subrayado de los enlaces */
         margin:1.7% 0; /* establece el espacio vertical entre los enlaces */
         font-size: 0.85vw; /* establece el tamaño de la letra */
         font-family: 'Syne', sans-serif;
         cursor: pointer; /* muestra el cursor de boton */
+        display: flex; /* organiza el contenido del logo */
+        align-items: center; /* centra el logo verticalmente */
+        border-bottom: 0.1vh solid #e3a008; /* agrega una línea superior de color gris */
 
 }
 
 /*TITULO NUESTRO_OBJETIVO PIE PAGINA*/
+.Icono_contacto_whatsapp{
+        width: 5vw; /* establece el ancho del logo */
+        padding-top: 1%; /* establece el espacio superior del logo */
+        padding-left: 4%; /* establece el espacio izquierdo del logo */
+        height: auto; /* mantiene la proporcion del logo */
+        display: block; /* elimina espacios innecesarios de la imagen */
+        text-align: center; /* centra el logo horizontalmente */
+
+}
+
 .btn_contactos2{
-        color:#d9d9d9; /* establece el color de los enlaces */
+        color:#e5ba31; /* establece el color de los enlaces */
         text-decoration:none; /* elimina el subrayado de los enlaces */
         margin:1.7% 0; /* establece el espacio vertical entre los enlaces */
         font-size: 0.85vw; /* establece el tamaño de la letra */
         font-family: 'Syne', sans-serif;
         cursor: pointer; /* muestra el cursor de boton */
+        display: flex; /* organiza el contenido del logo */
+        align-items: center; /* centra el logo verticalmente */
+        border-bottom: 0.1vh solid #e3a008; /* agrega una línea superior de color gris */
 
 }
 
 /*TITULO NUESTRA_VISION PIE PAGINA*/
+.Icono_contacto_instagram{
+        width: 5vw; /* establece el ancho del logo */
+        padding-top: 1%; /* establece el espacio superior del logo */
+        padding-left: 4%; /* establece el espacio izquierdo del logo */
+        height: auto; /* mantiene la proporcion del logo */
+        display: block; /* elimina espacios innecesarios de la imagen */
+        text-align: center; /* centra el logo horizontalmente */
+
+}
+
 .btn_contactos3{
-        color:#d9d9d9; /* establece el color de los enlaces */
+        color:#e5ba31; /* establece el color de los enlaces */
         text-decoration:none; /* elimina el subrayado de los enlaces */
         margin:1.7% 0; /* establece el espacio vertical entre los enlaces */
         font-size: 0.85vw; /* establece el tamaño de la letra */
         font-family: 'Syne', sans-serif;
         cursor: pointer; /* muestra el cursor de boton */
+        display: flex; /* organiza el contenido del logo */
+        align-items: center; /* centra el logo verticalmente */
 
 }
 
 /*TITULO CONSULTAS PIE PAGINA*/
 .btn_contactos4{
-        color:#d9d9d9; /* establece el color de los enlaces */
+        color:#e5ba31; /* establece el color de los enlaces */
         text-decoration:none; /* elimina el subrayado de los enlaces */
         margin:1.7% 0; /* establece el espacio vertical entre los enlaces */
         font-size: 0.85vw; /* establece el tamaño de la letra */

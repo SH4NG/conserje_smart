@@ -2,9 +2,11 @@
 .navegacion_pie_pagina{
         display:flex;
         flex-direction:column; /* organiza los elementos de forma vertical */
+        gap: 1.2vh;
         color:#e5ba31; /* establece el color del titulo */
         font-size: 1.2vw; /* establece el tamaño de la letra */
         text-align: center; /* alinea el titulo al centro */
+
 }
 
 /*TITULO QUIENES_SOMOS PIE PAGINA*/

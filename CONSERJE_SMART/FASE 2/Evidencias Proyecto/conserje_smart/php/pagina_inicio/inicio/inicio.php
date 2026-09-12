@@ -9,7 +9,8 @@
 <body>
     
     <!-- TITULO PAGINA_INICIO  -->
-    <div class="inicio" id="inicio">
+     <!-- estilo pagina inicio provisorio, sacar despues de agregar algo  -->
+    <div  style="min-height: 70%;" class="inicio" id="inicio">
 
 
         <!-- TITULO CONTENIDO_PAGINA_INICIO -->

@@ -10,24 +10,27 @@
 
     <!-- TITULO CONTACTO PIE PAGINA -->
 
-    <div class=contactos_pie_pagina id="contactos_pie_pagina">
-        contactos
+        <div class=contactos_pie_pagina id="contactos_pie_pagina">
+        CONTACTOS
 
         <!-- TITULO CORREO PIE PAGINA -->
 
         <div class="btn_contactos1" id="btn_contactos1">
+            <img class="Icono_contacto_correo" src="/conserje_smart/imagenes/pagina_inicio/pie_pagina/Icono_contacto_correo.png" alt="Correo">
             Conserje_Smart@gmail.com
         </div>
 
         <!-- TITULO TELEFONO/NUMERO PIE PAGINA -->
 
         <div class="btn_contactos2" id="btn_contactos2">
+            <img class="Icono_contacto_whatsapp" src="/conserje_smart/imagenes/pagina_inicio/pie_pagina/Icono_contacto_whatsapp.png" alt="Telefono">
             +56 9 12345678
         </div>
 
         <!-- TITULO INSTAGRAM PIE PAGINA -->
 
         <div class="btn_contactos3" id="btn_contactos3">
+            <img class="Icono_contacto_instagram" src="/conserje_smart/imagenes/pagina_inicio/pie_pagina/Icono_contacto_instagram.png" alt="Instagram">
             ConserjeSmart
         </div>
 

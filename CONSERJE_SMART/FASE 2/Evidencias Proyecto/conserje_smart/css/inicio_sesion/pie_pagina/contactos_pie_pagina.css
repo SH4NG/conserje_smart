@@ -4,7 +4,9 @@
         flex-direction:column; /* organiza los elementos de forma vertical */
         color:#e5ba31; /*establece el color del titulo */
         font-size: 1.2vw; /*establece el tamaño de la letra */
-        text-align: center; /*alinea el titulo al centro */
+        text-align: center; /*alinea el titulo al centro */        
+        gap: 1.2vh; /* establece el espacio entre los elementos */
+        margin-left: 10vw; /* establece el espacio derecho del contenedor */
 
 }
 
@@ -28,6 +30,8 @@
         cursor: pointer; /* muestra el cursor de boton */
         display: flex; /* organiza el contenido del logo */
         align-items: center; /* centra el logo verticalmente */
+        border-bottom: 0.1vh solid #e3a008; /* agrega una línea superior de color gris */
+
 }
 
 /*TITULO NUESTRO_OBJETIVO PIE PAGINA*/
@@ -38,6 +42,7 @@
         height: auto; /* mantiene la proporcion del logo */
         display: block; /* elimina espacios innecesarios de la imagen */
         text-align: center; /* centra el logo horizontalmente */
+
 }
 
 .btn_contactos2{
@@ -49,6 +54,7 @@
         cursor: pointer; /* muestra el cursor de boton */
         display: flex; /* organiza el contenido del logo */
         align-items: center; /* centra el logo verticalmente */
+        border-bottom: 0.1vh solid #e3a008; /* agrega una línea superior de color gris */
 
 }
 
@@ -60,6 +66,7 @@
         height: auto; /* mantiene la proporcion del logo */
         display: block; /* elimina espacios innecesarios de la imagen */
         text-align: center; /* centra el logo horizontalmente */
+
 }
 
 .btn_contactos3{
