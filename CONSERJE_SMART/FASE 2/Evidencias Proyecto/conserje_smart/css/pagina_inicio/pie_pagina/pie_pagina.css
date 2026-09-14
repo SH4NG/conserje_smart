@@ -10,7 +10,6 @@
     color: #e5ba31; /* establece el color del texto */
     justify-content: space-between; /* distribuye las partes del pie de pagina */
     align-items: center; /* centra las partes horizontalmente */
-    margin-top: 2%; /* agrega espacio entre el contenido y el footer */
     font-family: 'Syne', sans-serif; /* establece la tipografia del footer */
     padding-top: 1%; /* agrega espacio entre el contenido y el footer */
 
