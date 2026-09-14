@@ -14,7 +14,7 @@
 
         <!-- TITULO IMAGEN LOGO PIE PAGINA -->
 
-        <img src="/conserje_smart/imagenes/pagina_inicio/pie_pagina/logo_pie_pagina.png" alt="">
+        <img class="imagen_logo_pie_pagina" src="/conserje_smart/imagenes/pagina_inicio/pie_pagina/logo_pie_pagina.png" alt="">
         
     </div>
 
