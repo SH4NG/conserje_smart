@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/conserje_smart/css/pagina_inicio/pagina_inicio.css">
-    <title></title>
+    <link rel="icon" type="image/png" href="/conserje_smart/imagenes/favicon/icono_conserje_smart.png">
+    <title> INICIO </title>
 </head>
     <body>
         

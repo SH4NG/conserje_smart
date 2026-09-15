@@ -12,6 +12,7 @@
     align-items: center; /* centra las partes horizontalmente */
     font-family: 'Syne', sans-serif; /* establece la tipografia del footer */
     padding-top: 1%; /* agrega espacio entre el contenido y el footer */
+    box-shadow: 0 -0.4vh 0.5vw rgba(0, 0, 0, 0.4);
 
 }
 

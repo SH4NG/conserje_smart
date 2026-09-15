@@ -3,6 +3,6 @@
 background-color: #000000;
 padding-left: 5%;
 border-bottom: 1vh solid #f8c02c;
-}
-/*TITULO CONTENEDOR LOGO CABECERA*/
+box-shadow: 0 0.4vh 0.5vw rgba(0, 0, 0, 0.4);
 
+}
