@@ -1,0 +1,74 @@
+.contactos_pie_pagina{
+    display: flex;
+    flex-direction: column;
+    color: #e5ba31;
+    font-size: 1.2vw;
+    text-align: center;
+    gap: 1.2vh;
+    margin-left: 10vw;
+}
+.Icono_contacto_correo{
+    width: 5vw;
+    padding-top: 1%;
+    padding-left: 4%;
+    height: auto;
+    display: block;
+    text-align: center;
+}
+
+.Icono_contacto_whatsapp{
+    width: 5vw;
+    padding-top: 1%;
+    padding-left: 4%;
+    height: auto;
+    display: block;
+    text-align: center;
+
+}
+
+.Icono_contacto_instagram{
+    width: 5vw;
+    padding-top: 1%;
+    padding-left: 4%;
+    height: auto;
+    display: block;
+    text-align: center;
+
+}
+
+.btn_contactos1{
+    color: #e5ba31;
+    text-decoration: none;
+    margin: 1.7% 0;
+    font-size: 0.85vw;
+    font-family: 'Syne', sans-serif;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    border-bottom: 0.1vh solid #e3a008;
+}
+
+.btn_contactos2{
+    color: #e5ba31;
+    text-decoration: none;
+    margin: 1.7% 0;
+    font-size: 0.85vw;
+    font-family: 'Syne', sans-serif;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    border-bottom: 0.1vh solid #e3a008;
+}
+
+.btn_contactos3{
+    color: #e5ba31;
+    text-decoration: none;
+    margin: 1.7% 0;
+    font-size: 0.85vw;
+    font-family: 'Syne', sans-serif;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    border-bottom: 0.1vh solid #e3a008;
+
+}
