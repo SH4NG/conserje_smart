@@ -23,6 +23,8 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] !== 'sesion_iniciada') {
     <title>Document</title>
 </head>
 <body>
-    HOLA conserje
+        <?php
+        include 'barra_lateral/barra_lateral.php';
+        ?>
 </body>
 </html>
