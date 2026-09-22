@@ -14,12 +14,20 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] !== 'sesion_iniciada') {
 }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="/conserje_smart/imagenes/favicon/icono_conserje_smart.png">
     <link rel="stylesheet" href="/conserje_smart/css/programa/conserje/inicio_conserje/inicio_conserje.css">
-
+    <link rel="stylesheet" href="/conserje_smart/css/programa/cabecera/cabecera.css">
+    <link rel="stylesheet" href="/conserje_smart/css/programa/conserje/inicio_conserje/contenedor_inicio_contenido/contenedor_inicio_contenido.css">
+    <link rel="stylesheet" href="/conserje_smart/css/programa/conserje/inicio_conserje/barra_lateral/barra_lateral.css">
+    <link rel="stylesheet" href="/conserje_smart/css/programa/conserje/inicio_conserje/pie_pagina/pie_pagina.css">
+    <link rel="stylesheet" href="/conserje_smart/css/programa/conserje/inicio_conserje/pie_pagina/navegacion_pie_pagina.css">
+    <link rel="stylesheet" href="/conserje_smart/css/programa/conserje/inicio_conserje/pie_pagina/logo_pie_pagina.css">
+    <link rel="stylesheet" href="/conserje_smart/css/programa/conserje/inicio_conserje/pie_pagina/contactos_pie_pagina.css">
+    <link rel="stylesheet" href="/conserje_smart/css/programa/conserje/inicio_conserje/pie_pagina/creado_por_pie_pagina.css">
 
     <title>ConserjeSmart - Inicio Conserje</title>
     
@@ -27,9 +35,7 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] !== 'sesion_iniciada') {
 <body>
 
         <!-- TITULO CABECERA -->
-        <div class="cabecera" id="cabecera">
-
-        </div>
+        <?php include __DIR__ . '/../../cabecera/cabecera.php'; ?>
 
 
         <!-- TITULO CONTENEDOR CONTENIDO -->

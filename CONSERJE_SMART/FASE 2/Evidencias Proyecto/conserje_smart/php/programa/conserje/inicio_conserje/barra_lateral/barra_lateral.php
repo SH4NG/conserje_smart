@@ -1,5 +1,3 @@
-<link rel="stylesheet" href="/conserje_smart/css/programa/conserje/inicio_conserje/barra_lateral/barra_lateral.css">
-
 <div class="barra_lateral" id="barra_lateral">
 
     <div class="Ptitulo_barra_lateral" id="Ptitulo_barra_lateral">

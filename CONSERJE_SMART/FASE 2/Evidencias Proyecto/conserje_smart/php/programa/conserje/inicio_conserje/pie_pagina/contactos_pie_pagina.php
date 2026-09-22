@@ -1,16 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
-    <link rel="stylesheet" href="/conserje_smart/css/programa/conserje/inicio_conserje/pie_pagina/contactos_pie_pagina.css">
-</head>
-<body>
-
     <!-- TITULO CONTACTO PIE PAGINA -->
 
-    <div class=contactos_pie_pagina id="contactos_pie_pagina">
+    <div class="contactos_pie_pagina" id="contactos_pie_pagina">
         CONTACTOS
 
         <!-- TITULO CORREO PIE PAGINA -->
@@ -35,7 +25,3 @@
         </div>
 
     </div>
-
-    <script><?php include __DIR__ . '/../../../js/programa/conserje/inicio_conserje/pie_pagina/contactos_pie_pagina.js'; ?></script>
-</body>
-</html>

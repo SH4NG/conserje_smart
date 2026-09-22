@@ -1,6 +1,3 @@
-<link rel="stylesheet" href="  ">
-
-
 <div class="titulo_inicio_contenido" id="titulo_inicio_contenido">
     
     BIENVENIDO

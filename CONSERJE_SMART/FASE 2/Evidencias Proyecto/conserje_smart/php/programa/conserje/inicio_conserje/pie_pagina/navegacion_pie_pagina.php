@@ -1,16 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
-    <link rel="stylesheet" href="/conserje_smart/css/programa/conserje/inicio_conserje/pie_pagina/navegacion_pie_pagina.css">
-</head>
-<body>
-
     <!-- TITULO NAVEGACION PIE PAGINA -->
 
-    <div class=navegacion_pie_pagina id="navegacion_pie_pagina">
+    <div class="navegacion_pie_pagina" id="navegacion_pie_pagina">
         NAVEGACION
 
         <!-- TITULO QUIENES_SOMOS PIE PAGINA -->
@@ -37,7 +27,3 @@
             CONSULTAS
         </div>
     </div>
-
-    <script src="/conserje_smart/js/programa/conserje/inicio_conserje/pie_pagina/navegacion_pie_pagina.js"></script>
-</body>
-</html>
