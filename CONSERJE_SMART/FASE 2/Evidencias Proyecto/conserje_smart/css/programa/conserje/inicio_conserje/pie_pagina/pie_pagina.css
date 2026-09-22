@@ -10,10 +10,10 @@
     color: #e5ba31; /* establece el color del texto */
     justify-content: space-between; /* distribuye las partes del pie de pagina */
     align-items: center; /* centra las partes horizontalmente */
-    margin-top: 2%; /* agrega espacio entre el contenido y el footer */
     font-family: 'Syne', sans-serif; /* establece la tipografia del footer */
     padding-top: 1%; /* agrega espacio entre el contenido y el footer */
     box-shadow: 0 -0.4vh 0.5vw rgba(0, 0, 0, 0.4);
+    border-top: 0.5vh solid #e5ba31;
 
 }
 
@@ -57,11 +57,10 @@
 /* TITULO 5 CONTENEDOR CONTACTO PIE PAGINA */
 
 /* estilo contenedor de contacto del pie de pagina */
-.contenedor_contacto_pie_pagina {
+.contenedor_contactos_pie_pagina {
     width: 40%;
     height: 100%;
     display: flex;
-    justify-content: flex-end; /* coloca el contacto a la derecha */
     align-items: center; /* centra el contacto verticalmente */
 
 }

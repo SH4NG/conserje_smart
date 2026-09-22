@@ -1,7 +1,18 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #f3f4f6;
+    color: #1a1a1a;
+    font-family: 'Syne', sans-serif;
+}
+
 .cabecera {
     width: 100%;
     min-height: 6vh;
-    background: black;
+    background: #000000;
 }
 
 /* CONTENEDOR CENTRAL: barra lateral + contenido */
@@ -9,24 +20,43 @@
     width: 100%;
     flex-direction: row;
     display: flex;
+    min-height: 76vh;
+    background-image: linear-gradient(rgba(255, 255, 255, 0.78), rgba(255, 255, 255, 0.78)), url('/conserje_smart/imagenes/programa/conserje/inicio_conserje/inicio_sesion.png');
+    background-size: cover;
+    background-position: center;
 }
 
 /* BARRA LATERAL */
 .contenedor_barra_lateral {
-    width:20%;
+    width: 20%;
     display: flex;
-    margin-right:30px;
 }
 
 /* CONTENIDO DE INICIO */
 .contenedor_inicio_contenido {
     width: 80%;
     display: flex;
-    margin-top:30px;
+    margin: 3vh 3vw 4vh 0;
 }
 
 .pie_pagina {
     width: 100%;
     min-height: 6vh;
     background: black;
+}
+
+@media (max-width: 60vw) {
+    .contenedor_contenido {
+        flex-direction: column;
+    }
+
+    .contenedor_barra_lateral,
+    .contenedor_inicio_contenido {
+        width: 100%;
+    }
+
+    .contenedor_inicio_contenido {
+        margin: 3vh 3vw 4vh;
+        width: calc(100% - 6vw);
+    }
 }

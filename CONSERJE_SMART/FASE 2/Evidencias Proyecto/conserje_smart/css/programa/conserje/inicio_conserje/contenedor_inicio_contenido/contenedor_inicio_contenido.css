@@ -1,103 +1,238 @@
-/* TITULO 1 CONTENEDOR CONTENIDO INICIO */
-
 .contenedor_contenido_inicio {
     width: 100%;
-    height: 100%;
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 2vh;
+    padding: 1vh 0;
+    border-radius: 1vw;
 }
 
-/*TITULO 2 PARTE SUPERIOR CONTENIDO INICIO*/
-
-.parte_superior_contenido_inicio {
-    width: 100%;
-    min-height: 20vh;
-    border: 3px solid green;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    padding: 15px;
-    background-color: #ffffff;
-    border-radius: 10px;
-}
-
-/* TITULO 3 CONTENEDOR TITULO CONTENIDO */
-
-.contenedor_titulo_contenido {
-    width: 60%;
-    min-height: 8vh;
-    border: 3px solid yellow;
-}
-
-/*TITULO 4 CONTENEDOR FECHA CONTENIDO*/
-
-.contenedor_fecha_contenido {
-    width: 60%;
-    min-height: 8vh;
-    border: 3px solid blue;
-}
-
-/*TITULO 5 CONTENEDOR SUBTITULO CONTENIDO*/
-
-.contenedor_subtitulo_contenido {
-    width: 60%;
-    min-height: 8vh;
-    border: 3px solid #000;
-}
-
-/*TITULO 6 PARTE INFERIOR CONTENIDO INICIO*/
-
+.parte_superior_contenido_inicio,
 .parte_inferior_contenido_inicio {
     width: 100%;
-    min-height: 70vh;
-    border: 3px solid red;
+}
+
+.parte_superior_contenido_inicio {
+    min-height: 15vh;
+    padding: 2vh 2vw;
+    background: rgba(255, 255, 255, 0.9);
+    border: 0.1vw solid rgba(229, 186, 49, 0.45);
+    border-radius: 1vw;
+    box-shadow: 0 0.8vh 1.2vw rgba(26, 26, 26, 0.08);
+}
+
+.contenedor_titulo_contenido {
+    color: #1a1a1a;
+}
+
+.etiqueta_seccion {
+    color: #b78900;
+    font-size: 0.8vw;
+    font-weight: 700;
+    letter-spacing: 0.08vw;
+    text-transform: uppercase;
+}
+
+.contenedor_titulo_contenido h1 {
+    margin: 0.8vh 0;
+    font-size: 2vw;
+}
+
+.contenedor_fecha_contenido,
+.contenedor_subtitulo_contenido {
+    color: #5f6368;
+    font-size: 0.95vw;
+}
+
+.contenedor_fecha_contenido {
+    font-weight: 700;
+}
+
+.parte_inferior_contenido_inicio {
     display: flex;
     flex-direction: row;
-    gap: 15px;
+    gap: 2vw;
 }
 
-/*TITULO 7 CONTENEDOR ACTIVIDADES CONTENIDO*/
+.contenedor_actividades_contenido,
+.contenedor_acceso_rapido,
+.contenedor_cronograma {
+    background: rgba(255, 255, 255, 0.94);
+    border: 0.1vw solid rgba(225, 227, 230, 0.9);
+    border-radius: 1vw;
+    box-shadow: 0 0.8vh 1.2vw rgba(26, 26, 26, 0.1);
+}
 
 .contenedor_actividades_contenido {
-    width: 60%;                       /* 60% en lugar de 50% */
-    min-height: 65vh;
-    border: 3px solid lightblue;
-    display: flex;
-    background-color: #ffffff;
-    border-radius: 10px;
+    width: 60%;
+    min-height: 55vh;
+    padding: 2vh 1.5vw;
 }
-
-/*TITULO 8 CONTENEDOR ATAJOS CONTENIDO*/
 
 .contenedor_atajo_contenido {
-    width: 40%;                       /* 40% en lugar de 50% */
-    min-height: 65vh;
-    border: 3px solid purple;
+    width: 40%;
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    align-items: center;
+    gap: 2vh;
 }
 
-/*TITULO 9 CONTENEDOR ACCESO RAPIDO*/
+.encabezado_panel {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1vw;
+}
+
+.encabezado_panel > div {
+    display: flex;
+    align-items: center;
+    gap: 0.8vw;
+}
+
+.icono_panel,
+.actividad_icono {
+    width: 2.5vw;
+    height: 2.5vw;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #fff0b5;
+    color: #b78900;
+    font-weight: 700;
+}
+
+h2 {
+    margin: 0;
+    color: #1a1a1a;
+    font-size: 1.15vw;
+}
+
+.encabezado_panel p {
+    margin: 0.5vh 0 0;
+    color: #72777d;
+    font-size: 0.8vw;
+}
+
+.contador_panel {
+    padding: 0.8vh 0.8vw;
+    border-radius: 1vw;
+    background: #e5ba31;
+    color: #1a1a1a;
+    font-size: 0.75vw;
+    font-weight: 700;
+}
+
+.lista_actividades {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2vh;
+    margin-top: 2vh;
+}
+
+.actividad_item {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 1vw;
+    padding: 1.5vh 1vw;
+    border-radius: 0.8vw;
+    background: #f7f8fa;
+}
+
+.actividad_item strong {
+    font-size: 0.85vw;
+}
+
+.actividad_item p {
+    margin: 0.5vh 0 0;
+    color: #737981;
+    font-size: 0.75vw;
+}
+
+.actividad_item time {
+    color: #737981;
+    font-size: 0.7vw;
+}
+
+.actividad_visita {
+    background: #e2f0ff;
+    color: #2381cf;
+}
+
+.actividad_tarea {
+    background: #def5df;
+    color: #29964a;
+}
+
+.contenedor_acceso_rapido,
+.contenedor_cronograma {
+    width: 100%;
+    padding: 2vh 1.2vw;
+}
 
 .contenedor_acceso_rapido {
-    width: 96%;
-    min-height: 32vh;
-    border: 3px solid orange;
     display: flex;
-    background-color: #ffffff;
-    border-radius: 10px;
+    flex-direction: column;
+    gap: 1vh;
 }
 
-/*TITULO 10 CONTENEDOR CRONOGRAMA*/
+.contenedor_acceso_rapido h2,
+.contenedor_cronograma h2 {
+    margin-bottom: 1vh;
+}
 
-.contenedor_cronograma {
-    width: 96%;
-    min-height: 32vh;
-    border: 3px solid pink;
+.contenedor_acceso_rapido a {
     display: flex;
-    background-color: #ffffff;
-    border-radius: 10px;
+    justify-content: space-between;
+    padding: 1.5vh 0.8vw;
+    border: 0.1vw solid #eceef1;
+    border-radius: 0.7vw;
+    color: #30343a;
+    font-size: 0.8vw;
+    text-decoration: none;
+}
+
+.contenedor_acceso_rapido a span {
+    color: #b78900;
+    font-size: 1.2vw;
+}
+
+.contenedor_cronograma p {
+    display: flex;
+    gap: 1vw;
+    margin: 1.5vh 0;
+    color: #4e545b;
+    font-size: 0.78vw;
+}
+
+.contenedor_cronograma time {
+    color: #b78900;
+    font-weight: 700;
+}
+
+@media (max-width: 60vw) {
+    .parte_inferior_contenido_inicio {
+        flex-direction: column;
+    }
+
+    .contenedor_actividades_contenido,
+    .contenedor_atajo_contenido {
+        width: 100%;
+    }
+
+    .etiqueta_seccion,
+    .contenedor_fecha_contenido,
+    .contenedor_subtitulo_contenido,
+    .actividad_item strong,
+    .actividad_item p,
+    .actividad_item time,
+    .contenedor_acceso_rapido a,
+    .contenedor_cronograma p {
+        font-size: 1.5vw;
+    }
+
+    .contenedor_titulo_contenido h1 {
+        font-size: 2.5vw;
+    }
 }

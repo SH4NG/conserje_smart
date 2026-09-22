@@ -10,7 +10,7 @@
         width: 100%; /* establece el ancho del logo */
         height: auto; /* mantiene la proporcion del logo */
         display: block; /* elimina espacios innecesarios de la imagen */
-        border-left: 0.1vh solid #e3a008; /*borde dorado solido*/
-        border-right: 0.1vh solid #e3a008; /*borde dorado solido*/
+        border-left: 0.1vh solid #e5ba31; /*borde dorado solido*/
+        border-right: 0.1vh solid #e5ba31; /*borde dorado solido*/
 
 }
