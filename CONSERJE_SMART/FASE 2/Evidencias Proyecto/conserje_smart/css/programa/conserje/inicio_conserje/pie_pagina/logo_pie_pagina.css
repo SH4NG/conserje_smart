@@ -1,0 +1,16 @@
+/*TITULO LOGO PIE PAGINA*/
+.logo_pie_pagina{
+        display: flex; /* organiza el contenido del logo */
+        justify-content: center; /* centra el logo horizontalmente */
+        align-items: center; /* centra el logo verticalmente */
+
+}
+/*TITULO IMAGEN LOGO PIE PAGINA*/
+.imagen_logo_pie_pagina{
+        width: 100%; /* establece el ancho del logo */
+        height: auto; /* mantiene la proporcion del logo */
+        display: block; /* elimina espacios innecesarios de la imagen */
+        border-left: 0.1vh solid #e3a008; /*borde dorado solido*/
+        border-right: 0.1vh solid #e3a008; /*borde dorado solido*/
+
+}

@@ -1,94 +1,103 @@
-
 /* TITULO 1 CONTENEDOR CONTENIDO INICIO */
 
-    /*estilos del contenedor de contenido del inicio*/
-    .contenedor_contenido_inicio{
-        width: 100%; /* ocupamos todo el ancho del contenedor*/
-        height: 100%; /* ocupamos todo el alto del contenedor*/
-    }
+.contenedor_contenido_inicio {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
 
 /*TITULO 2 PARTE SUPERIOR CONTENIDO INICIO*/
 
-    /*estilos de la parte superior del contenido del inicio*/
-    .parte_superior_contenido_inicio{
-        width: 100%; /* ocupamos todo el ancho del contenedor*/
-        min-height: 20vh; /* ocupamos un alto minimo del contenedor*/
-        border : 3px solid green; /* agregamos un borde de 1px de color negro*/
-
-    }
+.parte_superior_contenido_inicio {
+    width: 100%;
+    min-height: 20vh;
+    border: 3px solid green;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 15px;
+    background-color: #ffffff;
+    border-radius: 10px;
+}
 
 /* TITULO 3 CONTENEDOR TITULO CONTENIDO */
 
-    /*estilos del contenedor del titulo del contenido del inicio*/
-    .contenedor_titulo_contenido{
-        width: 60%; /* ocupamos todo el ancho del contenedor*/
-        min-height: 8vh; /* ocupamos todo el alto del contenedor*/
-        border : 3px solid yellow; /* agregamos un borde de 1px de color negro*/
-    }
+.contenedor_titulo_contenido {
+    width: 60%;
+    min-height: 8vh;
+    border: 3px solid yellow;
+}
 
 /*TITULO 4 CONTENEDOR FECHA CONTENIDO*/
 
-    /*estilos del contenedor de la fecha del contenido del inicio*/
-    .contenedor_fecha_contenido{
-        width: 60%; /* ocupamos todo el ancho del contenedor*/
-        min-height: 8vh; /* ocupamos todo el alto del contenedor*/
-        border : 3px solid blue; /* agregamos un borde de 1px de color negro*/
-    }
+.contenedor_fecha_contenido {
+    width: 60%;
+    min-height: 8vh;
+    border: 3px solid blue;
+}
 
 /*TITULO 5 CONTENEDOR SUBTITULO CONTENIDO*/
 
-    /*estilos del contenedor del subtitulo del contenido del inicio*/
-    .contenedor_subtitulo_contenido{
-        width: 60%; /* ocupamos todo el ancho del contenedor*/
-        min-height: 8vh; /* ocupamos todo el alto del contenedor*/
-        border : 3px solid #000; /* agregamos un borde de 1px de color negro*/
-    }
+.contenedor_subtitulo_contenido {
+    width: 60%;
+    min-height: 8vh;
+    border: 3px solid #000;
+}
 
 /*TITULO 6 PARTE INFERIOR CONTENIDO INICIO*/
 
-    /*estilos de la parte inferior del contenido del inicio*/
-    .parte_inferior_contenido_inicio{
-        width: 100%; /* ocupamos todo el ancho del contenedor*/
-        min-height: 70vh; /* ocupamos un alto minimo del contenedor*/
-        border : 3px solid red; /* agregamos un borde de 1px de color negro*/
-        flex-direction: row;
-        display: flex;
-
-    }
+.parte_inferior_contenido_inicio {
+    width: 100%;
+    min-height: 70vh;
+    border: 3px solid red;
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+}
 
 /*TITULO 7 CONTENEDOR ACTIVIDADES CONTENIDO*/
 
-.contenedor_actividades_contenido{
-    width: 50%; /* ocupamos todo el ancho del contenedor*/
-    min-height: 65vh; /* ocupamos todo el alto del contenedor*/
-    border : 3px solid lightblue; /* agregamos un borde de 1px de color negro*/
-    display: flex; /* utilizamos flexbox para organizar los elementos hijos*/
+.contenedor_actividades_contenido {
+    width: 60%;                       /* 60% en lugar de 50% */
+    min-height: 65vh;
+    border: 3px solid lightblue;
+    display: flex;
+    background-color: #ffffff;
+    border-radius: 10px;
 }
 
 /*TITULO 8 CONTENEDOR ATAJOS CONTENIDO*/
 
-.contenedor_atajo_contenido{
-    width: 50%; /* ocupamos todo el ancho del contenedor*/
-    min-height: 65vh; /* ocupamos todo el alto del contenedor*/
-    border : 3px solid purple; /* agregamos un borde de 1px de color negro*/
+.contenedor_atajo_contenido {
+    width: 40%;                       /* 40% en lugar de 50% */
+    min-height: 65vh;
+    border: 3px solid purple;
+    display: flex;
     flex-direction: column;
-    display: flex; /* utilizamos flexbox para organizar los elementos hijos*/
+    gap: 10px;
+    align-items: center;
 }
 
 /*TITULO 9 CONTENEDOR ACCESO RAPIDO*/
 
-    .contenedor_acceso_rapido{
-        width: 96%; /* ocupamos todo el ancho del contenedor*/
-        min-height: 32vh; /* ocupamos todo el alto del contenedor*/
-        border : 3px solid orange; /* agregamos un borde de 1px de color negro*/
-        display: flex; /* utilizamos flexbox para organizar los elementos hijos*/
-    }
+.contenedor_acceso_rapido {
+    width: 96%;
+    min-height: 32vh;
+    border: 3px solid orange;
+    display: flex;
+    background-color: #ffffff;
+    border-radius: 10px;
+}
 
 /*TITULO 10 CONTENEDOR CRONOGRAMA*/
 
-    .contenedor_cronograma{
-        width: 96%; /* ocupamos todo el ancho del contenedor*/
-        min-height: 32vh; /* ocupamos todo el alto del contenedor*/
-        border : 3px solid pink; /* agregamos un borde de 1px de color negro*/
-        display: flex; /* utilizamos flexbox para organizar los elementos hijos*/
-    }
+.contenedor_cronograma {
+    width: 96%;
+    min-height: 32vh;
+    border: 3px solid pink;
+    display: flex;
+    background-color: #ffffff;
+    border-radius: 10px;
+}
