@@ -1,9 +1,13 @@
-/* css/reset.css */
 body{
   margin: 0;
   padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
   background-image: url('../../imagenes/inicio_sesion/inicio_sesion.png');
   background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 html {

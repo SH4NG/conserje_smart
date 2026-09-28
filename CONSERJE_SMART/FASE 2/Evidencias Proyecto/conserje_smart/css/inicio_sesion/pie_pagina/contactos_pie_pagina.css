@@ -30,7 +30,7 @@
         cursor: pointer; /* muestra el cursor de boton */
         display: flex; /* organiza el contenido del logo */
         align-items: center; /* centra el logo verticalmente */
-        border-bottom: 0.1vh solid #e3a008; /* agrega una línea superior de color gris */
+        border-bottom: 0.1vh solid #e5ba31; /* agrega una línea superior de color gris */
 
 }
 
@@ -54,7 +54,7 @@
         cursor: pointer; /* muestra el cursor de boton */
         display: flex; /* organiza el contenido del logo */
         align-items: center; /* centra el logo verticalmente */
-        border-bottom: 0.1vh solid #e3a008; /* agrega una línea superior de color gris */
+        border-bottom: 0.1vh solid #e5ba31; /* agrega una línea superior de color gris */
 
 }
 

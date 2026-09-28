@@ -1,8 +1,9 @@
 /*TITULO 1 CABECERA*/
 .cabecera{
-background-color: #000000;
-padding-left: 5%;
-border-bottom: 1vh solid #f8c02c;
-box-shadow: 0 0.4vh 0.5vw rgba(0, 0, 0, 0.4);
-
+    width: 100%;
+    min-height: 8vh;
+    padding: 1vh 5vw;
+    background-color: #000000;
+    border-bottom: 0.5vh solid #e5ba31;
+    box-shadow: 0 0.4vh 0.5vw rgba(0, 0, 0, 0.4);
 }

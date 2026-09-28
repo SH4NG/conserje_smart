@@ -1,17 +1,74 @@
 /* TITULO 1 REGISTRO */
 /* organiza la tarjeta principal del formulario */
 .registro {
-    width: 40%;
-    min-height: 50vh;
-    margin: 1% auto 0 auto;
-    padding: 3vh 3.7% 1.8vh 3.7%;
+    width: 38vw;
+    min-height: 58vh;
+    margin: 0 auto;
+    padding: 4vh 3vw;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     align-items: center;
     background-color: #ffffff;
     border-radius: 1vw;
-    box-shadow: 0 0.4vw 1.6vw rgba(0, 0, 0, 0.10);
+    box-shadow: 0 1vh 2vw rgba(0, 0, 0, 0.14);
+    gap: 1.2vh;
+}
+
+.registro > div:not(.ventana_emergente) {
+    width: 100%;
+}
+
+.titulo_registrar {
+    margin-bottom: 1vh;
+    color: #1a1a1a;
+    font-size: 1.5vw;
+    font-weight: 700;
+    text-align: center;
+}
+
+.registro input,
+.registro select {
+    width: 100%;
+    min-height: 5vh;
+    padding: 1vh 1vw;
+    border: 0.1vw solid #d8dadd;
+    border-radius: 0.6vw;
+    background: #ffffff;
+    color: #1a1a1a;
+    font: inherit;
+    font-size: 0.9vw;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.registro input::placeholder {
+    color: #757a80;
+}
+
+.registro input:focus,
+.registro select:focus {
+    outline: none;
+    border-color: #e5ba31;
+    box-shadow: 0 0 0 0.25vw rgba(229, 186, 49, 0.2);
+}
+
+.boton_registrar {
+    width: 100%;
+    min-height: 5.5vh;
+    border: none;
+    border-radius: 0.6vw;
+    background: #e5ba31;
+    color: #1a1a1a;
+    font: inherit;
+    font-size: 0.95vw;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.boton_registrar:hover {
+    background: #d6aa20;
+    transform: translateY(-0.2vh);
 }
 
 /* TITULO 2 VENTANA EMERGENTE */
@@ -28,4 +85,27 @@
 /* oscurece el contenido de fondo mientras el dialogo esta abierto */
 .ventana_emergente::backdrop {
     background-color: rgba(0, 0, 0, 0.45);
+}
+
+@media (orientation: portrait) {
+    .registro {
+        width: 88vw;
+        min-height: auto;
+        padding: 4vh 6vw;
+        border-radius: 2vw;
+    }
+
+    .titulo_registrar {
+        font-size: 3vw;
+    }
+
+    .registro input,
+    .registro select,
+    .boton_registrar {
+        font-size: 2vw;
+    }
+
+    .ventana_emergente {
+        width: 84vw;
+    }
 }

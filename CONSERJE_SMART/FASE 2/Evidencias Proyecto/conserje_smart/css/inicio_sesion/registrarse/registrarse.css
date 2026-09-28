@@ -1,15 +1,64 @@
-/* CONFIGURACION PAGINA*/
-
-body{
-margin: 0;
-padding: 0;
+* {
+    box-sizing: border-box;
 }
 
-.contenedor_registro{
+html,
+body {
+    min-height: 100%;
+    margin: 0;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: #ffffff;
+    color: #1a1a1a;
+    font-family: 'Syne', sans-serif;
+}
+
+.contenedor_registro {
     width: 100%;
-    min-height: 52vh;
+    flex: 1 0 auto;
+    min-height: 62vh;
     display: flex;
     justify-content: center;
+    align-items: center;
+    padding: 4vh 3vw;
+    background-color: #f7f6f1;
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.42), rgba(255, 255, 255, 0.42)),
+        url('/conserje_smart/imagenes/inicio_sesion/registrarse/Background_Conserje_Smart.png');
+    background-size: cover;
+    background-position: center;
 }
-/* TITULO REGISTRARSE */
-/* sin diseño */
+
+.cabecera {
+    min-height: 8vh;
+    display: flex;
+    align-items: center;
+    border-bottom: 0.5vh solid #e5ba31;
+}
+
+.contenedor_logo_cabecera img {
+    display: block;
+    width: 18vw;
+    height: auto;
+}
+
+.pie_pagina {
+    flex: 0 0 auto;
+    min-height: 24vh;
+    margin-top: 0;
+}
+
+@media (orientation: portrait) {
+    .contenedor_registro {
+        min-height: 62vh;
+        padding: 4vh 6vw;
+    }
+
+    .contenedor_logo_cabecera img {
+        width: 30vw;
+    }
+}
