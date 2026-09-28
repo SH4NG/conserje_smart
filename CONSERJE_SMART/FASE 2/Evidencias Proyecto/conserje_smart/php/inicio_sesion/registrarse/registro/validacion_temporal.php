@@ -1,36 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-    <!-- TITULO ENTRADA RUT VALIDACION -->
-
-        <input class="entrada_rut" id="entrada_rut"  type="text">
-
-    <!-- TITULO ENTRADA CLAVE VALIDACION -->
-
-        <input class="entrada_clave" id="entrada_clave" type="text">
-
-    <!-- TITULO BOTON VALIDAR VALIDACION -->
-
-        <button class="boton_validar" id="boton_validar" >validar</button>
-
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Validación temporal</title>
-    <link rel="stylesheet" href="/conserje_smart/css/inicio_sesion/registrarse/registro/validacion_temporal.css">
-</head>
-<body>
-
     <!-- TITULO 1 VALIDACION TEMPORAL -->
     <!-- contiene los datos del administrador que autorizara el registro -->
     <div class="validacion_temporal" id="validacion_temporal">
@@ -95,6 +62,3 @@
 
     <!-- carga las funciones propias de la validacion temporal -->
     <script src="/conserje_smart/js/inicio_sesion/registrarse/registro/validacion_temporal.js"></script>
-
-</body>
-</html>

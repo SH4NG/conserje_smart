@@ -1,12 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rol registrar</title>
-    <link rel="stylesheet" href="/conserje_smart/css/inicio_sesion/registrarse/registro/rol_registrar.css">
-</head>
-<body>
     <!-- TITULO ROL REGISTRAR -->
     <!-- permite seleccionar el rol del usuario -->
     <select class="rol_registrar" id="rol_registrar" name="rol">
@@ -20,5 +11,3 @@
 
     <!-- carga la captura y validacion del rol -->
     <script src="/conserje_smart/js/inicio_sesion/registrarse/registro/rol_registrar.js"></script>
-</body>
-</html>

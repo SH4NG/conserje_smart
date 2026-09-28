@@ -1,14 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registrarse</title>
-    <link rel="stylesheet" href="/conserje_smart/css/inicio_sesion/registrarse/registro/registro.css">
-</head>
-
-    <body>
-        
         <!-- TITULO REGISTRO -->
         <div class="registro" id="registro">
 
@@ -66,7 +55,3 @@
         </div>
 
         <script src="/conserje_smart/js/inicio_sesion/registrarse/registro/registro.js"></script>
-
-    </body>
-
-</html>

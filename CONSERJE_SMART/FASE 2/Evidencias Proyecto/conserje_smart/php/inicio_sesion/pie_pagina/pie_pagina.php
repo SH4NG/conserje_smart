@@ -1,14 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
-    <link rel="stylesheet" href="/conserje_smart/css/inicio_sesion/pie_pagina/pie_pagina.css">
-</head>
-<body>
-
-    <!-- TITULO 1 PIE PAGINA -->
+<!-- TITULO 1 PIE PAGINA -->
 
     <div class="pie_pagina" id="pie_pagina">
 
@@ -50,6 +40,3 @@
     </div>
 
     <script><?php include __DIR__ . '/../../../js/inicio_sesion/pie_pagina/pie_pagina.js'; ?></script>
-</body>
-    
-</html>
