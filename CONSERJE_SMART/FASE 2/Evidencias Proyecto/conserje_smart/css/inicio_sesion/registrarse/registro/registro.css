@@ -1,0 +1,31 @@
+/* TITULO 1 REGISTRO */
+/* organiza la tarjeta principal del formulario */
+.registro {
+    width: 40%;
+    min-height: 50vh;
+    margin: 1% auto 0 auto;
+    padding: 3vh 3.7% 1.8vh 3.7%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #ffffff;
+    border-radius: 1vw;
+    box-shadow: 0 0.4vw 1.6vw rgba(0, 0, 0, 0.10);
+}
+
+/* TITULO 2 VENTANA EMERGENTE */
+/* define la apariencia general del dialogo de autorización */
+.ventana_emergente {
+    width: 38vw;
+    padding: 2.5vh 2vw;
+    border: none;
+    border-radius: 1vw;
+    box-shadow: 0 0.4vw 1.6vw rgba(0, 0, 0, 0.25);
+}
+
+/* TITULO 3 FONDO VENTANA EMERGENTE */
+/* oscurece el contenido de fondo mientras el dialogo esta abierto */
+.ventana_emergente::backdrop {
+    background-color: rgba(0, 0, 0, 0.45);
+}

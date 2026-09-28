@@ -1,0 +1,78 @@
+/* TITULO 1 VALIDACION TEMPORAL */
+/* organiza el contenido de la ventana de autorización */
+.validacion_temporal {
+    width: 32vw;
+    display: flex;
+    flex-direction: column;
+    gap: 1.4vh;
+    align-items: stretch;
+}
+
+/* TITULO 2 TITULO VALIDACION TEMPORAL */
+/* destaca el titulo de la autorización */
+.titulo_validacion_temporal {
+    color: #1d1d1d;
+    font-size: 1.2vw;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* TITULO 3 TEXTO VALIDACION TEMPORAL */
+/* presenta las instrucciones del formulario */
+.texto_validacion_temporal {
+    margin: 0;
+    color: #4a4a4a;
+    font-size: 0.85vw;
+    text-align: center;
+}
+
+/* TITULO 4 ETIQUETAS VALIDACION TEMPORAL */
+/* identifica cada dato solicitado */
+.validacion_temporal label {
+    color: #1d1d1d;
+    font-size: 0.8vw;
+}
+
+/* TITULO 5 ENTRADAS VALIDACION TEMPORAL */
+/* aplica una presentación uniforme a los campos */
+.validacion_temporal input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 1vh 1vw;
+    border: 0.1vw solid #cfcfcf;
+    border-radius: 0.5vw;
+    font-size: 0.85vw;
+}
+
+/* TITULO 6 BOTONES VALIDACION TEMPORAL */
+/* distribuye las acciones del formulario */
+.botones_validacion_temporal {
+    display: flex;
+    justify-content: center;
+    gap: 1vw;
+    margin-top: 1vh;
+}
+
+/* TITULO 7 ACCIONES VALIDACION TEMPORAL */
+/* define el aspecto común de los botones */
+.botones_validacion_temporal button {
+    padding: 1vh 1.5vw;
+    border: none;
+    border-radius: 0.5vw;
+    cursor: pointer;
+    font-size: 0.8vw;
+}
+
+/* TITULO 8 BOTON VALIDAR VALIDACION TEMPORAL */
+/* diferencia la acción principal */
+.boton_validar_validacion_temporal {
+    background-color: #2f7d32;
+    color: #ffffff;
+}
+
+/* TITULO 9 BOTON CANCELAR VALIDACION TEMPORAL */
+/* diferencia la acción de cancelar */
+.boton_cancelar_validacion_temporal {
+    background-color: #b33a3a;
+    color: #ffffff;
+}

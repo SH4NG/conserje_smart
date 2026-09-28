@@ -1,0 +1,15 @@
+/* CONFIGURACION PAGINA*/
+
+body{
+margin: 0;
+padding: 0;
+}
+
+.contenedor_registro{
+    width: 100%;
+    min-height: 52vh;
+    display: flex;
+    justify-content: center;
+}
+/* TITULO REGISTRARSE */
+/* sin diseño */
