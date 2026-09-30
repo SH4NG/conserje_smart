@@ -1,12 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
-    <link rel="stylesheet" href="/conserje_smart/css/pagina_inicio/inicio/inicio.css">
-</head>
-<body>
     <!-- TITULO PAGINA_INICIO  -->
 
      <!-- estilo pagina inicio provisorio, sacar despues de agregar algo  -->
@@ -26,11 +17,26 @@
         <div class="contenedor_contenindo_inicio" id="contenedor_contenindo_inicio">
             <div class="contenedor_quienes_somos" id="contenedor_quienes_somos">
                 
-                <?php include 'quienes_somos/quienes_somos.php';?>
+                <?php include __DIR__ . '/quienes_somos/quienes_somos.php'; ?>
+
             </div>
+
+            <div class="contenedor_nuestro_objetivo" id="contenedor_nuestro_objetivo">
+                
+                <?php include __DIR__ . '/nuestro_objetivo/nuestro_objetivo.php'; ?>
+
+            </div>
+
+            <div class="contenedor_nuestra_vision" id="contenedor_nuestra_vision">
+
+                <?php include __DIR__ . '/nuestra_vision/nuestra_vision.php'; ?>
+
+            </div>
+
+            <div class="contenedor_consultas" id="contenedor_consultas">
+
+                <?php include __DIR__ . '/consultas/consultas.php'; ?>
+
+            </div>
+
         </div>
-
-    <script><?php include __DIR__ . '/../../../js/pagina_inicio/inicio/inicio.js'; ?></script>
-
-</body>
-</html>

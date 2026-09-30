@@ -1,44 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
-    <link rel="stylesheet" href="/conserje_smart/css/pagina_inicio/pie_pagina/navegacion_pie_pagina.css">
-</head>
-<body>
+<nav class="navegacion_pie_pagina" id="navegacion_pie_pagina" aria-label="Navegación de secciones">
+    <span>Navegación</span>
 
-    <!-- TITULO NAVEGACION PIE PAGINA -->
+    <button class="btn_navegacion btn_navegacion1" type="button"
+        data-section-target="contenedor_quienes_somos"
+        aria-controls="contenedor_quienes_somos" aria-pressed="false">
+        Quiénes Somos
+    </button>
 
-    <div class=navegacion_pie_pagina id="navegacion_pie_pagina">
-        Navegación
+    <button class="btn_navegacion btn_navegacion2" type="button"
+        data-section-target="contenedor_nuestro_objetivo"
+        aria-controls="contenedor_nuestro_objetivo" aria-pressed="false">
+        Nuestro Objetivo
+    </button>
 
-        <!-- TITULO QUIENES_SOMOS PIE PAGINA -->
+    <button class="btn_navegacion btn_navegacion3" type="button"
+        data-section-target="contenedor_nuestra_vision"
+        aria-controls="contenedor_nuestra_vision" aria-pressed="false">
+        Nuestra Visión
+    </button>
 
-        <div class="btn_navegacion1" id="btn_navegacion1">
-            
-            Quienes somos
-        </div>
-
-        <!-- TITULO NUESTRO_OBJETIVO PIE PAGINA -->
-
-        <div class="btn_navegacion2" id="btn_navegacion2">
-            Nuestro Objetivo
-        </div>
-
-        <!-- TITULO NUESTRA_VISION PIE PAGINA -->
-
-        <div class="btn_navegacion3" id="btn_navegacion3">
-            Nuestra Vision
-        </div>
-
-        <!-- TITULO CONSULTAS PIE PAGINA -->
-
-        <div class="btn_navegacion4" id="btn_navegacion4">
-            Consultas
-        </div>
-    </div>
-
-    <script src="/conserje_smart/js/pagina_inicio/pie_pagina/navegacion_pie_pagina.js"></script>
-</body>
-</html>
+    <button class="btn_navegacion btn_navegacion4" type="button"
+        data-section-target="contenedor_consultas"
+        aria-controls="contenedor_consultas" aria-pressed="false">
+        Consultas
+    </button>
+</nav>
