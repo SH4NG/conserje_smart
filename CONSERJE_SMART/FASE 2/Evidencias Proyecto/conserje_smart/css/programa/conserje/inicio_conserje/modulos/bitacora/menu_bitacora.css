@@ -1,0 +1,132 @@
+/* =========================================
+   CONTENEDOR GENERAL
+   ========================================= */
+.contenido_menu {
+    width: 100%;
+    max-width: 340px;
+    background-color: #121212;
+    padding: 20px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    box-sizing: border-box;
+}
+
+.contenido_menu * {
+    box-sizing: border-box;
+}
+
+/* =========================================
+   BOTÓN "VER BITÁCORA"
+   ========================================= */
+.boton_bitacora {
+    background-color: #e5ba31;
+    color: #1a1a1a;
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 14px 20px;
+    border-radius: 30px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.boton_bitacora:hover {
+    background-color: #ffc72c;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(229, 186, 49, 0.4);
+}
+
+/* =========================================
+   TEXTO "Ingrese su novedad:"
+   ========================================= */
+.texto_contenido_menu {
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 1rem;
+    margin-top: 10px;
+}
+
+/* =========================================
+   CAMPO DE TEXTO
+   ========================================= */
+.campo_novedad {
+    width: 100%;
+    display: flex;
+}
+
+.input_novedad {
+    width: 100%;
+    min-height: 130px;
+    background-color: #ffffff;
+    color: #1a1a1a;
+    border: 2px solid transparent;
+    border-radius: 12px;
+    padding: 14px 16px;
+    font-family: inherit;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    resize: vertical;              /* Permite agrandar verticalmente */
+    outline: none;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.input_novedad::placeholder {
+    color: #999;
+    font-style: italic;
+}
+
+.input_novedad:focus {
+    border-color: #e5ba31;
+    box-shadow: 0 0 0 3px rgba(229, 186, 49, 0.3);
+}
+
+/* =========================================
+   BOTÓN "ESTRUCTURAR CON IA"
+   ========================================= */
+.boton_estructurar_ia {
+    background-color: #e5ba31;
+    color: #1a1a1a;
+    font-weight: 700;
+    font-size: 0.9rem;
+    padding: 14px 20px;
+    border-radius: 30px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    align-self: center;            /* Botón centrado como en la imagen */
+    min-width: 200px;
+}
+
+.boton_estructurar_ia:hover {
+    background-color: #ffc72c;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(229, 186, 49, 0.4);
+}
+
+/* =========================================
+   RESPONSIVE
+   ========================================= */
+@media (max-width: 480px) {
+    .contenido_menu {
+        max-width: 100%;
+        padding: 15px;
+    }
+
+    .input_novedad {
+        min-height: 100px;
+        font-size: 0.85rem;
+    }
+
+    .boton_estructurar_ia {
+        width: 100%;
+        min-width: unset;
+    }
+}
