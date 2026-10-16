@@ -1,0 +1,267 @@
+
+/* CONFIGURACION GENERAL DE LA PAGINA */
+
+body{
+    margin: 0;
+}
+
+/* TITULO 1 CONTENEDOR PRINCIPAL DE NOVEDADES */
+.pagina_novedades {
+    width: 90%;
+    min-height: 60vh;
+    margin: 4vh auto;
+    padding: 2vw;
+    box-sizing: border-box;
+    color: #1a1a1a;
+    font-family: 'Syne', sans-serif;
+}
+
+/* TITULO 2 ENCABEZADO DE NOVEDADES */
+.encabezado_novedades {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2vw;
+    margin-bottom: 2vh;
+}
+
+.encabezado_novedades h1 {
+    margin: 0;
+    font-size: 2vw;
+}
+
+/* TITULO 3 ENLACE PARA VOLVER A BITACORA */
+.volver_bitacora {
+    padding: 0.8vh 1.2vw;
+    border-radius: 0.7vw;
+    background: #e5ba31;
+    color: #1a1a1a;
+    font-size: 0.9vw;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.volver_bitacora:hover {
+    background: #ffc72c;
+}
+
+/* TITULO 4 ESTADO DE CARGA */
+.estado_lista_novedades {
+    font-size: 0.9vw;
+    font-weight: 700;
+}
+
+/* TITULO 5 CONTENEDOR DE TARJETAS */
+.novedades {
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
+}
+
+/* TITULO 6 TARJETA DE NOVEDAD */
+.tarjeta_novedad {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8vh;
+    padding: 1vw;
+    border: 0.12vw solid #d5a900;
+    border-radius: 1vw;
+    background: #ffca2c;
+    color: #111111;
+}
+
+/* TITULO 7 ENCABEZADO DE TARJETA */
+.encabezado_tarjeta_novedad {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 1vw;
+}
+
+.contenido_principal_tarjeta {
+    min-width: 0;
+}
+
+/* TITULO 8 TITULO DE NOVEDAD */
+.titulo_tarjeta_novedad {
+    margin: 0 0 0.6vh;
+    font-size: 1.4vw;
+    font-style: italic;
+    font-weight: 800;
+}
+
+/* TITULO 9 DESCRIPCION DE NOVEDAD */
+.descripcion_tarjeta_novedad {
+    min-height: 6vh;
+    padding: 0.8vw;
+    border: 0.12vw solid #111111;
+    border-radius: 0.7vw;
+    background: #ffffff;
+    font-size: 0.9vw;
+    line-height: 1.4;
+    overflow-wrap: anywhere;
+}
+
+/* TITULO 10 INFORMACION DE AUTOR Y FECHA */
+.autor_tarjeta_novedad {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5vh;
+    font-size: 0.8vw;
+    font-weight: 700;
+    text-align: center;
+}
+
+.icono_autor_tarjeta_novedad {
+    width: 4vw;
+    height: auto;
+    object-fit: contain;
+}
+
+.fecha_hora_tarjeta_novedad {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.3vh;
+    white-space: nowrap;
+}
+
+/* TITULO 11 DETALLES DE NOVEDAD */
+.detalles_tarjeta_novedad {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15%, 1fr));
+    gap: 0.7vw;
+}
+
+.detalle_tarjeta_novedad {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3vh;
+    min-width: 0;
+    padding: 0.7vw;
+    border: 0.1vw solid #111111;
+    border-radius: 0.6vw;
+    background: #ffffff;
+    overflow-wrap: anywhere;
+}
+
+.etiqueta_detalle_tarjeta {
+    font-size: 0.7vw;
+    font-weight: 700;
+}
+
+.valor_detalle_tarjeta {
+    font-size: 0.8vw;
+}
+
+/* TITULO 12 MENSAJE DE LISTADO VACIO */
+.lista_novedades_vacia {
+    padding: 2vh 1vw;
+    border: 0.1vw solid #e8e9eb;
+    border-radius: 0.7vw;
+    color: #686d73;
+    font-size: 0.9vw;
+    text-align: center;
+}
+
+@media (max-width: 1441px) {
+    .pagina_novedades {
+        width: 94%;
+    }
+}
+
+@media (max-width: 1440px) {
+    /*sin estilo media query*/
+}
+
+@media (max-width: 1200px) {
+    .encabezado_novedades h1 {
+        font-size: 2.5vw;
+    }
+}
+
+@media (max-width: 992px) {
+    .pagina_novedades {
+        width: 96%;
+    }
+
+    .titulo_tarjeta_novedad {
+        font-size: 2vw;
+    }
+
+    .descripcion_tarjeta_novedad,
+    .valor_detalle_tarjeta {
+        font-size: 1.4vw;
+    }
+}
+
+@media (max-width: 768px) {
+    .encabezado_tarjeta_novedad {
+        grid-template-columns: minmax(0, 1fr) 20%;
+    }
+
+    .detalles_tarjeta_novedad {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .etiqueta_detalle_tarjeta {
+        font-size: 1.6vw;
+    }
+}
+
+@media (max-width: 414px) {
+    .pagina_novedades {
+        width: 100%;
+        padding: 3vw;
+    }
+
+    .encabezado_novedades {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .encabezado_novedades h1 {
+        font-size: 5vw;
+    }
+
+    .volver_bitacora,
+    .estado_lista_novedades,
+    .lista_novedades_vacia {
+        font-size: 3vw;
+    }
+
+    .encabezado_tarjeta_novedad {
+        grid-template-columns: minmax(0, 1fr) 22%;
+    }
+
+    .titulo_tarjeta_novedad {
+        font-size: 3.4vw;
+    }
+
+    .descripcion_tarjeta_novedad,
+    .valor_detalle_tarjeta {
+        font-size: 2.7vw;
+    }
+
+    .autor_tarjeta_novedad,
+    .fecha_hora_tarjeta_novedad {
+        font-size: 2.4vw;
+    }
+
+    .icono_autor_tarjeta_novedad {
+        width: 9vw;
+    }
+
+    .etiqueta_detalle_tarjeta {
+        font-size: 2.3vw;
+    }
+}
+
+@media (max-width: 390px) {
+    /*sin estilo media query*/
+}
+
+@media (max-width: 360px) {
+    /*sin estilo media query*/
+}

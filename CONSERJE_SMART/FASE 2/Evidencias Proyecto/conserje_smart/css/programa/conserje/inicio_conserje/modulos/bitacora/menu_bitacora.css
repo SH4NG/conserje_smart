@@ -1,12 +1,9 @@
-/* =========================================
-   CONTENEDOR GENERAL
-   ========================================= */
+/* TITULO 1 CONTENEDOR GENERAL */
 .contenido_menu {
     width: 100%;
-    max-width: 340px;
     background-color: #121212;
     padding: 20px;
-    border-radius: 12px;
+    border-radius: 12px 0 0 12px;
     display: flex;
     flex-direction: column;
     gap: 18px;
@@ -18,10 +15,9 @@
     box-sizing: border-box;
 }
 
-/* =========================================
-   BOTÓN "VER BITÁCORA"
-   ========================================= */
+/* TITULO 2 BOTON VER BITACORA */
 .boton_bitacora {
+    display: block;
     background-color: #e5ba31;
     color: #1a1a1a;
     font-weight: 700;
@@ -34,6 +30,7 @@
     cursor: pointer;
     transition: all 0.25s ease;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    text-decoration: none;
 }
 
 .boton_bitacora:hover {
@@ -42,9 +39,7 @@
     box-shadow: 0 6px 12px rgba(229, 186, 49, 0.4);
 }
 
-/* =========================================
-   TEXTO "Ingrese su novedad:"
-   ========================================= */
+/* TITULO 3 ETIQUETA DE NOVEDAD */
 .texto_contenido_menu {
     color: #ffffff;
     font-weight: 700;
@@ -52,9 +47,7 @@
     margin-top: 10px;
 }
 
-/* =========================================
-   CAMPO DE TEXTO
-   ========================================= */
+/* TITULO 4 CAMPO DE TEXTO */
 .campo_novedad {
     width: 100%;
     display: flex;
@@ -87,9 +80,7 @@
     box-shadow: 0 0 0 3px rgba(229, 186, 49, 0.3);
 }
 
-/* =========================================
-   BOTÓN "ESTRUCTURAR CON IA"
-   ========================================= */
+/* TITULO 5 BOTON ESTRUCTURAR CON IA */
 .boton_estructurar_ia {
     background-color: #e5ba31;
     color: #1a1a1a;
@@ -111,9 +102,7 @@
     box-shadow: 0 6px 12px rgba(229, 186, 49, 0.4);
 }
 
-/* =========================================
-   RESPONSIVE
-   ========================================= */
+/* TITULO 6 AJUSTES PARA PANTALLAS PEQUENAS */
 @media (max-width: 480px) {
     .contenido_menu {
         max-width: 100%;

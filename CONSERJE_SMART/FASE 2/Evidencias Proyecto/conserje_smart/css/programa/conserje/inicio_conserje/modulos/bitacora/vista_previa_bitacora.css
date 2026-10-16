@@ -1,3 +1,4 @@
+/* TITULO 1 ESTRUCTURA DE VISTA PREVIA */
 .contenedor_vista_previa_bitacora {
     display: grid;
     grid-template-columns: 1fr auto;
@@ -9,6 +10,7 @@
     font-family: 'Syne', sans-serif;
 }
 
+/* TITULO 2 FECHA DE VISTA PREVIA */
 .fecha_vista_previa_bitacora {
     display: inline-flex;
     align-items: center;
@@ -22,6 +24,7 @@
     text-transform: capitalize;
 }
 
+/* TITULO 3 ICONO DE FECHA */
 .icono_fecha_vista_previa_bitacora {
     display: block;
     width: 5vw;
@@ -31,6 +34,7 @@
     border-left: 0.9vh solid #e5ba31;
 }
 
+/* TITULO 4 INFORMACION DE TURNO */
 .definicion_turno_vista_previa_bitacora {
     display: flex;
     align-items: center;
@@ -41,6 +45,7 @@
     justify-content: flex-end;
 }
 
+/* TITULO 5 NOMBRE DE TURNO */
 .nombre_turno_vista_previa_bitacora {
     display: inline-flex;
     align-items: center;
@@ -55,6 +60,7 @@
     transition: background-color 180ms ease, border-color 180ms ease;
 }
 
+/* TITULO 6 INDICADOR DE TURNO */
 .nombre_turno_vista_previa_bitacora::before {
     width: 0.45vw;
     height: 0.45vw;
@@ -63,11 +69,13 @@
     content: "";
 }
 
+/* TITULO 7 INTERACCION DEL NOMBRE DE TURNO */
 .nombre_turno_vista_previa_bitacora:hover {
     border-color: #e5ba31;
     background: rgba(229, 186, 49, 0.2);
 }
 
+/* TITULO 8 HORARIO DE TURNO */
 .horario_turno_vista_previa_bitacora {
     color: #686d73;
     font-size: 0.78vw;
@@ -75,23 +83,200 @@
     letter-spacing: 0.02vw;
 }
 
+/* TITULO 9 AREA DE RESULTADO */
 .contenido_vista_previa {
     grid-column: 1 / -1;
     width: 100%;
     min-height: 35vh;
+    padding: 0.8vw;
     box-sizing: border-box;
     border: 0.1vw solid #e8e9eb;
     border-radius: 0.8vw;
     background:
         linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(250, 250, 248, 0.96));
     transition: border-color 180ms ease, box-shadow 180ms ease;
+    max-height: 78vh;
+    overflow-y: auto;
 }
 
+/* TITULO 10 TARJETA DE NOVEDAD */
+.novedad {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7vh;
+    width: 100%;
+    margin-bottom: 0.8vh;
+    padding: 0.8vw;
+    box-sizing: border-box;
+    border: 0.12vw solid #d5a900;
+    border-radius: 1.2vw;
+    background: #ffca2c;
+    color: #111111;
+}
+
+/* TITULO 11 ENCABEZADO DE NOVEDAD */
+.encabezado_novedad {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 14%;
+    align-items: center;
+    gap: 1vw;
+}
+
+/* TITULO 12 CONTENIDO PRINCIPAL DE NOVEDAD */
+.contenido_principal_novedad {
+    min-width: 0;
+}
+
+/* TITULO 13 TITULO DE NOVEDAD */
+.titulo_novedad {
+    margin: 0 0 0.5vh;
+    font-size: 1.35vw;
+    font-style: italic;
+    font-weight: 800;
+}
+
+/* TITULO 14 DESCRIPCION DE NOVEDAD */
+.descripcion_novedad {
+    min-height: 7vh;
+    padding: 0.65vw;
+    box-sizing: border-box;
+    border: 0.12vw solid #111111;
+    border-radius: 0.8vw;
+    background: #ffffff;
+    font-size: 0.85vw;
+    line-height: 1.3;
+    overflow-wrap: anywhere;
+}
+
+/* TITULO 15 AUTOR DE NOVEDAD */
+.autor_novedad {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 0.7vw;
+    text-align: center;
+}
+
+/* TITULO 16 IDENTIDAD DEL CONSERJE */
+.identidad_conserje_novedad {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4vh;
+}
+
+/* TITULO 17 ICONO DE CONSERJE */
+.icono_conserje_novedad {
+    width: 4.2vw;
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+/* TITULO 18 NOMBRE DE CONSERJE */
+.nombre_conserje_novedad {
+    font-size: 0.8vw;
+    font-style: italic;
+    font-weight: 800;
+    overflow-wrap: anywhere;
+}
+
+/* TITULO 19 FECHA Y HORA DE CREACION */
+.fecha_hora_novedad {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.4vh;
+    font-size: 0.75vw;
+    font-style: italic;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+/* TITULO 20 DETALLES DE NOVEDAD */
+.detalles_novedad {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 0.6vw;
+}
+
+/* TITULO 21 CAMPO DE DETALLE */
+.detalle_novedad {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25vh;
+    min-width: 0;
+    min-height: 3.5vh;
+    padding: 0.5vw;
+    box-sizing: border-box;
+    border: 0.12vw solid #111111;
+    border-radius: 0.7vw;
+    background: #ffffff;
+    overflow-wrap: anywhere;
+}
+
+/* TITULO 22 ETIQUETA DEL DETALLE */
+.etiqueta_detalle_novedad {
+    font-size: 0.62vw;
+    font-weight: 700;
+}
+
+/* TITULO 23 VALOR DEL DETALLE */
+.valor_detalle_novedad {
+    font-size: 0.72vw;
+}
+
+/* TITULO 24 ACCIONES DE NOVEDAD */
+.acciones_novedad {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.8vw;
+}
+
+/* TITULO 25 BOTON PARA GUARDAR NOVEDAD */
+.boton_guardar_novedad {
+    padding: 0.55vh 1vw;
+    border: 0.1vw solid #111111;
+    border-radius: 0.6vw;
+    background: #111111;
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 0.75vw;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.boton_guardar_novedad:hover:not(:disabled) {
+    background: #343434;
+}
+
+.boton_guardar_novedad:disabled {
+    opacity: 0.65;
+    cursor: wait;
+}
+
+/* TITULO 26 ESTADO DEL GUARDADO */
+.estado_guardado_novedad {
+    font-size: 0.7vw;
+    font-weight: 700;
+}
+
+/* TITULO 27 INTERACCION DEL AREA DE RESULTADO */
 .contenido_vista_previa:hover {
     border-color: rgba(229, 186, 49, 0.65);
     box-shadow: 0 0.6vh 1.2vw rgba(26, 26, 26, 0.06);
 }
 
+/* TITULO 28 ESTADO DE CARGA DE NOVEDADES */
+.estado_carga_bitacora {
+    margin: 0 0 0.8vh;
+    font-size: 0.8vw;
+    font-weight: 700;
+}
+
+/* TITULO 29 AJUSTES PARA ORIENTACION VERTICAL */
 @media (orientation: portrait) {
     .contenedor_vista_previa_bitacora {
         grid-template-columns: 1fr;
@@ -137,8 +322,67 @@
         min-height: 30vh;
         border-radius: 1.5vw;
     }
+
+    .encabezado_novedad {
+        grid-template-columns: minmax(0, 1fr) 20%;
+    }
+
+    .titulo_novedad {
+        font-size: 2.8vw;
+    }
+
+    .descripcion_novedad {
+        min-height: 6vh;
+        padding: 1vw;
+        font-size: 2.1vw;
+    }
+
+    .icono_conserje_novedad {
+        width: 9vw;
+    }
+
+    .nombre_conserje_novedad {
+        font-size: 1.8vw;
+    }
+
+    .fecha_hora_novedad {
+        font-size: 1.7vw;
+    }
+
+    .detalles_novedad {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1.5vw;
+    }
+
+    .detalle_novedad {
+        min-height: 3vh;
+        padding: 1vw;
+    }
+
+    .etiqueta_detalle_novedad {
+        font-size: 1.7vw;
+    }
+
+    .valor_detalle_novedad {
+        font-size: 1.9vw;
+    }
+
+    .acciones_novedad {
+        gap: 1.5vw;
+    }
+
+    .boton_guardar_novedad {
+        padding: 0.8vh 1.8vw;
+        border-radius: 1vw;
+        font-size: 1.8vw;
+    }
+
+    .estado_guardado_novedad {
+        font-size: 1.6vw;
+    }
 }
 
+/* TITULO 30 REDUCIR MOVIMIENTO */
 @media (prefers-reduced-motion: reduce) {
     .nombre_turno_vista_previa_bitacora,
     .contenido_vista_previa {
