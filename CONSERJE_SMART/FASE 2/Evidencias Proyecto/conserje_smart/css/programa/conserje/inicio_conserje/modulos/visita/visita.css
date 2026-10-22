@@ -1,0 +1,496 @@
+:root {
+    --color-fondo: #000000;
+    --color-amarillo: #e5ba31;
+    --color-amarillo-suave: rgba(229, 186, 49, 0.14);
+    --color-negro-texto: #1a1a1a;
+    --color-blanco: #ffffff;
+    --color-gris: #f3f3f3;
+    --color-borde: #d8d8d8;
+    --color-texto-secundario: #5d5d5d;
+    --fuente-principal: 'Syne', sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: linear-gradient(180deg, #f7f7f7 0%, #f1f1f1 100%);
+    font-family: var(--fuente-principal);
+    color: var(--color-negro-texto);
+}
+
+.pagina_visita {
+    max-width: 78vw;
+    margin: 4vh auto 6vh;
+    padding: 0 0 2vh;
+}
+
+.cabecera_visita {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2vw;
+    width: 100%;
+    margin-bottom: 2.5vh;
+    padding: 2vh 2vw;
+    border: 0.1vw solid rgba(229, 186, 49, 0.35);
+    border-radius: 1.2vw;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(245, 245, 245, 0.9));
+    box-shadow: 0 0.8vh 1.6vw rgba(0, 0, 0, 0.08);
+}
+
+.etiqueta_seccion {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5vw;
+    margin-bottom: 0.8vh;
+    color: var(--color-amarillo);
+    font-size: 0.72vw;
+    font-weight: 700;
+    letter-spacing: 0.12vw;
+    text-transform: uppercase;
+}
+
+.etiqueta_seccion::before {
+    content: "";
+    width: 0.65vw;
+    height: 0.65vw;
+    border-radius: 50%;
+    background: var(--color-amarillo);
+}
+
+.cabecera_visita h1 {
+    margin: 0;
+    font-size: clamp(1.8vw, 2vw, 2.6vw);
+    font-weight: 800;
+    color: var(--color-negro-texto);
+}
+
+.resumen_visita {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.5vh;
+    min-width: 15vw;
+    padding: 1vh 1.1vw;
+    border: 0.12vw solid rgba(229, 186, 49, 0.45);
+    border-radius: 0.9vw;
+    background: rgba(229, 186, 49, 0.08);
+}
+
+.resumen_visita_titulo {
+    font-size: 0.72vw;
+    color: var(--color-texto-secundario);
+    text-transform: uppercase;
+    letter-spacing: 0.08vw;
+}
+
+#resumen_departamento_visita {
+    font-size: 0.95vw;
+    color: var(--color-negro-texto);
+}
+
+.contenedor_formulario_visita {
+    display: flex;
+    flex-direction: column;
+    gap: 2vh;
+    width: 100%;
+    margin-top: 2vh;
+    padding: 2vw;
+    border: 0.1vw solid rgba(0, 0, 0, 0.08);
+    border-radius: 1.4vw;
+    background: rgba(255, 255, 255, 0.96);
+    box-shadow: 0 0.8vh 1.8vw rgba(0, 0, 0, 0.06);
+}
+
+.encabezado_formulario_visita {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1vw;
+}
+
+.encabezado_formulario_visita h2 {
+    margin: 0;
+    font-size: clamp(1.2vw, 1.6vw, 2vw);
+    color: var(--color-negro-texto);
+}
+
+.badge_estado_visita {
+    padding: 0.7vh 0.9vw;
+    border-radius: 999vw;
+    background: rgba(229, 186, 49, 0.12);
+    border: 0.1vw solid rgba(229, 186, 49, 0.5);
+    color: #6b5400;
+    font-size: 0.7vw;
+    font-weight: 700;
+    letter-spacing: 0.04vw;
+    text-transform: uppercase;
+}
+
+.formulario_visita {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5vh;
+}
+
+.grupo_campos_visita {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.2vw;
+}
+
+.campo_visita {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6vh;
+    color: var(--color-negro-texto);
+    font-size: 0.8vw;
+    font-weight: 700;
+}
+
+.campo_visita span {
+    color: var(--color-texto-secundario);
+}
+
+.campo_visita input,
+.campo_visita select,
+.campo_visita textarea {
+    width: 100%;
+    min-height: 5.4vh;
+    padding: 1vh 1vw;
+    border: 0.12vw solid var(--color-borde);
+    border-radius: 0.8vw;
+    background: var(--color-gris);
+    color: var(--color-negro-texto);
+    font-family: var(--fuente-principal);
+    font-size: 0.82vw;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.campo_visita textarea {
+    min-height: 12vh;
+    resize: vertical;
+}
+
+.campo_visita input:focus,
+.campo_visita select:focus,
+.campo_visita textarea:focus {
+    outline: none;
+    border-color: var(--color-amarillo);
+    box-shadow: 0 0 0 0.2vw rgba(229, 186, 49, 0.12);
+}
+
+.campo_visita_amplio {
+    grid-column: 1 / -1;
+}
+
+.acciones_formulario_visita {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1vw;
+    margin-top: 1vh;
+}
+
+.boton_principal_visita,
+.boton_secundario_visita {
+    border: none;
+    border-radius: 0.8vw;
+    padding: 1.1vh 1.5vw;
+    font-family: var(--fuente-principal);
+    font-size: 0.8vw;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.boton_principal_visita {
+    background: var(--color-amarillo);
+    color: var(--color-negro-texto);
+    box-shadow: 0 0.6vh 1vw rgba(229, 186, 49, 0.3);
+}
+
+.boton_secundario_visita {
+    background: #e9e9e9;
+    color: var(--color-negro-texto);
+}
+
+.boton_principal_visita:hover,
+.boton_secundario_visita:hover {
+    transform: translateY(-0.1vh);
+}
+
+.mensaje_formulario_visita {
+    min-height: 1.8vh;
+    margin: 0;
+    font-size: 0.76vw;
+    color: var(--color-texto-secundario);
+}
+
+.mensaje_formulario_visita.error {
+    color: #a00000;
+}
+
+.mensaje_formulario_visita.exito {
+    color: #0f6f38;
+}
+
+.pagina_visita {
+    max-width: 72vw;
+    margin-top: 3vh;
+}
+
+.cabecera_visita {
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 2vh;
+    padding: 2.2vh 2vw;
+    border-color: rgba(229, 186, 49, 0.42);
+    box-shadow: 0 1vh 2vw rgba(0, 0, 0, 0.07);
+}
+
+.cabecera_visita::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0.35vw;
+    height: 100%;
+    background: var(--color-amarillo);
+    content: "";
+}
+
+.cabecera_visita h1 {
+    font-size: 2.2vw;
+    letter-spacing: -0.04vw;
+}
+
+.etiqueta_seccion {
+    margin-bottom: 0.65vh;
+    font-size: 0.76vw;
+}
+
+.resumen_visita {
+    min-width: 18vw;
+    padding: 1.2vh 1.3vw;
+    border-radius: 0.7vw;
+}
+
+.resumen_visita_titulo {
+    font-size: 0.68vw;
+    letter-spacing: 0.1vw;
+}
+
+#resumen_departamento_visita {
+    max-width: 24vw;
+    font-size: 0.92vw;
+    text-align: right;
+}
+
+.contenedor_formulario_visita {
+    gap: 2.2vh;
+    margin-top: 0;
+    padding: 2.1vw;
+    border-color: rgba(0, 0, 0, 0.06);
+    box-shadow: 0 1.2vh 2.2vw rgba(0, 0, 0, 0.075);
+}
+
+.encabezado_formulario_visita {
+    padding-bottom: 1.4vh;
+    border-bottom: 0.08vw solid #ededed;
+}
+
+.encabezado_formulario_visita h2 {
+    font-size: 1.65vw;
+    letter-spacing: -0.025vw;
+}
+
+.badge_estado_visita {
+    padding: 0.7vh 1vw;
+    font-size: 0.72vw;
+}
+
+.formulario_visita {
+    gap: 1.8vh;
+}
+
+.grupo_campos_visita {
+    gap: 1.5vw;
+}
+
+.campo_visita {
+    gap: 0.7vh;
+    font-size: 0.82vw;
+}
+
+.campo_visita input,
+.campo_visita select,
+.campo_visita textarea {
+    min-height: 5.8vh;
+    padding: 1.1vh 1vw;
+    border-color: #dedede;
+    border-radius: 0.65vw;
+    background: #f7f7f7;
+    font-size: 0.9vw;
+}
+
+.campo_visita select {
+    cursor: pointer;
+}
+
+.campo_visita input::placeholder,
+.campo_visita textarea::placeholder {
+    color: #929292;
+}
+
+.campo_visita textarea {
+    min-height: 13vh;
+    line-height: 1.5;
+}
+
+.campo_visita input:focus,
+.campo_visita select:focus,
+.campo_visita textarea:focus {
+    background: var(--color-blanco);
+    box-shadow: 0 0 0 0.22vw rgba(229, 186, 49, 0.16);
+}
+
+.acciones_formulario_visita {
+    gap: 0.8vw;
+    margin-top: 0.5vh;
+}
+
+.boton_principal_visita,
+.boton_secundario_visita {
+    min-height: 4.8vh;
+    padding: 0.9vh 1.35vw;
+    font-size: 0.82vw;
+}
+
+.boton_principal_visita:hover:not(:disabled) {
+    box-shadow: 0 0.8vh 1.3vw rgba(229, 186, 49, 0.35);
+}
+
+.boton_principal_visita:disabled {
+    opacity: 0.7;
+    cursor: wait;
+}
+
+.mensaje_formulario_visita {
+    padding: 0;
+    font-size: 0.82vw;
+    line-height: 1.45;
+}
+
+.mensaje_formulario_visita.error,
+.mensaje_formulario_visita.exito {
+    padding: 0.9vh 1vw;
+    border-radius: 0.55vw;
+}
+
+.mensaje_formulario_visita.error {
+    background: #fff1f0;
+}
+
+.mensaje_formulario_visita.exito {
+    background: #edf8f0;
+}
+
+@media (max-width: 900px) {
+    .pagina_visita {
+        max-width: 88vw;
+    }
+
+    .cabecera_visita {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .resumen_visita {
+        align-items: flex-start;
+        width: 100%;
+    }
+
+    .grupo_campos_visita {
+        grid-template-columns: 1fr;
+    }
+
+    .cabecera_visita h1 {
+        font-size: 3vw;
+    }
+
+    .encabezado_formulario_visita h2 {
+        font-size: 2.4vw;
+    }
+
+    .campo_visita,
+    .campo_visita input,
+    .campo_visita select,
+    .campo_visita textarea,
+    .boton_principal_visita,
+    .boton_secundario_visita,
+    .mensaje_formulario_visita {
+        font-size: 1.5vw;
+    }
+
+    .encabezado_formulario_visita {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+@media (orientation: portrait) {
+    .pagina_visita {
+        max-width: 92vw;
+    }
+
+    .cabecera_visita,
+    .encabezado_formulario_visita {
+        align-items: flex-start;
+    }
+
+    .cabecera_visita h1 {
+        font-size: 5vw;
+    }
+
+    .encabezado_formulario_visita h2 {
+        font-size: 4vw;
+    }
+
+    .resumen_visita {
+        min-width: 100%;
+    }
+
+    #resumen_departamento_visita {
+        font-size: 3vw;
+        text-align: left;
+    }
+
+    .contenedor_formulario_visita {
+        padding: 4vw;
+    }
+
+    .grupo_campos_visita {
+        grid-template-columns: 1fr;
+    }
+
+    .campo_visita,
+    .campo_visita input,
+    .campo_visita select,
+    .campo_visita textarea,
+    .boton_principal_visita,
+    .boton_secundario_visita,
+    .mensaje_formulario_visita {
+        font-size: 3vw;
+    }
+
+    .acciones_formulario_visita {
+        flex-direction: column-reverse;
+    }
+
+    .boton_principal_visita,
+    .boton_secundario_visita {
+        width: 100%;
+    }
+}
