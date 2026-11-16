@@ -39,7 +39,7 @@ El archivo SQL incluye datos de ejemplo. No uses las credenciales ni los datos d
 | Integrante        | Rol o responsabilidades       |
 | ----------------- | ----------------------------- |
 | Angel Hernández  | Lider Proyecto/ desarrollador |
-| Wildo Pérez      | Desarrollador                 |
+| Wildo Pérez      | Desarrollador/QA                 |
 | Nicolás Saavedra | Diseñador UI / Desarrollador |
 
 Los perfiles funcionales de la aplicación (administrador, conserje ) son distintos de los roles de cada integrante del equipo.
