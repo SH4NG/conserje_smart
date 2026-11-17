@@ -1,0 +1,133 @@
+/* TITULO 1 CONTENEDOR FORMULARIO VISITA */
+.contenedor_formulario_visita {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+    padding: 2rem;
+    border: 1px solid #0000000f;
+    border-radius: 1rem;
+    background: var(--color-blanco);
+    box-shadow: 0 8px 24px #00000012;
+}
+
+/* TITULO 2 ENCABEZADO FORMULARIO VISITA */
+.encabezado_formulario_visita {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #ededed;
+}
+
+/* TITULO 3 BADGE ESTADO VISITA */
+.badge_estado_visita {
+    padding: .5rem .8rem;
+    border: 1px solid #e5ba3180;
+    border-radius: 2rem;
+    background: #e5ba311f;
+    color: #6b5400;
+    font-size: .75rem;
+    font-weight: 700;
+}
+
+/* TITULO 4 FORMULARIO VISITA */
+.formulario_visita {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+/* TITULO 5 GRUPO CAMPOS VISITA */
+.grupo_campos_visita {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+}
+
+/* TITULO 6 CAMPO VISITA */
+.campo_visita {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    font-size: .9rem;
+    font-weight: 700;
+}
+
+/* TITULO 7 ETIQUETAS DE LOS CAMPOS DE VISITA */
+.campo_visita span {
+    color: var(--color-texto-secundario);
+}
+
+/* TITULO 8 CAMPOS DE ENTRADA DEL FORMULARIO VISITA */
+.campo_visita input, .campo_visita select, .campo_visita textarea {
+    width: 100%;
+    min-height: 44px;
+    padding: .8rem 1rem;
+    border: 1px solid var(--color-borde);
+    border-radius: .65rem;
+    background: var(--color-gris);
+    color: var(--color-negro-texto);
+    font: 1rem var(--fuente-principal);
+}
+
+/* TITULO 9 AREA DE OBSERVACIONES DE VISITA */
+.campo_visita textarea {
+    min-height: 120px;
+    resize: vertical;
+    line-height: 1.5;
+}
+
+/* TITULO 10 SELECTOR DE DEPARTAMENTO */
+.campo_visita select {
+    cursor: pointer;
+}
+
+/* TITULO 11 FOCO DE LOS CAMPOS DE VISITA */
+.campo_visita input:focus, .campo_visita select:focus, .campo_visita textarea:focus {
+    border-color: #806300;
+    background: var(--color-blanco);
+}
+
+/* TITULO 12 CAMPOS DE VISITA CON DATOS INVALIDOS */
+.campo_visita [aria-invalid="true"] {
+    border-color: #a00000;
+}
+
+/* TITULO 13 CAMPO VISITA AMPLIO */
+.campo_visita_amplio {
+    grid-column: 1 / -1;
+}
+
+/* TITULO 14 ACCIONES FORMULARIO VISITA */
+.acciones_formulario_visita {
+    display: flex;
+    justify-content: flex-end;
+    gap: .8rem;
+}
+
+/* TITULO 15 AJUSTES PARA PANTALLAS MOVILES */
+@media (max-width: 650px) {
+
+    /* TITULO 16 CONTENEDOR FORMULARIO VISITA */
+    .contenedor_formulario_visita {
+        padding: 1.25rem;
+    }
+
+    /* TITULO 17 ENCABEZADO FORMULARIO VISITA */
+    .encabezado_formulario_visita {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    /* TITULO 18 GRUPO CAMPOS VISITA */
+    .grupo_campos_visita {
+        grid-template-columns: 1fr;
+    }
+
+    /* TITULO 19 ACCIONES FORMULARIO VISITA */
+    .acciones_formulario_visita {
+        flex-direction: column-reverse;
+    }
+}

@@ -1,0 +1,127 @@
+/* TITULO 1 CONTENEDOR TABLERO VISITA */
+.contenedor_tablero_visita {
+    padding: 2rem;
+    border: 1px solid #0000000f;
+    border-radius: 1rem;
+    background: var(--color-blanco);
+    box-shadow: 0 8px 24px #00000012;
+}
+
+/* TITULO 2 ENCABEZADO TABLERO VISITA */
+.encabezado_tablero_visita {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+/* TITULO 3 CONTROLES TABLERO VISITA */
+.controles_tablero_visita {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: .75rem;
+}
+
+/* TITULO 4 SELECTOR DE ESTADO DEL TABLERO */
+.controles_tablero_visita select {
+    min-height: 44px;
+    padding: .6rem;
+    border: 1px solid var(--color-borde);
+    border-radius: .5rem;
+    font: 1rem var(--fuente-principal);
+    background: var(--color-gris);
+}
+
+/* TITULO 5 TABLA VISITA DESPLAZABLE */
+.tabla_visita_desplazable {
+    overflow-x: auto;
+    margin-top: 1rem;
+}
+
+/* TITULO 6 TABLA VISITA */
+.tabla_visita {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: .9rem;
+    text-align: left;
+}
+
+/* TITULO 7 CELDAS Y ENCABEZADOS DE LA TABLA */
+.tabla_visita th, .tabla_visita td {
+    padding: .85rem;
+    border-bottom: 1px solid #ededed;
+    vertical-align: top;
+}
+
+/* TITULO 8 ENCABEZADOS DE LA TABLA DE VISITAS */
+.tabla_visita th {
+    background: var(--color-gris);
+    white-space: nowrap;
+}
+
+/* TITULO 9 CELDAS DE DATOS DE VISITA */
+.tabla_visita td {
+    min-width: 100px;
+    max-width: 280px;
+    overflow-wrap: anywhere;
+}
+
+/* TITULO 10 DETALLES DE TEXTO DE LA VISITA */
+.tabla_visita td small {
+    display: block;
+    margin-top: .4rem;
+    color: var(--color-texto-secundario);
+    white-space: pre-wrap;
+}
+
+/* TITULO 11 BOTONES DE ACCION DE LA VISITA */
+.tabla_visita td button {
+    display: block;
+    width: 100%;
+    margin-bottom: .5rem;
+    font-size: .8rem;
+}
+
+/* TITULO 12 ESTADO DE CARGA DE LA TABLA */
+.tabla_visita [aria-busy="true"] {
+    opacity: .5;
+    pointer-events: none;
+}
+
+/* TITULO 13 PAGINACION VISITA */
+.paginacion_visita {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1rem;
+    font-size: .9rem;
+}
+
+/* TITULO 14 AJUSTES PARA PANTALLAS MOVILES */
+@media (max-width: 650px) {
+
+    /* TITULO 15 CONTENEDOR TABLERO VISITA */
+    .contenedor_tablero_visita {
+        padding: 1.25rem;
+    }
+
+    /* TITULO 16 CONTROLES TABLERO VISITA */
+    .controles_tablero_visita {
+        width: 100%;
+    }
+
+    /* TITULO 17 SELECTOR DE ESTADO EN PANTALLAS MOVILES */
+    .controles_tablero_visita select {
+        flex: 1;
+    }
+
+    /* TITULO 18 PAGINACION VISITA */
+    .paginacion_visita {
+        justify-content: center;
+    }
+}
