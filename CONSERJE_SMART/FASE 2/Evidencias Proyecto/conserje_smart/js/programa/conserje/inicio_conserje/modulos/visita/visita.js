@@ -1,147 +1,67 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const selectDepartamento = document.getElementById('select_departamento_visita');
-    const resumenDepartamento = document.getElementById('resumen_departamento_visita');
-    const mensajeFormulario = document.getElementById('mensaje_formulario_visita');
-    const formulario = document.getElementById('formulario_visita');
-    const botonRegistrar = document.getElementById('boton_registrar_visita');
+// TITULO 1 INICIALIZAR MODULOS DE VISITA
+// carga cada sección por separado para que un fallo de cámara no bloquee el formulario
+async function iniciarVisita() {
+    if (!document.getElementById('pagina_visita')) {
+        return;
+    }
 
-    const mostrarMensaje = (mensaje, tipo) => {
-        if (!mensajeFormulario) {
-            return;
+    // TITULO 2 DEFINIR SECCIONES Y FUNCIONES DE INICIO
+    const modulos = [
+        {
+            cargar: () => import('./rut_visita.js'),
+            iniciar: 'inicializarRutVisita',
+            mensaje: 'mensaje_formulario_visita'
+        },
+        {
+            cargar: () => import('./escanerQR_visita.js'),
+            iniciar: 'inicializarEscanerVisita',
+            mensaje: 'mensaje_escaner_visita'
+        },
+        {
+            cargar: () => import('./backend_visitas/registrar_visita.js'),
+            iniciar: 'inicializarRegistroVisita',
+            mensaje: 'mensaje_formulario_visita'
+        },
+        {
+            cargar: () => import('./tablero_visita.js'),
+            iniciar: 'inicializarTableroVisita',
+            mensaje: 'mensaje_tablero_visita'
         }
+    ];
 
-        mensajeFormulario.textContent = mensaje;
-        mensajeFormulario.classList.remove('error', 'exito');
-        if (tipo) {
-            mensajeFormulario.classList.add(tipo);
-        }
-    };
+    if (document.getElementById('contenedor_instalacion_visita')) {
+        modulos.push({
+            cargar: () => import('./visita_appMovil/visita_appMovil.js'),
+            iniciar: 'inicializarVisitaAppMovil',
+            mensaje: 'mensaje_instalacion_visita'
+        });
+    }
 
-    const cargarDepartamentos = async () => {
-        if (!selectDepartamento) {
-            return;
-        }
-
+    // TITULO 3 CARGAR SECCIONES Y MOSTRAR ERRORES DE INICIO
+    await Promise.all(modulos.map(async (modulo) => {
         try {
-            const respuesta = await fetch(
-                '/conserje_smart/php/programa/conserje/inicio_conserje/modulos/visita/backend_visita/listar_departamento_visita.php',
-                {
-                    method: 'GET',
-                    credentials: 'same-origin',
-                    headers: { 'Accept': 'application/json' }
-                }
-            );
-
-            const resultado = await respuesta.json();
-
-            if (!respuesta.ok || !resultado.exito || !Array.isArray(resultado.datos)) {
-                throw new Error(resultado.mensaje || 'No se pudieron cargar los departamentos.');
-            }
-
-            selectDepartamento.innerHTML = '<option value="">Seleccione un departamento</option>';
-
-            if (resultado.datos.length === 0) {
-                selectDepartamento.innerHTML = '<option value="">No hay departamentos registrados</option>';
-                mostrarMensaje('Este condominio aún no tiene departamentos. Agrega registros a la tabla departamento para probar el formulario.', 'error');
-                return;
-            }
-
-            resultado.datos.forEach((departamento) => {
-                const etiqueta = [
-                    departamento.torre_departamento ? `Torre ${departamento.torre_departamento}` : '',
-                    `Depto. ${departamento.numero_departamento}`,
-                    departamento.piso_departamento !== null ? `Piso ${departamento.piso_departamento}` : ''
-                ].filter(Boolean).join(' · ');
-
-                const option = document.createElement('option');
-                option.value = String(departamento.id_departamento);
-                option.textContent = etiqueta;
-                selectDepartamento.appendChild(option);
-            });
-            mostrarMensaje('', null);
+            const funciones = await modulo.cargar();
+            await funciones[modulo.iniciar]();
         } catch (error) {
-            selectDepartamento.innerHTML = '<option value="">No disponible</option>';
-            mostrarMensaje(error.message || 'Error al cargar los departamentos.', 'error');
-            console.error('Error al cargar departamentos:', error);
+            console.error('No se pudo iniciar un módulo de Visita:', error);
+            const mensaje = document.getElementById(modulo.mensaje);
+            if (mensaje) {
+                mensaje.textContent = 'No se pudo cargar esta sección. Recarga la página para reintentar.';
+                mensaje.classList.add('error');
+            }
+            if (modulo.iniciar === 'inicializarRegistroVisita') {
+                const select = document.getElementById('select_departamento_visita');
+                select.replaceChildren(new Option('No disponible', ''));
+                select.disabled = true;
+                document.getElementById('boton_registrar_visita').disabled = true;
+            }
         }
-    };
+    }));
+}
 
-    if (selectDepartamento) {
-        selectDepartamento.addEventListener('change', () => {
-            const opcionSeleccionada = selectDepartamento.options[selectDepartamento.selectedIndex];
-            const texto = opcionSeleccionada && opcionSeleccionada.value ? opcionSeleccionada.textContent : 'Sin selección';
-
-            if (resumenDepartamento) {
-                resumenDepartamento.textContent = texto;
-            }
-
-            mostrarMensaje('', null);
-        });
-    }
-
-    if (formulario) {
-        formulario.addEventListener('reset', () => {
-            window.setTimeout(() => {
-                if (resumenDepartamento) {
-                    resumenDepartamento.textContent = 'Sin selección';
-                }
-                mostrarMensaje('', null);
-            });
-        });
-
-        formulario.addEventListener('submit', async (evento) => {
-            evento.preventDefault();
-
-            const datosFormulario = new FormData(formulario);
-            const departamento = String(datosFormulario.get('id_departamento') || '');
-            const nombre = String(datosFormulario.get('nombre_visitante') || '').trim();
-            const rut = String(datosFormulario.get('rut_visitante') || '').trim();
-            const motivo = String(datosFormulario.get('motivo_visita') || '').trim();
-
-            if (!departamento || !nombre || !rut || !motivo) {
-                mostrarMensaje('Completa departamento, nombre, RUT y motivo antes de registrar.', 'error');
-                return;
-            }
-
-            if (botonRegistrar) {
-                botonRegistrar.disabled = true;
-                botonRegistrar.textContent = 'Registrando...';
-            }
-
-            mostrarMensaje('Guardando el ingreso de visita...', null);
-
-            try {
-                const respuesta = await fetch(
-                    '/conserje_smart/php/programa/conserje/inicio_conserje/modulos/visita/backend_visita/registrar_visita.php',
-                    {
-                        method: 'POST',
-                        credentials: 'same-origin',
-                        headers: { 'Accept': 'application/json' },
-                        body: datosFormulario
-                    }
-                );
-                const resultado = await respuesta.json();
-
-                if (!respuesta.ok || resultado.exito !== true) {
-                    throw new Error(resultado.mensaje || `No se pudo registrar la visita (HTTP ${respuesta.status}).`);
-                }
-
-                formulario.reset();
-                const numeroRegistro = resultado.datos?.id_visita
-                    ? ` Número de registro: #${resultado.datos.id_visita}.`
-                    : '';
-                mostrarMensaje(`${resultado.mensaje || 'Visita registrada correctamente.'}${numeroRegistro}`, 'exito');
-            } catch (error) {
-                mostrarMensaje(error.message || 'No se pudo registrar la visita.', 'error');
-                console.error('Error al registrar la visita:', error);
-            } finally {
-                if (botonRegistrar) {
-                    botonRegistrar.disabled = false;
-                    botonRegistrar.textContent = 'Registrar ingreso';
-                }
-            }
-        });
-    }
-
-    cargarDepartamentos();
-});
+// TITULO 4 ESPERAR LA ESTRUCTURA DE LA PAGINA
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', iniciarVisita, { once: true });
+} else {
+    iniciarVisita();
+}
