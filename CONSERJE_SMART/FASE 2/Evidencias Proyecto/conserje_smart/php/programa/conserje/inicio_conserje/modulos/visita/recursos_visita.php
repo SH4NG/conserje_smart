@@ -1,0 +1,19 @@
+<?php
+// TITULO 1 DEFINIR LAS RUTAS DE LOS RECURSOS JS
+// cada importación utiliza la versión del contenido actual, incluidas sus dependencias
+$rutaJsVisita = '/conserje_smart/js/programa/conserje/inicio_conserje/modulos/visita/';
+$carpetaJsVisita = __DIR__ . '/../../../../../../js/programa/conserje/inicio_conserje/modulos/visita/';
+// TITULO 2 VERSIONAR LAS IMPORTACIONES DEL MODULO
+$importacionesVisita = [];
+foreach ([
+    'visita.js', 'rut_visita.js', 'escanerQR_visita.js', 'tablero_visita.js',
+    'backend_visitas/api_visita.js', 'backend_visitas/listar_visita.js',
+    'backend_visitas/registrar_visita.js', 'backend_visitas/modificar_visita.js',
+    'backend_visitas/registrar_salida_visita.js', 'visita_appMovil/visita_appMovil.js'
+] as $archivoJsVisita) {
+    $urlJsVisita = $rutaJsVisita . $archivoJsVisita;
+    $importacionesVisita[$urlJsVisita] = $urlJsVisita . '?v=' . substr(hash_file('sha256', $carpetaJsVisita . $archivoJsVisita), 0, 12);
+}
+?>
+<!-- TITULO MAPA DE IMPORTACIONES VISITA -->
+<script type="importmap"><?= json_encode(['imports' => $importacionesVisita], JSON_UNESCAPED_SLASHES | JSON_HEX_TAG | JSON_HEX_AMP); ?></script>
