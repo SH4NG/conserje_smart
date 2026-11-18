@@ -323,3 +323,33 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+
+-- ==========================================================
+-- SCRIPT DE CREACIÓN: TABLA `paquete` (Módulo Paquetería)
+-- Base de datos: conserje_smart_bd
+-- ==========================================================
+
+-- Si la tabla ya existe, la borramos para crearla limpia (opcional, ten cuidado en producción)
+-- DROP TABLE IF EXISTS `paquete`;
+
+CREATE TABLE `paquete` (
+  `id_paquete` int(11) NOT NULL AUTO_INCREMENT,
+  `id_condominio_fk` int(11) NOT NULL,
+  `id_departamento_fk` int(11) NOT NULL,
+  `id_usuario_fk` int(11) NOT NULL COMMENT 'ID del conserje que recibe o entrega',
+  `empresa_envio` varchar(100) DEFAULT NULL,
+  `codigo_seguimiento` varchar(50) DEFAULT NULL,
+  `descripcion_paquete` text DEFAULT NULL,
+  `fecha_recepcion` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `fecha_retiro` datetime DEFAULT NULL,
+  `fecha_eliminacion` datetime DEFAULT NULL COMMENT 'Se usa para archivar paquetes con más de 30 días',
+  `estado_paquete` enum('Pendiente','Retirado') NOT NULL DEFAULT 'Pendiente',
+  PRIMARY KEY (`id_paquete`),
+  KEY `fk_paquete_condominio` (`id_condominio_fk`),
+  KEY `fk_paquete_departamento` (`id_departamento_fk`),
+  KEY `fk_paquete_usuario` (`id_usuario_fk`),
+  CONSTRAINT `fk_paquete_condominio` FOREIGN KEY (`id_condominio_fk`) REFERENCES `condominio` (`id_condominio`),
+  CONSTRAINT `fk_paquete_departamento` FOREIGN KEY (`id_departamento_fk`) REFERENCES `departamento` (`id_departamento`),
+  CONSTRAINT `fk_paquete_usuario` FOREIGN KEY (`id_usuario_fk`) REFERENCES `usuario` (`id_usuario`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
