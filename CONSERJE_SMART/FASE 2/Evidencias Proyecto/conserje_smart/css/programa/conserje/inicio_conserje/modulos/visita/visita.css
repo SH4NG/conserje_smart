@@ -17,7 +17,12 @@
 /* TITULO 3 ESTRUCTURA GENERAL DE LA PAGINA */
 body {
     margin: 0;
-    background: linear-gradient(180deg, #f7f7f7, #f1f1f1);
+    min-height: 100vh;
+    background-color: #f1f1f1;
+    background-image: linear-gradient(rgba(255, 255, 255, .72), rgba(255, 255, 255, .72)), url('/conserje_smart/imagenes/programa/conserje/inicio_conserje/modulos/visita/background_visita.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     font-family: var(--fuente-principal);
     color: var(--color-negro-texto);
 }

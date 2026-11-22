@@ -85,6 +85,12 @@
     font-size: .8rem;
 }
 
+/* TITULO VISITA SELECCIONADA DESDE EL INICIO */
+.tabla_visita .visita_seleccionada_inicio {
+    background: #fff8df;
+    box-shadow: inset 4px 0 #e5ba31;
+}
+
 /* TITULO 12 ESTADO DE CARGA DE LA TABLA */
 .tabla_visita [aria-busy="true"] {
     opacity: .5;

@@ -1,0 +1,64 @@
+/* TITULO 1 CONTENEDOR VINCULAR MOVIL VISITA */
+.pagina_visita [hidden] {
+    display: none !important;
+}
+
+.contenedor_vincular_movil_visita {
+    margin-bottom: 1.5rem;
+    padding: 1.5rem;
+    border: 1px solid #e5ba3159;
+    border-radius: 1rem;
+    background: #fff;
+}
+
+/* TITULO 2 ENCABEZADO VINCULAR MOVIL VISITA */
+.encabezado_vincular_movil_visita {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+/* TITULO 3 QR VINCULAR MOVIL VISITA */
+.qr_vincular_movil_visita {
+    width: min(100%, 320px);
+    margin: 1.5rem auto;
+    padding: .5rem;
+    background: #fff;
+    border: 1px solid #ddd;
+}
+
+.qr_vincular_movil_visita svg {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+/* TITULO 4 CONFIRMACION VINCULAR MOVIL VISITA */
+.confirmacion_vincular_movil_visita {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 1rem 0;
+    padding: 1rem;
+    border-radius: .75rem;
+    background: #fff8df;
+    text-align: center;
+}
+
+/* TITULO 5 CODIGO VINCULAR MOVIL VISITA */
+.codigo_vincular_movil_visita {
+    font-size: 2rem;
+    letter-spacing: .2rem;
+    font-variant-numeric: tabular-nums;
+}
+
+/* TITULO 6 AYUDA VINCULAR MOVIL VISITA */
+.ayuda_vincular_movil_visita {
+    color: #5d5d5d;
+    font-size: .85rem;
+    line-height: 1.5;
+}
+
