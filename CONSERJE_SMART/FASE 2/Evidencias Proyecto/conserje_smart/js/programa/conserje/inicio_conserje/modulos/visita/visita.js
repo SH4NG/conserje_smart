@@ -13,12 +13,12 @@ async function iniciarVisita() {
             mensaje: 'mensaje_formulario_visita'
         },
         {
-            cargar: () => import('./escanerQR_visita.js'),
+            cargar: () => import('./escanerQR_visita/control_escanerQR_visita.js'),
             iniciar: 'inicializarEscanerVisita',
             mensaje: 'mensaje_escaner_visita'
         },
         {
-            cargar: () => import('./backend_visitas/registrar_visita.js'),
+            cargar: () => import('./Backend_visita/registrar_visita.js'),
             iniciar: 'inicializarRegistroVisita',
             mensaje: 'mensaje_formulario_visita'
         },
@@ -31,13 +31,36 @@ async function iniciarVisita() {
 
     if (document.getElementById('contenedor_instalacion_visita')) {
         modulos.push({
-            cargar: () => import('./visita_appMovil/visita_appMovil.js'),
+            cargar: () => import('./escanerQR_visita/appMovil_visita/appMovil_visita.js'),
             iniciar: 'inicializarVisitaAppMovil',
             mensaje: 'mensaje_instalacion_visita'
         });
     }
 
-    // TITULO 3 CARGAR SECCIONES Y MOSTRAR ERRORES DE INICIO
+    const publicos = [];
+    if (document.getElementById('estado_acceso_movil_visita')) {
+        publicos.push({
+            cargar: () => import('./escanerQR_visita/appMovil_visita/vinculo_appMovil_visita.js'),
+            iniciar: 'inicializarVinculoAppMovilVisita',
+            mensaje: 'mensaje_acceso_movil_visita'
+        });
+        // la instalación se prepara sin consultar departamentos ni iniciar la cámara
+        const instalacion = modulos.findIndex((modulo) => modulo.iniciar === 'inicializarVisitaAppMovil');
+        if (instalacion >= 0) publicos.push(...modulos.splice(instalacion, 1));
+        document.addEventListener('visita:movil-autorizado', () => cargarModulos(modulos), { once: true });
+        await cargarModulos(publicos);
+    } else {
+        modulos.push({
+            cargar: () => import('./escanerQR_visita/vincular_movil_visita.js'),
+            iniciar: 'inicializarVincularMovilVisita',
+            mensaje: 'mensaje_vincular_movil_visita'
+        });
+        await cargarModulos(modulos);
+    }
+}
+
+// TITULO 3 CARGAR SECCIONES Y MOSTRAR ERRORES DE INICIO
+async function cargarModulos(modulos) {
     await Promise.all(modulos.map(async (modulo) => {
         try {
             const funciones = await modulo.cargar();

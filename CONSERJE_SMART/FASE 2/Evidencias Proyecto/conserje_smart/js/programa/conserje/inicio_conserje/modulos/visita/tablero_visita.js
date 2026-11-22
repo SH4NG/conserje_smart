@@ -1,8 +1,8 @@
 // TITULO 1 IMPORTAR LAS OPERACIONES DEL TABLERO
-import { listarVisitas, etiquetaDepartamento } from './backend_visitas/listar_visita.js';
-import { registrarSalidaVisita } from './backend_visitas/registrar_salida_visita.js';
-import { prepararEdicionVisita } from './backend_visitas/modificar_visita.js';
-import { mostrarMensajeVisita } from './backend_visitas/api_visita.js';
+import { listarVisitas, etiquetaDepartamento } from './Backend_visita/listar_visita.js';
+import { registrarSalidaVisita } from './Backend_visita/registrar_salida_visita.js';
+import { prepararEdicionVisita } from './Backend_visita/modificar_visita.js';
+import { mostrarMensajeVisita } from './Backend_visita/api_visita.js';
 
 // TITULO 2 FORMATEAR FECHAS Y HORAS DE VISITA
 // muestra la hora local de Santiago guardada por el backend
@@ -26,6 +26,14 @@ export function inicializarTableroVisita() {
     const anterior = document.getElementById('pagina_anterior_visita');
     const siguiente = document.getElementById('pagina_siguiente_visita');
     const indicador = document.getElementById('pagina_actual_visita');
+    const quitarSeleccion = document.getElementById('quitar_registro_seleccionado_visita');
+    const seleccionUrl = new URL(location.href).searchParams.get('visita');
+    let idSeleccionado = /^[1-9]\d*$/.test(seleccionUrl || '') && Number.isSafeInteger(Number(seleccionUrl))
+        ? Number(seleccionUrl) : null;
+    if (idSeleccionado) {
+        estado.value = 'todas';
+        quitarSeleccion.hidden = false;
+    }
     let pagina = 1;
     let visitas = [];
     let solicitud = null;
@@ -44,11 +52,13 @@ export function inicializarTableroVisita() {
         cuerpo.replaceChildren();
         if (!visitas.length) {
             const fila = document.createElement('tr');
-            agregarCelda(fila, 'No hay visitas para este estado.').colSpan = 8;
+            agregarCelda(fila, idSeleccionado ? 'El registro solicitado no está disponible en tu condominio.' : 'No hay visitas para este estado.').colSpan = 8;
             cuerpo.appendChild(fila);
         }
         for (const visita of visitas) {
             const fila = document.createElement('tr');
+            fila.id = `visita-${visita.id_visita}`;
+            fila.classList.toggle('visita_seleccionada_inicio', visita.id_visita === idSeleccionado);
             agregarCelda(fila, `#${visita.id_visita}`);
             const visitante = agregarCelda(fila, visita.nombre_visitante);
             const rut = document.createElement('small');
@@ -96,7 +106,7 @@ export function inicializarTableroVisita() {
             mostrarMensajeVisita(mensaje, 'Cargando visitas...');
         }
         try {
-            const resultado = await listarVisitas({ estado: estado.value, pagina, signal: actual.signal });
+            const resultado = await listarVisitas({ estado: estado.value, pagina, idVisita: idSeleccionado, signal: actual.signal });
             if (actual.signal.aborted) {
                 return;
             }
@@ -107,7 +117,7 @@ export function inicializarTableroVisita() {
             }
             visitas = resultado.datos;
             dibujar();
-            indicador.textContent = `Página ${pagina} · ${resultado.total} visitas`;
+            indicador.textContent = idSeleccionado ? `Registro #${idSeleccionado}` : `Página ${pagina} · ${resultado.total} visitas`;
             anterior.disabled = pagina <= 1;
             siguiente.disabled = !resultado.hay_mas;
             if (!conservarMensaje) {
@@ -163,7 +173,21 @@ export function inicializarTableroVisita() {
     });
 
     // TITULO 8 ESCUCHAR FILTROS Y CAMBIOS DE PAGINA
+    function quitarRegistroSeleccionado() {
+        idSeleccionado = null;
+        quitarSeleccion.hidden = true;
+        const url = new URL(location.href);
+        url.searchParams.delete('visita');
+        history.replaceState(null, '', url);
+        pagina = 1;
+    }
+    quitarSeleccion.addEventListener('click', () => {
+        quitarRegistroSeleccionado();
+        estado.value = 'todas';
+        cargar();
+    });
     estado.addEventListener('change', () => {
+        if (idSeleccionado) quitarRegistroSeleccionado();
         pagina = 1;
         cargar();
     });
