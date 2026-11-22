@@ -6,10 +6,11 @@ $carpetaJsVisita = __DIR__ . '/../../../../../../js/programa/conserje/inicio_con
 // TITULO 2 VERSIONAR LAS IMPORTACIONES DEL MODULO
 $importacionesVisita = [];
 foreach ([
-    'visita.js', 'rut_visita.js', 'escanerQR_visita.js', 'tablero_visita.js',
-    'backend_visitas/api_visita.js', 'backend_visitas/listar_visita.js',
-    'backend_visitas/registrar_visita.js', 'backend_visitas/modificar_visita.js',
-    'backend_visitas/registrar_salida_visita.js', 'visita_appMovil/visita_appMovil.js'
+    'visita.js', 'rut_visita.js', 'escanerQR_visita/control_escanerQR_visita.js', 'tablero_visita.js',
+    'Backend_visita/api_visita.js', 'Backend_visita/listar_visita.js',
+    'Backend_visita/registrar_visita.js', 'Backend_visita/modificar_visita.js',
+    'Backend_visita/registrar_salida_visita.js', 'escanerQR_visita/appMovil_visita/appMovil_visita.js',
+    'escanerQR_visita/vincular_movil_visita.js', 'escanerQR_visita/appMovil_visita/vinculo_appMovil_visita.js'
 ] as $archivoJsVisita) {
     $urlJsVisita = $rutaJsVisita . $archivoJsVisita;
     $importacionesVisita[$urlJsVisita] = $urlJsVisita . '?v=' . substr(hash_file('sha256', $carpetaJsVisita . $archivoJsVisita), 0, 12);

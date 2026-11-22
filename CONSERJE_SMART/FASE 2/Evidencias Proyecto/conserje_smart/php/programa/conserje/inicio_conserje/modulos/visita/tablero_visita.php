@@ -12,6 +12,7 @@
                 <option value="todas">Todas</option>
             </select>
             <button type="button" class="boton_secundario_visita" id="actualizar_tablero_visita">Actualizar</button>
+            <button type="button" class="boton_secundario_visita" id="quitar_registro_seleccionado_visita" hidden>Ver todas las visitas</button>
         </div>
     </div>
     <!-- TITULO MENSAJE TABLERO VISITA -->

@@ -1,7 +1,8 @@
 <?php
 // TITULO 1 INICIAR LA SESION DEL CONSERJE
 if (session_status() !== PHP_SESSION_ACTIVE) {
-    session_start();
+    require_once __DIR__ . '/Backend_visita/comun_visita.php';
+    iniciarSesionVisita();
 }
 
 // TITULO 2 COMPROBAR EL ACCESO AL MODULO VISITA
@@ -18,8 +19,9 @@ if (
 if (empty($_SESSION['csrf_visita'])) {
     $_SESSION['csrf_visita'] = bin2hex(random_bytes(32));
 }
-// TITULO 4 DEFINIR EL MODO DE PRESENTACION
-$modoMovilVisita = $modoMovilVisita ?? false;
+// TITULO 4 PREPARAR LOS ENCABEZADOS DE LA VISTA
+header('Cache-Control: no-store');
+header('Referrer-Policy: no-referrer');
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -29,34 +31,26 @@ $modoMovilVisita = $modoMovilVisita ?? false;
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-visita" content="<?= htmlspecialchars($_SESSION['csrf_visita'], ENT_QUOTES, 'UTF-8'); ?>">
     <meta name="theme-color" content="#e5ba31">
-    <title><?= $modoMovilVisita ? 'App de visitas' : 'Visitas'; ?> | Conserje Smart</title>
+    <title>Visitas | Conserje Smart</title>
 
     <!-- TITULO ESTILOS DE PAGINA VISITA -->
     <link rel="icon" type="image/png" href="/conserje_smart/imagenes/favicon/icono_conserje_smart.png">
     <link rel="stylesheet" href="/conserje_smart/css/programa/cabecera/cabecera.css">
-    <link rel="stylesheet" href="/conserje_smart/css/programa/conserje/inicio_conserje/modulos/visita/visita.css?v=20261115-1">
+    <link rel="stylesheet" href="/conserje_smart/css/programa/conserje/inicio_conserje/modulos/visita/visita.css?v=<?= filemtime(__DIR__ . '/../../../../../../css/programa/conserje/inicio_conserje/modulos/visita/visita.css'); ?>">
     <link rel="stylesheet" href="/conserje_smart/css/programa/conserje/inicio_conserje/modulos/visita/formulario_visita.css?v=20261115-1">
-    <link rel="stylesheet" href="/conserje_smart/css/programa/conserje/inicio_conserje/modulos/visita/escanerQR_visita.css?v=20261115-2">
-    <link rel="stylesheet" href="/conserje_smart/css/programa/conserje/inicio_conserje/modulos/visita/tablero_visita.css?v=20261115-1">
+    <link rel="stylesheet" href="/conserje_smart/css/programa/conserje/inicio_conserje/modulos/visita/escanerQR_visita/vincular_movil_visita.css?v=20261122-1">
+    <link rel="stylesheet" href="/conserje_smart/css/programa/conserje/inicio_conserje/modulos/visita/escanerQR_visita/escanerQR_visita.css?v=20261122-1">
+    <link rel="stylesheet" href="/conserje_smart/css/programa/conserje/inicio_conserje/modulos/visita/tablero_visita.css?v=<?= filemtime(__DIR__ . '/../../../../../../css/programa/conserje/inicio_conserje/modulos/visita/tablero_visita.css'); ?>">
     <link rel="stylesheet" href="/conserje_smart/css/programa/conserje/inicio_conserje/pie_pagina/pie_pagina.css">
     <link rel="stylesheet" href="/conserje_smart/css/programa/conserje/inicio_conserje/pie_pagina/navegacion_pie_pagina.css">
     <link rel="stylesheet" href="/conserje_smart/css/programa/conserje/inicio_conserje/pie_pagina/logo_pie_pagina.css">
     <link rel="stylesheet" href="/conserje_smart/css/programa/conserje/inicio_conserje/pie_pagina/contactos_pie_pagina.css">
     <link rel="stylesheet" href="/conserje_smart/css/programa/conserje/inicio_conserje/pie_pagina/creado_por_pie_pagina.css">
 
-    <!-- TITULO RECURSOS DE APLICACION MOVIL VISITA -->
-    <?php if ($modoMovilVisita): ?>
-        <link rel="manifest" href="/conserje_smart/js/programa/conserje/inicio_conserje/modulos/visita/visita_appMovil/visita_appMovil.webmanifest">
-        <link rel="apple-touch-icon" href="/conserje_smart/imagenes/programa/conserje/inicio_conserje/modulos/visita/visita_appMovil/icono_visita_192.png">
-        <meta name="mobile-web-app-capable" content="yes">
-        <meta name="apple-mobile-web-app-title" content="Visitas">
-        <link rel="stylesheet" href="/conserje_smart/css/programa/conserje/inicio_conserje/modulos/visita/visita_appMovil.css?v=20261115-1">
-    <?php endif; ?>
-
     <!-- TITULO IMPORTACIONES JS DE VISITA -->
     <?php include __DIR__ . '/recursos_visita.php'; ?>
 </head>
-<body class="<?= $modoMovilVisita ? 'modo_movil_visita' : 'modo_escritorio_visita'; ?>">
+<body class="modo_escritorio_visita">
     <!-- TITULO CABECERA -->
     <?php include __DIR__ . '/../../../../cabecera/cabecera.php'; ?>
 
@@ -76,30 +70,26 @@ $modoMovilVisita = $modoMovilVisita ?? false;
             </div>
         </section>
 
+        <!-- TITULO CONTENEDOR VINCULAR MOVIL VISITA -->
+        <?php include __DIR__ . '/escanerQR_visita/vincular_movil_visita.php'; ?>
+
         <!-- TITULO ENLACE MODO VISITA -->
         <p class="enlace_modo_visita">
-            <?php if ($modoMovilVisita): ?>
-                <a href="visita.php">Ver tablero de visitas</a>
-            <?php else: ?>
-                <a href="visita_appMovil.php">Abrir app móvil para escanear el carnet</a>
-            <?php endif; ?>
+            <a href="escanerQR_visita/appMovil_visita/appMovil_visita.php">Abrir app móvil para escanear el carnet</a>
         </p>
 
-        <!-- TITULO CONTENEDOR INSTALACION VISITA -->
-        <?php if ($modoMovilVisita) include __DIR__ . '/visita_appMovil_instalacion.php'; ?>
-
         <!-- TITULO CONTENEDOR ESCANER VISITA -->
-        <?php include __DIR__ . '/escanerQR_visita.php'; ?>
+        <?php include __DIR__ . '/escanerQR_visita/escanerQR_visita.php'; ?>
 
         <!-- TITULO CONTENEDOR FORMULARIO VISITA -->
         <?php include __DIR__ . '/formulario_visita.php'; ?>
 
         <!-- TITULO CONTENEDOR TABLERO VISITA -->
-        <?php if (!$modoMovilVisita) include __DIR__ . '/tablero_visita.php'; ?>
+        <?php include __DIR__ . '/tablero_visita.php'; ?>
     </main>
 
     <!-- TITULO CONTENEDOR PIE PAGINA -->
-    <?php if (!$modoMovilVisita) include __DIR__ . '/../../pie_pagina/pie_pagina.php'; ?>
+    <?php include __DIR__ . '/../../pie_pagina/pie_pagina.php'; ?>
 
     <!-- TITULO INICIALIZACION JS DE VISITA -->
     <script type="module" src="<?= htmlspecialchars($importacionesVisita[$rutaJsVisita . 'visita.js'], ENT_QUOTES, 'UTF-8'); ?>"></script>
