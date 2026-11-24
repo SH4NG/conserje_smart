@@ -1,0 +1,136 @@
+{
+  "name": "conserje_smart_workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "a8e28145-377e-4ffa-bd28-321e87b5cfa0",
+        "authentication": "headerAuth",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "b75f841a-ebbc-4238-9d8d-b43e8812c17c",
+      "name": "Webhook",
+      "webhookId": "a8e28145-377e-4ffa-bd28-321e87b5cfa0",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "pfIqg0GlYq9GjYtq",
+          "name": "Header Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{$json.body.novedad}}",
+        "messages": {
+          "messageValues": [
+            {
+              "message": "=Eres un asistente que estructura novedades de una bitácora de conserjería. Extrae la información del texto proporcionado y devuelve ÚNICAMENTE un objeto JSON válido con las siguientes claves en la raíz.\n\nReglas de extracción:\n\ntitulo: Resumen breve basado únicamente en la novedad.\n\ndescripcion: Conserva el texto original recibido, sin traducirlo, corregirlo, resumirlo ni omitir detalles.\n\ncategoria: null.\n\ntipo_lugar: El tipo de lugar, recinto o espacio físico mencionado (ejemplos: \"pasillo\", \"departamento\", \"estacionamiento\", \"ascensor\", \"escaleras\" ,\"oficinas\", \"Tejado\",\"techos\",\"azoteas\", \"salas\", \"piezas\", \"sotanos\", \"subterraneos\"), o null si no se menciona ninguno.\n\nlugar: La ubicación física específica y completa (ejemplos: \"pasillo del segundo piso\", \"departamento 402\", \"estacionamiento de visitas\"), o null.\n\nentidad_relacionada: Arreglo de textos con las personas o equipos nombrados explícitamente (ej: [\"María López\", \"equipo de mantención\"]). Conserva sus nombres tal cual. Si no hay, devuelve [].\n\nfecha_evento: Formato \"YYYY-MM-DD\" si se indica claramente. Si no, null.\n\nhora_evento: Formato \"HH:MM\" si se indica. Si no, null.\n\netiquetas: Arreglo de conceptos clave de la novedad (ej: [\"filtración de agua\"]). Si no hay, [].\n\nobservaciones: null si no hay observación adicional explícita.\n\nTexto a analizar:\n{{$json.body.novedad}}"
+            }
+          ]
+        },
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.9,
+      "position": [
+        224,
+        0
+      ],
+      "id": "da74d757-593a-4d6b-a509-e92475697c22",
+      "name": "Basic LLM Chain"
+    },
+    {
+      "parameters": {
+        "model": "qwen2.5:3b",
+        "options": {
+          "temperature": 0,
+          "format": "json"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOllama",
+      "typeVersion": 1,
+      "position": [
+        160,
+        208
+      ],
+      "id": "8af86c0d-84c5-4d80-92ab-a2b7d419c0f9",
+      "name": "Ollama Chat Model",
+      "credentials": {
+        "ollamaApi": {
+          "id": "MgkXYbPIYSA7Tdkj",
+          "name": "Ollama account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// n8n ya detectó y parseó el JSON, así que tomamos el objeto directamente:\nlet datos_extraidos = $input.first().json;\n\n// Definir los campos que queremos monitorear\nconst campos_a_revisar = [\"categoria\", \"tipo_lugar\", \"lugar\", \"fecha_evento\", \"hora_evento\"];\nlet campos_faltantes = [];\n\n// Lógica 100% precisa: si el valor es nulo o no existe, se añade a la lista\nfor (let campo of campos_a_revisar) {\n  if (datos_extraidos[campo] === null || datos_extraidos[campo] === undefined) {\n    campos_faltantes.push(campo);\n  }\n}\n\n// Agregar el arreglo calculado al objeto final\ndatos_extraidos.campos_faltantes = campos_faltantes;\n\n// Retornar en el formato estándar de un item en n8n\nreturn { json: datos_extraidos };"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        592,
+        0
+      ],
+      "id": "2136b2bd-9951-49ac-9440-14d71c28f13d",
+      "name": "Code in JavaScript"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ollama Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Basic LLM Chain": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "ab32fc4b-47b8-460e-83cc-bc55def59896",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "f9a6dc4e783a81137e9e52e8f441f1018a57136bc0550ae5316f0cced107a160"
+  },
+  "nodeGroups": [],
+  "id": "bMiZsZXh3cESrDV5",
+  "tags": []
+}
