@@ -1,0 +1,8 @@
+    <!-- TITULO BOTON REGISTRAR -->
+    <!-- inicia las validaciones y el envio del formulario -->
+        <button class="boton_registrar" id="boton_registrar" > 
+            Registrarse
+        </button>
+
+    <!-- carga la logica principal del registro -->
+    <script src="/conserje_smart/conserje-smart-frontend/js/inicio_sesion/registrarse/registro/boton_registrar.js?v=20261015-2"></script>
