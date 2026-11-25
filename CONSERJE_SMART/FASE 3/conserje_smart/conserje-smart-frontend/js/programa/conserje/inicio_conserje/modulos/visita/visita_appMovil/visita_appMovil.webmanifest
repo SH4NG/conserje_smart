@@ -1,0 +1,27 @@
+{
+    "id": "/conserje_smart/conserje-smart-frontend/php/programa/conserje/inicio_conserje/modulos/visita/visita_appMovil.php",
+    "name": "Conserje Smart - Visitas",
+    "short_name": "Visitas",
+    "description": "Escanea el QR del carnet y registra visitas en tu condominio.",
+    "lang": "es-CL",
+    "start_url": "/conserje_smart/conserje-smart-frontend/php/programa/conserje/inicio_conserje/modulos/visita/visita_appMovil.php?origen=pwa",
+    "scope": "/conserje_smart/conserje-smart-frontend/php/programa/conserje/inicio_conserje/modulos/visita/",
+    "display": "standalone",
+    "theme_color": "#e5ba31",
+    "background_color": "#f7f7f7",
+    "prefer_related_applications": false,
+    "icons": [
+        {
+            "src": "/conserje_smart/conserje-smart-frontend/imagenes/programa/conserje/inicio_conserje/modulos/visita/visita_appMovil/icono_visita_192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/conserje_smart/conserje-smart-frontend/imagenes/programa/conserje/inicio_conserje/modulos/visita/visita_appMovil/icono_visita_512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any"
+        }
+    ]
+}
