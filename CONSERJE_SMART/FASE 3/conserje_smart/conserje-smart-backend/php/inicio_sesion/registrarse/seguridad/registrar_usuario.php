@@ -6,6 +6,7 @@ header('Content-Type: application/json; charset=utf-8');
 
 // TITULO 2 RESPONDER REGISTRO
 // devuelve una respuesta uniforme y finaliza la ejecucion del endpoint
+/** @return never */
 function responderRegistro(bool $exito, string $mensaje, int $codigoHttp = 200): void
 {
     // establece el codigo HTTP que recibira el navegador
@@ -25,16 +26,14 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 // TITULO 4 CONEXION BASE DE DATOS
-// establece la conexion local con la base de datos del proyecto
-$mysqli = new mysqli('localhost', 'root', '', 'conserje_smart_bd');
-
-// verifica si la conexion produjo un error
-if ($mysqli->connect_error) {
+// establece la conexion PostgreSQL mediante la configuracion del servidor
+require_once dirname(__DIR__, 3) . '/base_datos/conexion_postgresql.php';
+try {
+    $pdo = conectarBasePostgreSQL();
+} catch (Throwable $error) {
+    error_log('No se pudo conectar para registrar un usuario: ' . $error->getMessage());
     responderRegistro(false, 'No se pudo conectar con la base de datos.', 500);
 }
-
-// configura la codificacion para recibir correctamente caracteres especiales
-$mysqli->set_charset('utf8mb4');
 
 // TITULO 5 RECIBIR DATOS
 // obtiene y limpia los valores enviados por el formulario
@@ -65,13 +64,11 @@ if (
     $idCondominio === null ||
     $idCondominio < 1
 ) {
-    $mysqli->close();
     responderRegistro(false, 'Faltan datos obligatorios por ingresar.', 400);
 }
 
 // valida el formato general del correo recibido
 if (!filter_var($correo, FILTER_VALIDATE_EMAIL)) {
-    $mysqli->close();
     responderRegistro(false, 'El correo electrónico no es válido.', 400);
 }
 
@@ -79,7 +76,6 @@ if (!filter_var($correo, FILTER_VALIDATE_EMAIL)) {
 // limita el registro a los roles definidos por el sistema
 $rolesPermitidos = ['admin', 'conserje', 'residente'];
 if (!in_array($rol, $rolesPermitidos, true)) {
-    $mysqli->close();
     responderRegistro(false, 'El rol seleccionado no es válido.', 400);
 }
 
@@ -95,7 +91,6 @@ if (
     mb_strlen($rutAdmin) > 20 ||
     mb_strlen($codigoAuthAdmin) > 255
 ) {
-    $mysqli->close();
     responderRegistro(false, 'Uno o más datos superan la longitud permitida.', 400);
 }
 
@@ -106,64 +101,46 @@ if (
     !preg_match('/[a-z]/', $contraseña) ||
     !preg_match('/\d/', $contraseña)
 ) {
-    $mysqli->close();
     responderRegistro(false, 'La contraseña debe tener al menos 8 caracteres, máximo 72 bytes UTF-8 e incluir mayúscula, minúscula y número.', 400);
 }
 
 // TITULO 9 VALIDAR CONDOMINIO
 // comprueba que el id recibido exista en la tabla condominio
-$consultaCondominio = $mysqli->prepare(
+$consultaCondominio = $pdo->prepare(
     'SELECT id_condominio FROM condominio WHERE id_condominio = ?'
 );
 
-if ($consultaCondominio === false) {
-    $mysqli->close();
+try {
+    $consultaCondominio->execute([$idCondominio]);
+} catch (PDOException $error) {
+    error_log('No se pudo validar el condominio del registro: ' . $error->getMessage());
     responderRegistro(false, 'No se pudo validar el condominio.', 500);
 }
 
-$consultaCondominio->bind_param('i', $idCondominio);
-// ejecuta la consulta preparada para validar la relacion
-$consultaCondominio->execute();
-$resultadoCondominio = $consultaCondominio->get_result();
-$consultaCondominio->close();
-
-if ($resultadoCondominio->num_rows === 0) {
-    $mysqli->close();
+if (!$consultaCondominio->fetchColumn()) {
     responderRegistro(false, 'El condominio seleccionado no existe.', 400);
 }
 
 // TITULO 10 VALIDAR AUTORIZACION DEL ADMINISTRADOR
 // acepta solo un administrador del mismo condominio con RUT y código coincidentes
 $rutAdminNormalizado = strtoupper((string) preg_replace('/[^0-9kK]/', '', $rutAdmin));
-$consultaAdmin = $mysqli->prepare(
+$consultaAdmin = $pdo->prepare(
     'SELECT rut_usuario, codigo_auth_usuario
      FROM usuario
      WHERE id_condominio_fk = ? AND rol_usuario = \'admin\''
 );
 
-if ($consultaAdmin === false) {
-    $mysqli->close();
+try {
+    $consultaAdmin->execute([$idCondominio]);
+    $administradores = $consultaAdmin->fetchAll();
+} catch (PDOException $error) {
+    error_log('No se pudo validar la autorización del administrador: ' . $error->getMessage());
     responderRegistro(false, 'No se pudo validar la autorización del administrador.', 500);
-}
-
-$consultaAdmin->bind_param('i', $idCondominio);
-$ejecucionAdmin = $consultaAdmin->execute();
-if (!$ejecucionAdmin) {
-    $consultaAdmin->close();
-    $mysqli->close();
-    responderRegistro(false, 'No se pudo comprobar la autorización del administrador.', 500);
-}
-
-$resultadoAdmin = $consultaAdmin->get_result();
-if ($resultadoAdmin === false) {
-    $consultaAdmin->close();
-    $mysqli->close();
-    responderRegistro(false, 'No se pudo leer la autorización del administrador.', 500);
 }
 
 $adminAutorizado = false;
 
-while ($administrador = $resultadoAdmin->fetch_assoc()) {
+foreach ($administradores as $administrador) {
     $rutGuardadoNormalizado = strtoupper(
         (string) preg_replace('/[^0-9kK]/', '', $administrador['rut_usuario'])
     );
@@ -178,34 +155,25 @@ while ($administrador = $resultadoAdmin->fetch_assoc()) {
     }
 }
 
-$consultaAdmin->close();
-
 if (!$adminAutorizado) {
-    $mysqli->close();
     responderRegistro(false, 'El RUT o el código no corresponde a un administrador de este condominio.', 403);
 }
 
 // TITULO 11 VALIDAR DUPLICADOS
 // comprueba que el RUT y el correo no esten registrados
-$consultaDuplicado = $mysqli->prepare(
+$consultaDuplicado = $pdo->prepare(
     'SELECT rut_usuario, correo FROM usuario WHERE rut_usuario = ? OR correo = ? LIMIT 1'
 );
 
-if ($consultaDuplicado === false) {
-    $mysqli->close();
+try {
+    $consultaDuplicado->execute([$rut, $correo]);
+    $usuarioDuplicado = $consultaDuplicado->fetch();
+} catch (PDOException $error) {
+    error_log('No se pudo comprobar si el usuario ya existe: ' . $error->getMessage());
     responderRegistro(false, 'No se pudieron validar los datos del usuario.', 500);
 }
 
-$consultaDuplicado->bind_param('ss', $rut, $correo);
-// ejecuta la consulta que busca coincidencias
-$consultaDuplicado->execute();
-$resultadoDuplicado = $consultaDuplicado->get_result();
-$usuarioDuplicado = $resultadoDuplicado->fetch_assoc();
-$consultaDuplicado->close();
-
-if ($usuarioDuplicado !== null) {
-    $mysqli->close();
-
+if ($usuarioDuplicado !== false) {
     if ($usuarioDuplicado['rut_usuario'] === $rut) {
         responderRegistro(false, 'El RUT ya está registrado.', 409);
     }
@@ -219,53 +187,43 @@ $codigoAuth = bin2hex(random_bytes(32));
 $hashContraseña = password_hash($contraseña, PASSWORD_DEFAULT);
 
 if ($hashContraseña === false) {
-    $mysqli->close();
     responderRegistro(false, 'No se pudo proteger la contraseña del usuario.', 500);
 }
 
 // TITULO 13 INSERTAR USUARIO
 // inicia una transaccion para mantener consistente el registro
-$mysqli->begin_transaction();
+try {
+    $pdo->beginTransaction();
+    $insertarUsuario = $pdo->prepare(
+        'INSERT INTO usuario
+            (rut_usuario, nombre_usuario, apellido_usuario, telefono_usuario, correo, rol_usuario, codigo_auth_usuario, contraseña, id_condominio_fk)
+         VALUES (?, ?, ?, NULLIF(?, \'\'), ?, ?, ?, ?, ?)
+         RETURNING id_usuario'
+    );
+    $insertarUsuario->execute([
+        $rut,
+        $nombre,
+        $apellido,
+        $telefono,
+        $correo,
+        $rol,
+        $codigoAuth,
+        $hashContraseña,
+        $idCondominio
+    ]);
 
-// prepara la insercion con parametros para evitar inyecciones SQL
-$insertarUsuario = $mysqli->prepare(
-    'INSERT INTO usuario
-        (rut_usuario, nombre_usuario, apellido_usuario, telefono_usuario, correo, rol_usuario, codigo_auth_usuario, contraseña, id_condominio_fk)
-     VALUES (?, ?, ?, NULLIF(?, \'\'), ?, ?, ?, ?, ?)'
-);
-
-if ($insertarUsuario === false) {
-    $mysqli->rollback();
-    $mysqli->close();
-    responderRegistro(false, 'No se pudo preparar el registro del usuario.', 500);
-}
-
-$insertarUsuario->bind_param(
-    'ssssssssi',
-    $rut,
-    $nombre,
-    $apellido,
-    $telefono,
-    $correo,
-    $rol,
-    $codigoAuth,
-    $hashContraseña,
-    $idCondominio
-);
-
-// ejecuta la insercion del nuevo usuario
-if (!$insertarUsuario->execute()) {
-    $insertarUsuario->close();
-    $mysqli->rollback();
-    $mysqli->close();
+    $idUsuario = (int) $insertarUsuario->fetchColumn();
+    $pdo->commit();
+} catch (PDOException $error) {
+    if ($pdo->inTransaction()) {
+        $pdo->rollBack();
+    }
+    error_log('No se pudo registrar el usuario: ' . $error->getMessage());
+    if ($error->getCode() === '23505') {
+        responderRegistro(false, 'El RUT o el correo ya está registrado.', 409);
+    }
     responderRegistro(false, 'No se pudo registrar el usuario.', 500);
 }
-
-// conserva el id generado por la base de datos
-$idUsuario = $mysqli->insert_id;
-$insertarUsuario->close();
-$mysqli->commit();
-$mysqli->close();
 
 // TITULO 14 RESPUESTA EXITOSA
 // informa al navegador que el usuario fue registrado

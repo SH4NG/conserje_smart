@@ -1,5 +1,7 @@
 <?php
 // TITULO 1 PREPARAR LA SESION Y EL TOKEN DEL FORMULARIO
+require_once dirname(__DIR__, 6) . '/base_datos/conexion_postgresql.php';
+
 function iniciarSesionVisita(): void
 {
     if (session_status() !== PHP_SESSION_ACTIVE) {
@@ -42,12 +44,9 @@ function validarTokenFormularioVisita(): void
 }
 
 // TITULO 4 CONECTAR LA BASE DE DATOS DE VISITA
-function abrirBaseVisita(): mysqli
+function abrirBaseVisita(): PDO
 {
-    mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
-    $bd = new mysqli('localhost', 'root', '', getenv('CONSERJE_DB_NOMBRE') ?: 'conserje_smart_bd');
-    $bd->set_charset('utf8mb4');
-    return $bd;
+    return conectarBasePostgreSQL();
 }
 
 // TITULO 5 IDENTIFICAR EL COMPUTADOR QUE AUTORIZA EL MOVIL
@@ -73,7 +72,7 @@ function urlAplicacionMovilVisita(): ?string
 }
 
 // TITULO 7 LEER EL VINCULO DEL NAVEGADOR MOVIL
-function consultarVinculoMovilVisita(mysqli $bd): ?array
+function consultarVinculoMovilVisita(PDO $bd): ?array
 {
     $id = enteroPositivoVisita($_SESSION['visita_movil_vinculo'] ?? null);
     $nonce = $_SESSION['visita_movil_nonce'] ?? '';
@@ -86,33 +85,29 @@ function consultarVinculoMovilVisita(mysqli $bd): ?array
             v.vence_en, CONCAT(u.nombre_usuario, ' ', u.apellido_usuario) AS nombre_conserje,
             c.nombre_condominio,
             v.id_lectura_movil, v.rut_lectura_movil, v.fecha_lectura_movil, v.id_visita_lectura_fk,
-            (v.fecha_lectura_movil <= DATE_SUB(UTC_TIMESTAMP(), INTERVAL 5 MINUTE)) AS lectura_vencida
+            CASE WHEN v.fecha_lectura_movil <= (timezone('UTC', now()) - INTERVAL '5 minutes') THEN 1 ELSE 0 END AS lectura_vencida
          FROM visita_vinculo_movil v
          INNER JOIN usuario u ON u.id_usuario = v.id_usuario_fk AND u.id_condominio_fk = v.id_condominio_fk
          INNER JOIN condominio c ON c.id_condominio = v.id_condominio_fk
          WHERE v.id_vinculo = ? AND v.solicitud_hash = ? AND u.rol_usuario = 'conserje'
-           AND v.vence_en > UTC_TIMESTAMP() AND v.estado <> 'revocado'
-           AND (v.estado <> 'activo' OR v.ultimo_uso > DATE_SUB(UTC_TIMESTAMP(), INTERVAL 30 MINUTE))"
+           AND v.vence_en > timezone('UTC', now()) AND v.estado <> 'revocado'
+           AND (v.estado <> 'activo' OR v.ultimo_uso > (timezone('UTC', now()) - INTERVAL '30 minutes'))"
     );
-    $consulta->bind_param('is', $id, $hash);
-    $consulta->execute();
-    $fila = $consulta->get_result()->fetch_assoc();
-    $consulta->close();
+    $consulta->execute([$id, $hash]);
+    $fila = $consulta->fetch();
     return $fila ?: null;
 }
 
 // TITULO 8 OBTENER EL ACCESO LIMITADO DEL MOVIL
-function accesoMovilVisita(mysqli $bd): ?array
+function accesoMovilVisita(PDO $bd): ?array
 {
     $fila = consultarVinculoMovilVisita($bd);
     if (!$fila || $fila['estado'] !== 'activo') {
         return null;
     }
     $id = (int) $fila['id_vinculo'];
-    $actualizar = $bd->prepare("UPDATE visita_vinculo_movil SET ultimo_uso = UTC_TIMESTAMP() WHERE id_vinculo = ? AND estado = 'activo' AND vence_en > UTC_TIMESTAMP() AND ultimo_uso > DATE_SUB(UTC_TIMESTAMP(), INTERVAL 30 MINUTE)");
-    $actualizar->bind_param('i', $id);
-    $actualizar->execute();
-    $actualizar->close();
+    $actualizar = $bd->prepare("UPDATE visita_vinculo_movil SET ultimo_uso = timezone('UTC', now()) WHERE id_vinculo = ? AND estado = 'activo' AND vence_en > timezone('UTC', now()) AND ultimo_uso > (timezone('UTC', now()) - INTERVAL '30 minutes')");
+    $actualizar->execute([$id]);
     return [
         'id_usuario' => (int) $fila['id_usuario_fk'],
         'id_condominio' => (int) $fila['id_condominio_fk'],
@@ -125,17 +120,15 @@ function accesoMovilVisita(mysqli $bd): ?array
 }
 
 // TITULO 9 REVOCAR LOS MOVILES AL CERRAR LA SESION DEL COMPUTADOR
-function revocarMovilesDelEscritorioVisita(mysqli $bd): void
+function revocarMovilesDelEscritorioVisita(PDO $bd): void
 {
     $origen = origenSesionVisita();
     $consulta = $bd->prepare("UPDATE visita_vinculo_movil SET estado = 'revocado' WHERE sesion_origen_hash = ? AND estado <> 'revocado'");
-    $consulta->bind_param('s', $origen);
-    $consulta->execute();
-    $consulta->close();
+    $consulta->execute([$origen]);
 }
 
 // TITULO 10 PREPARAR LA LECTURA RECIBIDA SIN CREAR UNA VISITA
-function resumenLecturaMovilVisita(mysqli $bd, array $fila, bool $incluirNombre = false): ?array
+function resumenLecturaMovilVisita(PDO $bd, array $fila, bool $incluirNombre = false): ?array
 {
     if (empty($fila['id_lectura_movil']) || empty($fila['rut_lectura_movil'])) return null;
     $registrada = !empty($fila['id_visita_lectura_fk']);
@@ -152,10 +145,8 @@ function resumenLecturaMovilVisita(mysqli $bd, array $fila, bool $incluirNombre 
              AND UPPER(REPLACE(REPLACE(REPLACE(rut_visitante, '.', ''), '-', ''), ' ', '')) = ?
              ORDER BY fecha_hora_ingreso DESC, id_visita DESC LIMIT 1"
         );
-        $buscar->bind_param('is', $fila['id_condominio_fk'], $rutLimpio);
-        $buscar->execute();
-        $anterior = $buscar->get_result()->fetch_assoc();
-        $buscar->close();
+        $buscar->execute([$fila['id_condominio_fk'], $rutLimpio]);
+        $anterior = $buscar->fetch();
         $datos['nombre_visitante'] = $anterior ? trim($anterior['nombre_visitante']) : '';
         $datos['origen_nombre'] = $datos['nombre_visitante'] !== '' ? 'historial_visitas' : null;
     }

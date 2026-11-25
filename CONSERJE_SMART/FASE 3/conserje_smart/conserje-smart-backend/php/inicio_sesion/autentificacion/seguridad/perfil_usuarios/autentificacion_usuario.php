@@ -6,31 +6,7 @@ session_start();
 // Configurar encabezado para responder exclusivamente en formato JSON
 header('Content-Type: application/json; charset=utf-8');
 
-/* ------------------------
-   -- INICIO CONEXION BD --
-   ------------------------ */
-
-// Establece la conexión a la base de datos de conserje_smart_bd, conexion para xampp
-$mysqli = new mysqli('localhost', 'root', '', 'conserje_smart_bd');
-
-// verifica si ocurrio un error al intentar conectar con la base de datos
-if ($mysqli->connect_error) {
-    echo json_encode([
-        "exito" => false,
-        "mensaje" => "No se pudo conectar con la base de datos."
-    ]);
-    exit;
-}
-
-// Establece la conexión a la base de datos de conserje_smart_bd, conexion para el hosting
-//$mysqli = new mysqli('localhost', 'nombre_servidor_root', '123456', 'nombre_servidor_conserje_smart_bd');
-
-// Establecer el charset a utf8mb4
-$mysqli->set_charset("utf8mb4");
-
-/* ---------------------
-   -- FIN CONEXION BD --
-   --------------------- */
+require_once dirname(__DIR__, 4) . '/base_datos/conexion_postgresql.php';
 
 
 // TITULO 2 VALIDAR CORREO Y CONTRASEÑA ENTRADA
@@ -58,34 +34,33 @@ $mysqli->set_charset("utf8mb4");
             FROM usuario 
             WHERE correo = ?";
     // crea la sentencia preparada para evitar inyecciones SQL
-    $stmt = $mysqli->prepare($sql);
-    // vincula el parámetro del correo a la consulta preparada indicando que es de tipo string ("s")
-    $stmt->bind_param("s", $correo);
-    // ejecuta la consulta en la base de datos
-    $stmt->execute();
-    // obtiene el resultado generado por la consulta
-    $resultado = $stmt->get_result();
+    try {
+    $pdo = conectarBasePostgreSQL();
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([$correo]);
+    $usuario = $stmt->fetch();
+} catch (Throwable $error) {
+    error_log('No se pudo consultar la autenticación del usuario: ' . $error->getMessage());
+    http_response_code(500);
+    echo json_encode([
+        "exito" => false,
+        "mensaje" => "No se pudo conectar con la base de datos."
+    ], JSON_UNESCAPED_UNICODE);
+    exit;
+}
 
 
 // TITULO 4 VALIDAR USUARIO  
 
     // comprueba si se encontro un registro que coincida con el correo ingresado
-    if ($usuario = $resultado->fetch_assoc()) {
+    if ($usuario) {
         
         // verifica la contraseña contra el hash almacenado
         if (is_string($usuario['contraseña']) && password_verify($contraseña, $usuario['contraseña'])) {
 
             if (password_needs_rehash($usuario['contraseña'], PASSWORD_DEFAULT)) {
                 $hashActualizado = password_hash($contraseña, PASSWORD_DEFAULT);
-                $actualizarHash = $mysqli->prepare(
-                    'UPDATE usuario SET contraseña = ? WHERE id_usuario = ?'
-                );
-
-                if (
-                    $hashActualizado === false ||
-                    $actualizarHash === false
-                ) {
-                    $mysqli->close();
+                if ($hashActualizado === false) {
                     echo json_encode([
                         "exito" => false,
                         "mensaje" => "No se pudo completar el inicio de sesión."
@@ -94,12 +69,13 @@ $mysqli->set_charset("utf8mb4");
                 }
 
                 $idUsuario = (int) $usuario['id_usuario'];
-                $actualizarHash->bind_param('si', $hashActualizado, $idUsuario);
-                $hashGuardado = $actualizarHash->execute();
-                $actualizarHash->close();
-
-                if (!$hashGuardado) {
-                    $mysqli->close();
+                try {
+                    $actualizarHash = $pdo->prepare(
+                        'UPDATE usuario SET contraseña = ? WHERE id_usuario = ?'
+                    );
+                    $actualizarHash->execute([$hashActualizado, $idUsuario]);
+                } catch (PDOException $error) {
+                    error_log('No se pudo actualizar el hash de contraseña: ' . $error->getMessage());
                     echo json_encode([
                         "exito" => false,
                         "mensaje" => "No se pudo completar el inicio de sesión."
@@ -141,12 +117,5 @@ $mysqli->set_charset("utf8mb4");
             "mensaje" => "Correo o contraseña incorrectos."
         ]);
     }
-
-/* -------------------------------
-   -- INICIO CIERRE CONEXION BD --
-   ------------------------------- */
-
-$stmt->close();
-$mysqli->close();
 
 ?>

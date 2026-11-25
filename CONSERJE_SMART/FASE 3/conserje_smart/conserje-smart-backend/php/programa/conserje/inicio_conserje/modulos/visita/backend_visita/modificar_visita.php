@@ -3,7 +3,7 @@
 require_once __DIR__ . '/comun_visita.php';
 
 // TITULO 2 VALIDAR LA VISITA Y EL DEPARTAMENTO DE DESTINO
-ejecutarVisita('POST', function (mysqli $bd, int $idCondominio): void {
+ejecutarVisita('POST', function (PDO $bd, int $idCondominio): void {
     $idVisita = enteroPositivoVisita($_POST['id_visita'] ?? null);
     if (!$idVisita) {
         responderVisita(false, 'Selecciona una visita válida.', 400);
@@ -13,14 +13,12 @@ ejecutarVisita('POST', function (mysqli $bd, int $idCondominio): void {
 
     // TITULO 3 BLOQUEAR LA VISITA DURANTE LA MODIFICACION
     // evita modificar la fila mientras otra solicitud registra su salida
-    $bd->begin_transaction();
+    $bd->beginTransaction();
     $actual = $bd->prepare('SELECT fecha_hora_salida FROM visita WHERE id_visita = ? AND id_condominio_fk = ? FOR UPDATE');
-    $actual->bind_param('ii', $idVisita, $idCondominio);
-    $actual->execute();
-    $visita = $actual->get_result()->fetch_assoc();
-    $actual->close();
+    $actual->execute([$idVisita, $idCondominio]);
+    $visita = $actual->fetch();
     if (!$visita || $visita['fecha_hora_salida'] !== null) {
-        $bd->rollback();
+        $bd->rollBack();
         responderVisita(false, $visita ? 'La visita ya tiene una salida registrada y no se puede modificar.' : 'No se encontró la visita en tu condominio.', $visita ? 409 : 404);
     }
     // TITULO 4 GUARDAR LOS DATOS DE LA VISITA ACTIVA
@@ -29,11 +27,8 @@ ejecutarVisita('POST', function (mysqli $bd, int $idCondominio): void {
             motivo_visita = ?, observaciones_visita = NULLIF(?, \'\')
          WHERE id_visita = ? AND id_condominio_fk = ? AND fecha_hora_salida IS NULL'
     );
-    $consulta->bind_param('issssii', $idDepartamento, $nombre, $rut, $motivo, $observaciones, $idVisita, $idCondominio);
-    $consulta->execute();
-    $consulta->close();
+    $consulta->execute([$idDepartamento, $nombre, $rut, $motivo, $observaciones, $idVisita, $idCondominio]);
     // TITULO 5 CONFIRMAR LA TRANSACCION Y ENVIAR LA RESPUESTA
     $bd->commit();
-    $bd->close();
     responderVisita(true, 'Visita modificada correctamente.', 200, ['id_visita' => $idVisita]);
 });

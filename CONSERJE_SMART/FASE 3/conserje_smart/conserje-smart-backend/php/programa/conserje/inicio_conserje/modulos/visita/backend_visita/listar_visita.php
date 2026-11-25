@@ -3,7 +3,7 @@
 require_once __DIR__ . '/comun_visita.php';
 
 // TITULO 2 VALIDAR LOS FILTROS Y LA PAGINA SOLICITADA
-ejecutarVisita('GET', function (mysqli $bd, int $idCondominio): void {
+ejecutarVisita('GET', function (PDO $bd, int $idCondominio): void {
     $estado = $_GET['estado'] ?? 'activas';
     $pagina = enteroPositivoVisita($_GET['pagina'] ?? 1);
     $idVisita = isset($_GET['id_visita']) ? enteroPositivoVisita($_GET['id_visita']) : null;
@@ -22,14 +22,12 @@ ejecutarVisita('GET', function (mysqli $bd, int $idCondominio): void {
     // TITULO 3 CONTAR LAS VISITAS DEL ESTADO SELECCIONADO
     // el filtro procede de valores fijos y los datos de la solicitud se enlazan
     $consultaTotal = $bd->prepare('SELECT COUNT(*) AS total FROM visita v WHERE v.id_condominio_fk = ?' . $filtro);
+    $parametrosTotal = [$idCondominio];
     if ($idVisita !== null) {
-        $consultaTotal->bind_param('ii', $idCondominio, $idVisita);
-    } else {
-        $consultaTotal->bind_param('i', $idCondominio);
+        $parametrosTotal[] = $idVisita;
     }
-    $consultaTotal->execute();
-    $total = (int) $consultaTotal->get_result()->fetch_assoc()['total'];
-    $consultaTotal->close();
+    $consultaTotal->execute($parametrosTotal);
+    $total = (int) $consultaTotal->fetchColumn();
 
     // TITULO 4 CONSULTAR LAS VISITAS Y SUS DEPARTAMENTOS
     $consulta = $bd->prepare(
@@ -41,25 +39,23 @@ ejecutarVisita('GET', function (mysqli $bd, int $idCondominio): void {
          WHERE v.id_condominio_fk = ?' . $filtro . '
          ORDER BY v.fecha_hora_ingreso DESC, v.id_visita DESC LIMIT ? OFFSET ?'
     );
+    $parametros = [$idCondominio];
     if ($idVisita !== null) {
-        $consulta->bind_param('iiii', $idCondominio, $idVisita, $limite, $offset);
-    } else {
-        $consulta->bind_param('iii', $idCondominio, $limite, $offset);
+        $parametros[] = $idVisita;
     }
-    $consulta->execute();
+    $parametros[] = $limite;
+    $parametros[] = $offset;
+    $consulta->execute($parametros);
     
     // TITULO 5 PREPARAR LAS FILAS DEL TABLERO
-    $resultado = $consulta->get_result();
     $visitas = [];
-    while ($fila = $resultado->fetch_assoc()) {
+    foreach ($consulta->fetchAll() as $fila) {
         $fila['id_visita'] = (int) $fila['id_visita'];
         $fila['id_departamento_fk'] = (int) $fila['id_departamento_fk'];
         $fila['piso_departamento'] = $fila['piso_departamento'] !== null ? (int) $fila['piso_departamento'] : null;
         $visitas[] = $fila;
     }
     // TITULO 6 CERRAR LA CONSULTA Y RESPONDER CON LA PAGINACION
-    $consulta->close();
-    $bd->close();
     responderVisita(true, 'Visitas consultadas correctamente.', 200, $visitas, [
         'pagina' => $pagina, 'total' => $total, 'hay_mas' => $offset + $limite < $total
     ]);

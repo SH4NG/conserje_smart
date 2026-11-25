@@ -6,6 +6,7 @@ header('Content-Type: application/json; charset=utf-8');
 
 // TITULO 2 RESPONDER SOLICITUD
 // devuelve una respuesta JSON uniforme y finaliza el endpoint
+/** @return never */
 function responderGuardado(bool $exito, string $mensaje, int $codigoHttp = 200, ?array $datos = null): void
 {
     http_response_code($codigoHttp);
@@ -130,7 +131,7 @@ foreach (['entidad_relacionada', 'etiquetas', 'campos_faltantes'] as $campo) {
     }
 }
 
-// comprueba fecha y hora sin aceptar formatos que MariaDB no pueda almacenar
+// comprueba fecha y hora antes de enviarlas a PostgreSQL
 $fechaValida = static function (?string $fecha): bool {
     if ($fecha === null) {
         return true;
@@ -182,78 +183,54 @@ try {
 }
 
 // TITULO 5 CONECTAR CON LA BASE DE DATOS
-// utiliza la configuración local de MariaDB empleada por los demás endpoints
-mysqli_report(MYSQLI_REPORT_OFF);
-$mysqli = new mysqli('localhost', 'root', '', 'conserje_smart_bd');
-
-if ($mysqli->connect_error) {
-    error_log('No se pudo conectar con la base de datos de bitácora: ' . $mysqli->connect_error);
-    responderGuardado(false, 'No se pudo conectar con la base de datos.', 500);
-}
-
-if (!$mysqli->set_charset('utf8mb4')) {
-    error_log('No se pudo establecer utf8mb4 para el guardado de bitácora: ' . $mysqli->error);
-    $mysqli->close();
-    responderGuardado(false, 'No se pudo preparar la conexión con la base de datos.', 500);
-}
+require_once dirname(__DIR__, 6) . '/base_datos/conexion_postgresql.php';
 
 // TITULO 6 GUARDAR NOVEDAD
 // asocia la fila al usuario y condominio de la sesión, no a valores enviados por el navegador
-$consulta = $mysqli->prepare(
-    'INSERT INTO bitacora (
-        id_condominio_fk,
-        id_usuario_fk,
-        titulo,
-        descripcion,
-        categoria,
-        tipo_lugar,
-        lugar,
-        entidad_relacionada,
-        fecha_evento,
-        hora_evento,
-        etiquetas,
-        campos_faltantes,
-        fecha_novedad,
-        hora_novedad,
-        observaciones
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
-);
-
-if ($consulta === false) {
-    error_log('No se pudo preparar la inserción en bitácora: ' . $mysqli->error);
-    $mysqli->close();
-    responderGuardado(false, 'No se pudo preparar el guardado de la novedad.', 500);
-}
-
-$consulta->bind_param(
-    'iisssssssssssss',
-    $idCondominio,
-    $idUsuario,
-    $solicitud['titulo'],
-    $solicitud['descripcion'],
-    $solicitud['categoria'],
-    $solicitud['tipo_lugar'],
-    $solicitud['lugar'],
-    $entidadRelacionada,
-    $solicitud['fecha_evento'],
-    $horaEvento,
-    $etiquetas,
-    $camposFaltantes,
-    $solicitud['fecha_novedad'],
-    $horaNovedad,
-    $solicitud['observaciones']
-);
-
-if (!$consulta->execute()) {
-    error_log('Falló la inserción en bitácora: ' . $consulta->error);
-    $consulta->close();
-    $mysqli->close();
+try {
+    $pdo = conectarBasePostgreSQL();
+    $consulta = $pdo->prepare(
+        'INSERT INTO bitacora (
+            id_condominio_fk,
+            id_usuario_fk,
+            titulo,
+            descripcion,
+            categoria,
+            tipo_lugar,
+            lugar,
+            entidad_relacionada,
+            fecha_evento,
+            hora_evento,
+            etiquetas,
+            campos_faltantes,
+            fecha_novedad,
+            hora_novedad,
+            observaciones
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        RETURNING id_bitacora'
+    );
+    $consulta->execute([
+        $idCondominio,
+        $idUsuario,
+        $solicitud['titulo'],
+        $solicitud['descripcion'],
+        $solicitud['categoria'],
+        $solicitud['tipo_lugar'],
+        $solicitud['lugar'],
+        $entidadRelacionada,
+        $solicitud['fecha_evento'],
+        $horaEvento,
+        $etiquetas,
+        $camposFaltantes,
+        $solicitud['fecha_novedad'],
+        $horaNovedad,
+        $solicitud['observaciones']
+    ]);
+    $idBitacora = (int) $consulta->fetchColumn();
+} catch (Throwable $error) {
+    error_log('No se pudo guardar la novedad en PostgreSQL: ' . $error->getMessage());
     responderGuardado(false, 'No se pudo guardar la novedad.', 500);
 }
-
-$idBitacora = $consulta->insert_id;
-$consulta->close();
-$mysqli->close();
 
 responderGuardado(true, 'La novedad se guardó correctamente.', 201, [
     'id_bitacora' => $idBitacora

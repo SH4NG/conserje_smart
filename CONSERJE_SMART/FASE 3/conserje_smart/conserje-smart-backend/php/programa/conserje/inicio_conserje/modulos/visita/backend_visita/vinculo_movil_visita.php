@@ -52,18 +52,16 @@ try {
         }
         // revoca solamente las solicitudes pendientes de este navegador
         $anterior = $bd->prepare("UPDATE visita_vinculo_movil SET estado = 'revocado' WHERE sesion_origen_hash = ? AND estado IN ('pendiente','solicitado','aprobado')");
-        $anterior->bind_param('s', $origen);
-        $anterior->execute();
-        $anterior->close();
+        $anterior->execute([$origen]);
         $token = bin2hex(random_bytes(32));
         $hash = hash('sha256', $token);
         $crear = $bd->prepare(
             "INSERT INTO visita_vinculo_movil (id_usuario_fk, id_condominio_fk, sesion_origen_hash, token_hash, creado_en, vence_en)
-             VALUES (?, ?, ?, ?, UTC_TIMESTAMP(), DATE_ADD(UTC_TIMESTAMP(), INTERVAL 3 MINUTE))"
+             VALUES (?, ?, ?, ?, timezone('UTC', now()), timezone('UTC', now()) + INTERVAL '3 minutes')
+             RETURNING id_vinculo"
         );
-        $crear->bind_param('iiss', $idUsuario, $idCondominio, $origen, $hash);
-        $crear->execute();
-        $id = (int) $bd->insert_id;
+        $crear->execute([$idUsuario, $idCondominio, $origen, $hash]);
+        $id = (int) $crear->fetchColumn();
         responderVisita(true, 'Escanea el QR y confirma el código que aparece en ambos dispositivos.', 201, [
             'id_vinculo' => $id, 'url' => $url . '#vinculo=' . $token, 'segundos' => 180
         ]);
@@ -84,25 +82,22 @@ try {
         $codigo = str_pad((string) random_int(0, 999999), 6, '0', STR_PAD_LEFT);
         $consulta = $bd->prepare(
             "UPDATE visita_vinculo_movil SET estado = 'solicitado', solicitud_hash = ?, codigo_confirmacion = ?
-             WHERE token_hash = ? AND estado = 'pendiente' AND vence_en > UTC_TIMESTAMP()"
+             WHERE token_hash = ? AND estado = 'pendiente' AND vence_en > timezone('UTC', now())"
         );
-        $consulta->bind_param('sss', $solicitudHash, $codigo, $hash);
-        $consulta->execute();
-        if ($consulta->affected_rows !== 1) {
+        $consulta->execute([$solicitudHash, $codigo, $hash]);
+        if ($consulta->rowCount() !== 1) {
             responderVisita(false, 'El QR venció o ya fue utilizado. Genera uno nuevo desde el computador.', 410);
         }
         $leer = $bd->prepare('SELECT id_vinculo FROM visita_vinculo_movil WHERE token_hash = ?');
-        $leer->bind_param('s', $hash);
-        $leer->execute();
-        $id = (int) $leer->get_result()->fetch_assoc()['id_vinculo'];
+        $leer->execute([$hash]);
+        $id = (int) $leer->fetchColumn();
         // una nueva vinculación reemplaza el permiso anterior de este teléfono
         $anteriorId = enteroPositivoVisita($_SESSION['visita_movil_vinculo'] ?? null);
         $anteriorNonce = $_SESSION['visita_movil_nonce'] ?? '';
         if ($anteriorId && is_string($anteriorNonce)) {
             $anteriorHash = hash('sha256', $anteriorNonce);
             $anterior = $bd->prepare("UPDATE visita_vinculo_movil SET estado = 'revocado' WHERE id_vinculo = ? AND solicitud_hash = ?");
-            $anterior->bind_param('is', $anteriorId, $anteriorHash);
-            $anterior->execute();
+            $anterior->execute([$anteriorId, $anteriorHash]);
         }
         $_SESSION['visita_movil_vinculo'] = $id;
         $_SESSION['visita_movil_nonce'] = $nonce;
@@ -116,9 +111,8 @@ try {
         // también permite abrir la app en un navegador que ya inició sesión
         if (!isset($_GET['id_vinculo'])) {
             $consulta = $bd->prepare("SELECT CONCAT(u.nombre_usuario, ' ', u.apellido_usuario) AS nombre_conserje, c.nombre_condominio FROM usuario u INNER JOIN condominio c ON c.id_condominio = u.id_condominio_fk WHERE u.id_usuario = ? AND u.id_condominio_fk = ? AND u.rol_usuario = 'conserje'");
-            $consulta->bind_param('ii', $idUsuario, $idCondominio);
-            $consulta->execute();
-            $datos = $consulta->get_result()->fetch_assoc();
+            $consulta->execute([$idUsuario, $idCondominio]);
+            $datos = $consulta->fetch();
             if (!$datos) responderVisita(false, 'La sesión del conserje ya no es válida.', 401);
             responderVisita(true, 'Sesión de conserje iniciada en este navegador.', 200, array_merge($datos, [
                 'estado' => 'activo', 'sesion_completa' => true, 'csrf' => $_SESSION['csrf_visita']
@@ -131,13 +125,12 @@ try {
         $consulta = $bd->prepare(
             "SELECT id_vinculo, id_condominio_fk, estado, codigo_confirmacion, vence_en,
                 id_lectura_movil, rut_lectura_movil, fecha_lectura_movil, id_visita_lectura_fk,
-                (fecha_lectura_movil <= DATE_SUB(UTC_TIMESTAMP(), INTERVAL 5 MINUTE)) AS lectura_vencida,
-                (vence_en <= UTC_TIMESTAMP() OR (estado = 'activo' AND ultimo_uso <= DATE_SUB(UTC_TIMESTAMP(), INTERVAL 30 MINUTE))) AS vencido
+                CASE WHEN fecha_lectura_movil <= (timezone('UTC', now()) - INTERVAL '5 minutes') THEN 1 ELSE 0 END AS lectura_vencida,
+                CASE WHEN vence_en <= timezone('UTC', now()) OR (estado = 'activo' AND ultimo_uso <= (timezone('UTC', now()) - INTERVAL '30 minutes')) THEN 1 ELSE 0 END AS vencido
              FROM visita_vinculo_movil WHERE id_vinculo = ? AND id_usuario_fk = ? AND id_condominio_fk = ? AND sesion_origen_hash = ?"
         );
-        $consulta->bind_param('iiis', $id, $idUsuario, $idCondominio, $origen);
-        $consulta->execute();
-        $fila = $consulta->get_result()->fetch_assoc();
+        $consulta->execute([$id, $idUsuario, $idCondominio, $origen]);
+        $fila = $consulta->fetch();
         if (!$fila) {
             responderVisita(false, 'No se encontró ese vínculo en tu sesión.', 404);
         }
@@ -160,13 +153,12 @@ try {
             responderVisita(false, 'Comprueba el código de vinculación.', 400);
         }
         $consulta = $bd->prepare(
-            "UPDATE visita_vinculo_movil SET estado = 'aprobado', vence_en = DATE_ADD(UTC_TIMESTAMP(), INTERVAL 1 MINUTE)
+            "UPDATE visita_vinculo_movil SET estado = 'aprobado', vence_en = timezone('UTC', now()) + INTERVAL '1 minute'
              WHERE id_vinculo = ? AND id_usuario_fk = ? AND id_condominio_fk = ? AND sesion_origen_hash = ?
-               AND codigo_confirmacion = ? AND estado = 'solicitado' AND vence_en > UTC_TIMESTAMP()"
+               AND codigo_confirmacion = ? AND estado = 'solicitado' AND vence_en > timezone('UTC', now())"
         );
-        $consulta->bind_param('iiiss', $id, $idUsuario, $idCondominio, $origen, $codigo);
-        $consulta->execute();
-        if ($consulta->affected_rows !== 1) {
+        $consulta->execute([$id, $idUsuario, $idCondominio, $origen, $codigo]);
+        if ($consulta->rowCount() !== 1) {
             responderVisita(false, 'La solicitud venció, cambió de estado o pertenece a otra sesión.', 409);
         }
         responderVisita(true, 'Móvil autorizado. El teléfono terminará la vinculación.', 200, ['estado' => 'aprobado']);
@@ -199,19 +191,17 @@ try {
         $rut = normalizarRutVisita(textoVisita('rut_visitante'));
         if ($rut === null) responderVisita(false, 'El QR no contiene un RUT válido.', 400);
         $id = $acceso['id_vinculo'];
-        $bd->begin_transaction();
+        $bd->beginTransaction();
         $consulta = $bd->prepare(
             "SELECT id_lectura_movil, rut_lectura_movil, id_visita_lectura_fk,
-                (fecha_lectura_movil > DATE_SUB(UTC_TIMESTAMP(), INTERVAL 5 MINUTE)) AS vigente
+                CASE WHEN fecha_lectura_movil > (timezone('UTC', now()) - INTERVAL '5 minutes') THEN 1 ELSE 0 END AS vigente
              FROM visita_vinculo_movil WHERE id_vinculo = ? AND estado = 'activo'
-               AND vence_en > UTC_TIMESTAMP() AND ultimo_uso > DATE_SUB(UTC_TIMESTAMP(), INTERVAL 30 MINUTE) FOR UPDATE"
+               AND vence_en > timezone('UTC', now()) AND ultimo_uso > (timezone('UTC', now()) - INTERVAL '30 minutes') FOR UPDATE"
         );
-        $consulta->bind_param('i', $id);
-        $consulta->execute();
-        $actual = $consulta->get_result()->fetch_assoc();
-        $consulta->close();
+        $consulta->execute([$id]);
+        $actual = $consulta->fetch();
         if (!$actual) {
-            $bd->rollback();
+            $bd->rollBack();
             responderVisita(false, 'El acceso del móvil terminó. Vuelve a vincularlo.', 401);
         }
         if (!empty($actual['id_lectura_movil']) && empty($actual['id_visita_lectura_fk']) && $actual['vigente']) {
@@ -224,11 +214,9 @@ try {
         $lectura = bin2hex(random_bytes(16));
         $guardar = $bd->prepare(
             "UPDATE visita_vinculo_movil SET id_lectura_movil = ?, rut_lectura_movil = ?,
-                fecha_lectura_movil = UTC_TIMESTAMP(), id_visita_lectura_fk = NULL WHERE id_vinculo = ?"
+                fecha_lectura_movil = timezone('UTC', now()), id_visita_lectura_fk = NULL WHERE id_vinculo = ?"
         );
-        $guardar->bind_param('ssi', $lectura, $rut, $id);
-        $guardar->execute();
-        $guardar->close();
+        $guardar->execute([$lectura, $rut, $id]);
         $bd->commit();
         responderVisita(true, 'RUT enviado. Completa y confirma el ingreso desde el computador.', 200, [
             'id_lectura' => $lectura, 'rut_visitante' => $rut, 'estado' => 'pendiente'
@@ -247,10 +235,8 @@ try {
              WHERE id_vinculo = ? AND id_lectura_movil = ? AND id_usuario_fk = ?
                AND id_condominio_fk = ? AND sesion_origen_hash = ? AND id_visita_lectura_fk IS NULL"
         );
-        $quitar->bind_param('isiis', $id, $lectura, $idUsuario, $idCondominio, $origen);
-        $quitar->execute();
-        $modificada = $quitar->affected_rows;
-        $quitar->close();
+        $quitar->execute([$id, $lectura, $idUsuario, $idCondominio, $origen]);
+        $modificada = $quitar->rowCount();
         if ($modificada !== 1) responderVisita(false, 'La lectura cambió o ya fue registrada. Actualiza el estado.', 409);
         responderVisita(true, 'Lectura descartada. Puedes escanear otro carnet.');
     }
@@ -268,15 +254,16 @@ try {
             responderVisita(false, 'Espera la aprobación del computador o genera un QR nuevo.', 409);
         }
         $id = (int) $fila['id_vinculo'];
-        $consulta = $bd->prepare("UPDATE visita_vinculo_movil SET estado = 'activo', ultimo_uso = UTC_TIMESTAMP(), vence_en = DATE_ADD(UTC_TIMESTAMP(), INTERVAL 8 HOUR) WHERE id_vinculo = ? AND estado = 'aprobado' AND vence_en > UTC_TIMESTAMP()");
-        $consulta->bind_param('i', $id);
-        $consulta->execute();
-        if ($consulta->affected_rows !== 1) {
+        $consulta = $bd->prepare("UPDATE visita_vinculo_movil SET estado = 'activo', ultimo_uso = timezone('UTC', now()), vence_en = timezone('UTC', now()) + INTERVAL '8 hours' WHERE id_vinculo = ? AND estado = 'aprobado' AND vence_en > timezone('UTC', now())");
+        $consulta->execute([$id]);
+        if ($consulta->rowCount() !== 1) {
             responderVisita(false, 'La solicitud ya fue utilizada o revocada.', 409);
         }
         session_regenerate_id(true);
         $_SESSION['csrf_visita'] = bin2hex(random_bytes(32));
-        $vigencia = $bd->query('SELECT vence_en FROM visita_vinculo_movil WHERE id_vinculo = ' . $id)->fetch_assoc()['vence_en'];
+        $consultaVigencia = $bd->prepare('SELECT vence_en FROM visita_vinculo_movil WHERE id_vinculo = ?');
+        $consultaVigencia->execute([$id]);
+        $vigencia = $consultaVigencia->fetchColumn();
         responderVisita(true, 'Teléfono vinculado para registrar visitas.', 200, [
             'estado' => 'activo', 'csrf' => $_SESSION['csrf_visita'],
             'nombre_conserje' => $fila['nombre_conserje'], 'nombre_condominio' => $fila['nombre_condominio'],
@@ -292,7 +279,7 @@ try {
                 responderVisita(false, 'Selecciona un vínculo válido.', 400);
             }
             $consulta = $bd->prepare("UPDATE visita_vinculo_movil SET estado = 'revocado' WHERE id_vinculo = ? AND id_usuario_fk = ? AND id_condominio_fk = ? AND sesion_origen_hash = ?");
-            $consulta->bind_param('iiis', $id, $idUsuario, $idCondominio, $origen);
+            $parametros = [$id, $idUsuario, $idCondominio, $origen];
         } else {
             $id = enteroPositivoVisita($_SESSION['visita_movil_vinculo'] ?? null);
             $nonce = $_SESSION['visita_movil_nonce'] ?? '';
@@ -301,10 +288,10 @@ try {
             }
             $hash = hash('sha256', $nonce);
             $consulta = $bd->prepare("UPDATE visita_vinculo_movil SET estado = 'revocado' WHERE id_vinculo = ? AND solicitud_hash = ?");
-            $consulta->bind_param('is', $id, $hash);
+            $parametros = [$id, $hash];
         }
-        $consulta->execute();
-        if ($consulta->affected_rows < 1) {
+        $consulta->execute($parametros);
+        if ($consulta->rowCount() < 1) {
             responderVisita(false, 'No se encontró un vínculo activo de esta sesión.', 404);
         }
         if (!$escritorio) {

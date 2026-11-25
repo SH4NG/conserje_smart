@@ -11,13 +11,13 @@ $url_retorno = "/conserje_smart/conserje-smart-frontend/php/programa/conserje/in
 // --- LIMPIEZA AUTOMÁTICA (Paquetes con más de 30 días retirados) ---
 try {
     $sql_limpieza = "UPDATE paquete 
-                     SET fecha_eliminacion = NOW() 
+                     SET fecha_eliminacion = timezone('UTC', now())
                      WHERE estado_paquete = 'Retirado' 
-                     AND fecha_retiro <= (NOW() - INTERVAL 30 DAY) 
+                     AND fecha_retiro <= (timezone('UTC', now()) - INTERVAL '30 days')
                      AND fecha_eliminacion IS NULL";
     $pdo->query($sql_limpieza);
 } catch (PDOException $e) {
-    // Si falla, solo ignoramos para no interrumpir al usuario
+    error_log('No se pudo limpiar el historial de paquetería: ' . $e->getMessage());
 }
 
 // --- REGISTRAR PAQUETE ---
@@ -38,6 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion']) && $_POST['
         header("Location: " . $url_retorno . "?status=success");
         exit;
     } catch (PDOException $e) {
+        error_log('No se pudo registrar el paquete: ' . $e->getMessage());
         header("Location: " . $url_retorno . "?status=error");
         exit;
     }
@@ -54,6 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion']) && $_POST['
         header("Location: " . $url_retorno . "?status=retirado&tab=retirados");
         exit;
     } catch (PDOException $e) {
+        error_log('No se pudo registrar el retiro del paquete: ' . $e->getMessage());
         header("Location: " . $url_retorno . "?status=error");
         exit;
     }

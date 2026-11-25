@@ -31,7 +31,7 @@ function obtenerDatosPaqueteria(PDO $pdo, int $idCondominio, string $filtroMes, 
     $parametrosHistorial = [$idCondominio];
 
     if ($filtroMes !== '' && $filtroAnio !== '') {
-        $queryHistorial .= ' AND MONTH(p.fecha_retiro) = ? AND YEAR(p.fecha_retiro) = ?';
+        $queryHistorial .= ' AND EXTRACT(MONTH FROM p.fecha_retiro) = CAST(? AS INTEGER) AND EXTRACT(YEAR FROM p.fecha_retiro) = CAST(? AS INTEGER)';
         $parametrosHistorial[] = $filtroMes;
         $parametrosHistorial[] = $filtroAnio;
     } else {

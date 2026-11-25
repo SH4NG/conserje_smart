@@ -53,13 +53,11 @@ function datosFormularioVisita(): array
 }
 
 // TITULO 6 COMPROBAR QUE EL DEPARTAMENTO PERTENECE AL CONDOMINIO
-function validarDepartamentoVisita(mysqli $bd, int $idDepartamento, int $idCondominio): void
+function validarDepartamentoVisita(PDO $bd, int $idDepartamento, int $idCondominio): void
 {
     $consulta = $bd->prepare('SELECT id_departamento FROM departamento WHERE id_departamento = ? AND id_condominio_fk = ? LIMIT 1');
-    $consulta->bind_param('ii', $idDepartamento, $idCondominio);
-    $consulta->execute();
-    $valido = $consulta->get_result()->num_rows === 1;
-    $consulta->close();
+    $consulta->execute([$idDepartamento, $idCondominio]);
+    $valido = $consulta->fetchColumn() !== false;
     if (!$valido) {
         responderVisita(false, 'El departamento seleccionado no pertenece a tu condominio.', 400);
     }
