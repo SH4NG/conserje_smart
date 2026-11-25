@@ -47,6 +47,35 @@ $fechaActual = date('d/m/Y');
 
                     <!-- contenedor que recibe actividades_contenido.php -->
                     <div class="contenedor_actividades_contenido" id="contenedor_actividades_contenido">
+                        <!-- TITULO ENCABEZADO ACTIVIDADES INICIO -->
+                        <div class="encabezado_actividades_inicio">
+                            <!-- TITULO TITULOS ACTIVIDADES INICIO -->
+                            <div class="titulos_actividades_inicio">
+                                <span class="icono_actividades_inicio" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" focusable="false">
+                                        <path d="m15 4 6-2v18l-6-3H5a3 3 0 0 1-3-3v-4a3 3 0 0 1 3-3h10V4ZM7 17l2 5h4l-2-5M15 7v10" />
+                                    </svg>
+                                </span>
+                                <div class="descripcion_actividades_inicio">
+                                    <h2 id="titulo_actividades_inicio">Novedades y Actividades</h2>
+                                    <p>Últimos ingresos de visitas del condominio.</p>
+                                </div>
+                            </div>
+                            <span class="contador_actividades_inicio" id="contador_actividades_inicio" hidden></span>
+                        </div>
+
+                        <!-- TITULO CONTROLES ACTIVIDADES INICIO -->
+                        <div class="controles_actividades_inicio">
+                            <p class="mensaje_actividades_inicio" id="mensaje_actividades_inicio" role="status" aria-live="polite">Cargando visitas recientes...</p>
+                            <button class="actualizar_actividades_inicio" id="actualizar_actividades_inicio" type="button">Actualizar</button>
+                        </div>
+
+                        <!-- TITULO LISTA ACTIVIDADES -->
+                        <ul class="lista_actividades" id="lista_actividades_inicio" aria-labelledby="titulo_actividades_inicio" aria-busy="true"></ul>
+
+                        <!-- TITULO ENLACE VISITAS INICIO -->
+                        <a class="enlace_visitas_inicio" href="/conserje_smart/conserje-smart-frontend/php/programa/conserje/inicio_conserje/modulos/visita/visita.php#contenedor_tablero_visita">Ver todas las visitas <span aria-hidden="true">→</span></a>
+                        <noscript>Activa JavaScript para consultar las visitas recientes o utiliza el enlace al tablero.</noscript>
                     </div>
 
                 <!-- TITULO 8 CONTENEDOR ATAJOS CONTENIDO -->
@@ -58,6 +87,25 @@ $fechaActual = date('d/m/Y');
 
                             <!-- contenedor que recibe acceso_rapido.php -->
                             <div class="contenedor_acceso_rapido" id="contenedor_acceso_rapido">
+                                <!-- TITULO ENCABEZADO ACCESO RAPIDO -->
+                                <div class="encabezado_acceso_rapido">
+                                    <svg class="icono_acceso_rapido" viewBox="0 0 24 24" fill="#e5ba31" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                                        <path d="M13 2 4 14h7l-1 8 10-13h-7l1-7Z" />
+                                    </svg>
+                                    <h2>Accesos rápidos</h2>
+                                </div>
+
+                                <!-- TITULO BOTON REGISTRAR VISITA INICIO -->
+                                <a class="boton_registrar_visita_inicio" id="boton_registrar_visita_inicio" href="/conserje_smart/conserje-smart-frontend/php/programa/conserje/inicio_conserje/modulos/visita/visita.php#contenedor_formulario_visita">
+                                    <svg class="icono_registrar_visita_inicio" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                                        <circle cx="9" cy="7" r="4" />
+                                        <path d="M2 21v-2a7 7 0 0 1 12-4M19 14v8M15 18h8" />
+                                    </svg>
+                                    <span class="texto_registrar_visita_inicio">Registrar visita</span>
+                                    <svg class="flecha_registrar_visita_inicio" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                                        <path d="m9 5 7 7-7 7" />
+                                    </svg>
+                                </a>
                             </div>
 
                         <!-- TITULO 10 CONTENEDOR CRONOGRAMA -->

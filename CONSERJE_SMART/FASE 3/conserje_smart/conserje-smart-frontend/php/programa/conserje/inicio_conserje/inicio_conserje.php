@@ -19,9 +19,9 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] !== 'sesion_iniciada') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="/conserje_smart/conserje-smart-frontend/imagenes/favicon/icono_conserje_smart.png">
-    <link rel="stylesheet" href="/conserje_smart/conserje-smart-frontend/css/programa/conserje/inicio_conserje/inicio_conserje.css">
+    <link rel="stylesheet" href="/conserje_smart/conserje-smart-frontend/css/programa/conserje/inicio_conserje/inicio_conserje.css?v=<?= filemtime(__DIR__ . '/../../../../css/programa/conserje/inicio_conserje/inicio_conserje.css'); ?>">
     <link rel="stylesheet" href="/conserje_smart/conserje-smart-frontend/css/programa/cabecera/cabecera.css">
-    <link rel="stylesheet" href="/conserje_smart/conserje-smart-frontend/css/programa/conserje/inicio_conserje/contenedor_inicio_contenido/contenedor_inicio_contenido.css">
+    <link rel="stylesheet" href="/conserje_smart/conserje-smart-frontend/css/programa/conserje/inicio_conserje/contenedor_inicio_contenido/contenedor_inicio_contenido.css?v=<?= filemtime(__DIR__ . '/../../../../css/programa/conserje/inicio_conserje/contenedor_inicio_contenido/contenedor_inicio_contenido.css'); ?>">
     <link rel="stylesheet" href="/conserje_smart/conserje-smart-frontend/css/programa/conserje/inicio_conserje/barra_lateral/barra_lateral.css">
     <link rel="stylesheet" href="/conserje_smart/conserje-smart-frontend/css/programa/conserje/inicio_conserje/pie_pagina/pie_pagina.css">
     <link rel="stylesheet" href="/conserje_smart/conserje-smart-frontend/css/programa/conserje/inicio_conserje/pie_pagina/navegacion_pie_pagina.css">
@@ -54,6 +54,8 @@ if (!isset($_SESSION['estado']) || $_SESSION['estado'] !== 'sesion_iniciada') {
     <!-- TITULO CONTENEDOR PIE PAGINA -->
     <?php include __DIR__ . '/pie_pagina/pie_pagina.php'; ?>
 
+    <!-- TITULO ACTUALIZACION JS DE NOVEDADES DEL INICIO -->
+    <script type="module" src="/conserje_smart/conserje-smart-frontend/js/programa/conserje/inicio_conserje/inicio_conserje.js?v=<?= filemtime(__DIR__ . '/../../../../js/programa/conserje/inicio_conserje/inicio_conserje.js'); ?>"></script>
 
 
 </body>
