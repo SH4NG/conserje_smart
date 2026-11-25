@@ -1,0 +1,179 @@
+/* TITULO 1 CONTENEDOR FORMULARIO VISITA */
+.contenedor_formulario_visita {
+    display: flex;
+    flex-direction: column;
+    gap: 2.222vh;
+    margin-bottom: 2.667vh;
+    padding: 3.111vh;
+    border: 0.111vh solid #e4e7eb;
+    border-radius: 2.222vh;
+    background: #fff;
+    box-shadow: var(--sombra-tarjeta-visita);
+}
+
+/* TITULO 2 ENCABEZADO FORMULARIO VISITA */
+.encabezado_formulario_visita {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.778vh;
+    padding-bottom: 1.778vh;
+    border-bottom: 0.111vh solid #edf0f3;
+}
+
+/* TITULO 3 BADGE ESTADO VISITA */
+.badge_estado_visita {
+    flex-shrink: 0;
+    padding: 0.711vh 1.244vh;
+    border: 0.111vh solid #e5ba315e;
+    border-radius: 3.556vh;
+    background: #fff9e6;
+    color: #775b00;
+    font-size: 1.244vh;
+    font-weight: 700;
+}
+
+/* TITULO 4 AYUDA FORMULARIO VISITA */
+.ayuda_formulario_visita {
+    margin: -0.622vh 0 0;
+    color: var(--color-texto-secundario);
+    font-size: 1.511vh;
+}
+
+/* TITULO 5 FORMULARIO VISITA */
+.formulario_visita {
+    display: flex;
+    flex-direction: column;
+    gap: 2.311vh;
+}
+
+/* TITULO 6 GRUPO CAMPOS VISITA */
+.grupo_campos_visita {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2.133vh;
+}
+
+/* TITULO 7 CAMPO VISITA */
+.campo_visita {
+    display: flex;
+    flex-direction: column;
+    gap: 0.889vh;
+    min-width: 0;
+    font-size: 1.458vh;
+    font-weight: 700;
+}
+
+.campo_visita > span {
+    color: #414d58;
+}
+
+.campo_visita > span small {
+    color: #707983;
+    font-size: 1.244vh;
+    font-weight: 400;
+    margin-left: 0.533vh;
+}
+
+/* TITULO 8 CAMPOS DE ENTRADA DEL FORMULARIO VISITA */
+.campo_visita input, .campo_visita select, .campo_visita textarea {
+    width: 100%;
+    min-height: 5.333vh;
+    padding: 1.422vh 1.6vh;
+    border: 0.111vh solid var(--color-borde);
+    border-radius: 1.244vh;
+    background: #fafbfc;
+    color: var(--color-negro-texto);
+    font: 1.778vh var(--fuente-principal);
+    transition: border-color .18s, background .18s, box-shadow .18s;
+}
+
+.campo_visita input::placeholder, .campo_visita textarea::placeholder {
+    color: #7a838d;
+    font-size: 1.511vh;
+}
+
+/* TITULO 9 AREA DE OBSERVACIONES DE VISITA */
+.campo_visita textarea {
+    min-height: 11.667vh;
+    resize: vertical;
+    line-height: 1.6;
+}
+
+/* TITULO 10 SELECTOR DE DEPARTAMENTO */
+.campo_visita select {
+    cursor: pointer;
+}
+
+/* TITULO 11 FOCO DE LOS CAMPOS DE VISITA */
+.campo_visita input:focus, .campo_visita select:focus, .campo_visita textarea:focus {
+    border-color: #b28b18;
+    background: #fff;
+    box-shadow: 0 0 0 0.333vh #e5ba311a;
+}
+
+/* TITULO 12 IDENTIDAD RECUPERADA DE VISITA */
+.campo_visita input[readonly] {
+    background: #f0f7f3;
+    border-color: #c8dfd2;
+    color: #24553c;
+}
+
+.origen_nombre_visitante {
+    color: #576c60;
+    font-size: 1.298vh;
+    line-height: 1.5;
+    font-weight: 400;
+}
+
+#corregir_nombre_visitante {
+    align-self: flex-start;
+    padding: 0.889vh 1.333vh;
+    font-size: 1.28vh;
+}
+
+/* TITULO 13 CAMPOS DE VISITA CON DATOS INVALIDOS */
+.campo_visita [aria-invalid="true"] {
+    border-color: #b03838;
+    background: #fff8f7;
+}
+
+/* TITULO 14 CAMPO VISITA AMPLIO */
+.campo_visita_amplio {
+    grid-column: 1 / -1;
+}
+
+/* TITULO 15 ACCIONES FORMULARIO VISITA */
+.acciones_formulario_visita {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1.333vh;
+    padding-top: 0.711vh;
+}
+
+.acciones_formulario_visita .boton_principal_visita {
+    min-width: 18.889vh;
+}
+
+/* TITULO 16 AJUSTES PARA PANTALLAS MOVILES */
+@media (max-width: 768px) {
+    .contenedor_formulario_visita {
+        padding: 2.222vh;
+        border-radius: 1.778vh;
+    }
+
+    .encabezado_formulario_visita {
+        flex-wrap: wrap;
+    }
+
+    .grupo_campos_visita {
+        grid-template-columns: 1fr;
+        gap: 1.956vh;
+    }
+
+    .acciones_formulario_visita {
+        flex-direction: column-reverse;
+    }
+
+}
+

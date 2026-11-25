@@ -1,0 +1,12 @@
+.logo_pie_pagina{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.imagen_logo_pie_pagina{
+    width: 100%;
+    height: auto;
+    display: block;
+    border-left: 0.1vh solid #e5ba31;
+    border-right: 0.1vh solid #e5ba31;
+}

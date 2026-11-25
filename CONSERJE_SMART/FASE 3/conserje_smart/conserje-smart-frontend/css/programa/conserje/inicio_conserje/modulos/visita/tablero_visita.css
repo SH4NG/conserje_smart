@@ -1,0 +1,194 @@
+/* TITULO 1 CONTENEDOR TABLERO VISITA */
+.contenedor_tablero_visita {
+    padding: 3.556vh;
+    border: 0.111vh solid #e4e7eb;
+    border-radius: 2.222vh;
+    background: var(--color-blanco);
+    box-shadow: var(--sombra-tarjeta-visita);
+}
+
+/* TITULO 2 ENCABEZADO TABLERO VISITA */
+.encabezado_tablero_visita {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1.778vh;
+    margin-bottom: 1.778vh;
+}
+
+/* TITULO 3 CONTROLES TABLERO VISITA */
+.controles_tablero_visita {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.333vh;
+}
+
+/* TITULO 4 SELECTOR DE ESTADO DEL TABLERO */
+.controles_tablero_visita select {
+    min-height: 4.889vh;
+    padding: 1.067vh;
+    border: 0.111vh solid var(--color-borde);
+    border-radius: 0.889vh;
+    font: 1.778vh var(--fuente-principal);
+    background: var(--color-gris);
+}
+
+/* TITULO 5 TABLA VISITA DESPLAZABLE */
+.tabla_visita_desplazable {
+    overflow-x: auto;
+    margin-top: 1.778vh;
+}
+
+/* TITULO 6 TABLA VISITA */
+.tabla_visita {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 1.6vh;
+    text-align: left;
+}
+
+/* TITULO 7 CELDAS Y ENCABEZADOS DE LA TABLA */
+.tabla_visita th, .tabla_visita td {
+    padding: 1.511vh;
+    border-bottom: 0.111vh solid #ededed;
+    vertical-align: top;
+}
+
+/* TITULO 8 ENCABEZADOS DE LA TABLA DE VISITAS */
+.tabla_visita th {
+    background: var(--color-gris);
+    white-space: nowrap;
+}
+
+/* TITULO 9 CELDAS DE DATOS DE VISITA */
+.tabla_visita td {
+    min-width: 11.111vh;
+    max-width: 31.111vh;
+    overflow-wrap: anywhere;
+}
+
+/* TITULO 10 DETALLES DE TEXTO DE LA VISITA */
+.tabla_visita td small {
+    display: block;
+    margin-top: 0.711vh;
+    color: var(--color-texto-secundario);
+    white-space: pre-wrap;
+}
+
+/* TITULO 11 BOTONES DE ACCION DE LA VISITA */
+.tabla_visita td button {
+    display: block;
+    width: 100%;
+    margin-bottom: 0.889vh;
+    font-size: 1.422vh;
+}
+
+/* TITULO VISITA SELECCIONADA DESDE EL INICIO */
+.tabla_visita .visita_seleccionada_inicio {
+    background: #fff8df;
+    box-shadow: inset 0.444vh 0 #e5ba31;
+}
+
+/* TITULO 12 ESTADO DE CARGA DE LA TABLA */
+.tabla_visita [aria-busy="true"] {
+    opacity: .5;
+    pointer-events: none;
+}
+
+/* TITULO 13 PAGINACION VISITA */
+.paginacion_visita {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 1.778vh;
+    margin-top: 1.778vh;
+    font-size: 1.6vh;
+}
+
+/* TITULO 14 AJUSTES PARA PANTALLAS MOVILES */
+@media (max-width: 768px) {
+    /* TITULO 15 CONTENEDOR TABLERO VISITA */
+    .contenedor_tablero_visita {
+        padding: 2.222vh;
+    }
+
+    /* TITULO 16 CONTROLES TABLERO VISITA */
+    .controles_tablero_visita {
+        width: 100%;
+    }
+
+    /* TITULO 17 SELECTOR DE ESTADO EN PANTALLAS MOVILES */
+    .controles_tablero_visita select {
+        flex: 1;
+    }
+
+    /* TITULO 18 PAGINACION VISITA */
+    .paginacion_visita {
+        justify-content: center;
+    }
+
+}
+
+/* TITULO 19 FILAS Y ESTADOS DEL TABLERO DE VISITA */
+.tabla_visita tbody tr {
+    transition: background .18s;
+}
+
+.tabla_visita tbody tr:hover {
+    background: #fafbfc;
+}
+
+.tabla_visita td:nth-child(2) {
+    font-weight: 700;
+}
+
+.tabla_visita td small {
+    font-weight: 400;
+    font-size: 1.333vh;
+}
+
+.tabla_visita th {
+    color: #65707a;
+    font-size: 1.244vh;
+    letter-spacing: 0.071vh;
+    text-transform: uppercase;
+    padding-top: 1.778vh;
+    padding-bottom: 1.778vh;
+}
+
+.estado_fila_visita {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.711vh;
+    padding: 0.622vh 1.067vh;
+    border-radius: 3.556vh;
+    white-space: nowrap;
+    font-size: 1.244vh;
+    font-weight: 700;
+    background: #edf7f0;
+    color: #17633f;
+}
+
+.estado_fila_visita::before {
+    content: '';
+    width: 0.667vh;
+    height: 0.667vh;
+    border-radius: 50%;
+    background: currentColor;
+}
+
+.estado_fila_visita.finalizada {
+    color: #5f6c77;
+    background: #eef1f4;
+}
+
+.tabla_visita td[colspan] {
+    text-align: center;
+    padding: 3.556vh 1.778vh;
+    color: var(--color-texto-secundario);
+    font-weight: 400;
+}
+

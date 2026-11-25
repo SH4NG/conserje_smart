@@ -1,0 +1,13 @@
+/*TITULO RECORDAR AUTENTIFICACION*/
+.recordar_autentificacion{
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5vh;
+
+}
+/*CASILLA RECORDAR AUTENTIFICACION*/
+.casilla_recordar_autentificacion{
+    color: #1a1a1a;
+    cursor: pointer;
+    
+}

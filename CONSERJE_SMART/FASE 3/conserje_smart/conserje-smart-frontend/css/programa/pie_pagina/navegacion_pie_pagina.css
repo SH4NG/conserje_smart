@@ -1,0 +1,44 @@
+.navegacion_pie_pagina{
+    display:flex;
+    flex-direction:column;
+    gap: 1.2vh;
+    color:#e5ba31;
+    font-size: 1.2vw;
+    text-align: center;
+}
+.btn_navegacion1{
+    color:#e5ba31;
+    text-decoration:none;
+    font-size: 0.85vw;
+    font-family: 'Syne', sans-serif;
+    cursor: pointer;
+}
+
+.btn_navegacion2{
+    color:#e5ba31;
+    text-decoration:none;
+    font-size: 0.85vw;
+    font-family: 'Syne', sans-serif;
+    cursor: pointer;
+
+}
+
+.btn_navegacion3{
+    color:#e5ba31;
+    text-decoration:none;
+    font-size: 0.85vw;
+    font-family: 'Syne', sans-serif;
+    cursor: pointer;
+
+
+}
+
+.btn_navegacion4{
+    color:#e5ba31;
+    text-decoration:none;
+    font-size: 0.85vw;
+    font-family: 'Syne', sans-serif;
+    cursor: pointer;
+
+
+}

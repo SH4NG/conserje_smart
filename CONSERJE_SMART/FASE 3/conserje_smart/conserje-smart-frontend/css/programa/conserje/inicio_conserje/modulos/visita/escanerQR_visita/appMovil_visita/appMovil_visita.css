@@ -1,0 +1,169 @@
+/* TITULO 1 PAGINA VISITA EN MODO MOVIL */
+.modo_movil_visita .pagina_visita {
+    width: min(94%, 68.889vh);
+    padding-bottom: env(safe-area-inset-bottom, 0);
+}
+
+/* TITULO 2 CABECERA DE LA APLICACION MOVIL */
+.modo_movil_visita .cabecera_visita {
+    padding: 2.667vh;
+    border-left: 0;
+    border-top: 0.444vh solid var(--color-amarillo);
+    background: linear-gradient(130deg, #fff 35%, #fff6d7);
+}
+
+.modo_movil_visita .cabecera_visita h1 {
+    font-size: 3.289vh;
+}
+
+.modo_movil_visita .descripcion_cabecera_visita {
+    font-size: 1.511vh;
+}
+
+/* TITULO 3 ESTADO ACCESO MOVIL VISITA */
+.estado_acceso_movil_visita {
+    padding: 2.222vh;
+    margin-bottom: 1.778vh;
+    background: #fff;
+    border: 0.111vh solid #e1e6ea;
+    border-radius: 1.778vh;
+    box-shadow: var(--sombra-tarjeta-visita);
+}
+
+.estado_acceso_movil_visita h2 {
+    font-size: 1.778vh;
+}
+
+.estado_acceso_movil_visita[data-estado="activo"] {
+    border-color: #c6dfcf;
+}
+
+#identidad_acceso_movil_visita {
+    padding-top: 1.422vh;
+    margin: 1.422vh 0 0;
+    border-top: 0.111vh solid #e9eeeb;
+    color: #4c6255;
+    font-size: 1.422vh;
+    overflow-wrap: anywhere;
+}
+
+#mensaje_acceso_movil_visita {
+    margin-top: 1.333vh;
+    font-size: 1.458vh;
+    line-height: 1.6;
+}
+
+/* TITULO 4 ACCIONES ACCESO MOVIL VISITA */
+.acciones_acceso_movil_visita {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.156vh;
+    margin-top: 1.778vh;
+}
+
+.acciones_acceso_movil_visita button {
+    flex: 1;
+    font-size: 1.28vh;
+}
+
+/* TITULO 5 CODIGO ACCESO MOVIL VISITA */
+.codigo_acceso_movil_visita {
+    display: block;
+    padding: 1.778vh;
+    margin-top: 1.422vh;
+    border: 0.111vh solid #e5ba3166;
+    background: #fff9e7;
+    border-radius: 1.333vh;
+    font-size: 3.556vh;
+    letter-spacing: 0.356vh;
+    font-variant-numeric: tabular-nums;
+    text-align: center;
+}
+
+/* TITULO 6 CONTENEDOR ESCANER EN EL MOVIL */
+.modo_movil_visita .contenedor_escaner_visita {
+    margin-bottom: 1.778vh;
+}
+
+.modo_movil_visita #iniciar_escaner_visita {
+    min-height: 5.778vh;
+    font-size: 1.689vh;
+}
+
+/* TITULO 7 LECTURA ENVIADA MOVIL VISITA */
+.lectura_enviada_movil_visita {
+    gap: 1.333vh;
+    padding: 2.222vh;
+    border-left: 0.444vh solid var(--color-amarillo);
+}
+
+.lectura_enviada_movil_visita h2 {
+    font-size: 1.778vh;
+}
+
+.lectura_enviada_movil_visita p {
+    margin: 0;
+    color: #59626b;
+    font-size: 1.511vh;
+    line-height: 1.6;
+}
+
+#rut_enviado_movil_visita {
+    display: block;
+    margin-top: 0.622vh;
+    font-size: 2.667vh;
+    color: #222c35;
+    font-variant-numeric: tabular-nums;
+    overflow-wrap: anywhere;
+}
+
+.lectura_enviada_movil_visita[data-estado="registrada"] {
+    border-color: #65a981;
+    background: #f1f9f4;
+}
+
+.lectura_enviada_movil_visita[data-estado="vencida"] {
+    border-color: #d6a94c;
+    background: #fffbef;
+}
+
+/* TITULO 8 CONTENEDOR INSTALACION VISITA */
+.contenedor_instalacion_visita {
+    margin: 1.778vh 0 2.667vh;
+    padding: 1.956vh 2.222vh;
+    border: 0.111vh solid #e1e5ea;
+    border-radius: 1.778vh;
+    background: #ffffffd9;
+}
+
+.encabezado_instalacion_visita {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1.778vh;
+}
+
+.encabezado_instalacion_visita h2 {
+    font-size: 1.689vh;
+}
+
+/* TITULO 9 MENSAJE INSTALACION VISITA */
+.mensaje_instalacion_visita {
+    color: var(--color-texto-secundario);
+    font-size: 1.422vh;
+    line-height: 1.6;
+}
+
+/* TITULO 10 ESTADO CONEXION VISITA */
+.estado_conexion_visita {
+    margin-bottom: 0;
+    color: #17633f;
+    font-size: 1.333vh;
+    line-height: 1.6;
+}
+
+.estado_conexion_visita.error {
+    color: #9c2828;
+}
+

@@ -1,0 +1,89 @@
+/* TITULO 1 CONTENEDOR ESCANER VISITA */
+.contenedor_escaner_visita {
+    margin-bottom: 1.5rem;
+    padding: 1.5rem 2rem;
+    border: 1px solid #e5ba3159;
+    border-radius: 1rem;
+    background: var(--color-blanco);
+}
+
+/* TITULO 2 ENCABEZADO ESCANER VISITA */
+.encabezado_escaner_visita {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+/* TITULO 3 ACCIONES ESCANER VISITA */
+.acciones_escaner_visita {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .75rem;
+}
+
+/* TITULO 4 INSTRUCCIONES DEL ESCANER DE VISITA */
+.contenedor_escaner_visita > p {
+    color: var(--color-texto-secundario);
+    font-size: .95rem;
+    line-height: 1.5;
+}
+
+/* TITULO 5 VIDEO ESCANER VISITA */
+.video_escaner_visita {
+    display: block;
+    width: min(100%, 540px);
+    max-height: 60vh;
+    margin: 1rem auto;
+    border-radius: .75rem;
+    background: #111;
+    object-fit: contain;
+}
+
+/* TITULO 6 CONTROLES CAMARA VISITA */
+.controles_camara_visita {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+/* TITULO 7 CONTROL ZOOM VISITA */
+.control_zoom_visita {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: .75rem;
+    max-width: 100%;
+    font-size: .95rem;
+}
+
+/* TITULO 8 SELECTOR DE ACERCAMIENTO DE LA CAMARA */
+#zoom_camara_visita {
+    width: 160px;
+    max-width: 100%;
+    min-height: 44px;
+    accent-color: #806300;
+}
+
+/* TITULO 9 AJUSTES PARA PANTALLAS MOVILES */
+@media (max-width: 650px) {
+
+    /* TITULO 10 CONTENEDOR ESCANER VISITA */
+    .contenedor_escaner_visita {
+        padding: 1.25rem;
+    }
+
+    /* TITULO 11 ENCABEZADO ESCANER VISITA */
+    .encabezado_escaner_visita {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    /* TITULO 12 BOTONES DEL ESCANER EN PANTALLAS MOVILES */
+    .acciones_escaner_visita > button {
+        flex: 1;
+    }
+}

@@ -1,0 +1,35 @@
+/*TITULO CAMPO CONTRASEÑA AUTENTIFICACION*/
+.campo_contraseña_autentificacion{
+    width: 100%;
+    margin-bottom: 1.3vh;
+
+}
+
+/*TITULO ENTRADA CAMPO CONTRASEÑA AUTENTIFICACION*/
+.entrada_campo_contraseña_autentificacion{
+    display: flex;
+    align-items: center;
+    gap: 0.5vw;
+    border: 0.05vw solid #dddddd;
+    border-radius: 0.4vw;
+    padding: 0.9vh 0.7vw;
+    width: 28.5vw;
+}
+
+/*TITULO IMAGEN CAMPO CONTRASEÑA AUTENTIFICACION*/
+.imagen_campo_contraseña_autentificacion{
+    width: 0.9vw;
+    height: 0.9vw;
+}
+
+/*TITULO ENTRADA DE TEXTO DE LA CONTRASEÑA*/
+.texto_entrada_contraseña_autentificacion{
+    border: none;
+    outline: none;
+    flex: 1;
+    font-family: 'Syne', sans-serif;
+    font-size: 0.85vw;
+    color: #1a1a1a;
+    background: transparent;
+    
+}

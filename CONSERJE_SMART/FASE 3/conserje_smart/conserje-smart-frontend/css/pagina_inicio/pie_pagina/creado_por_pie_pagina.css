@@ -1,0 +1,9 @@
+.creado_por_pie_pagina{
+    border-top: 0.1vh solid #E3A008; /* agrega una línea superior de color gris */
+    font-family: 'Syne', sans-serif; /* establece la fuente del texto */
+    font-weight: 400; /* establece el grosor de la fuente */
+    font-size: 1vw; /* establece el tamaño de la fuente */
+    margin-bottom: 1vh; /* agrega un margen inferior */
+    margin-top: 1vh; /* agrega un margen superior */
+
+}

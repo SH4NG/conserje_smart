@@ -1,0 +1,47 @@
+/* TITULO 1 ESTRUCTURA GENERAL DE PAGINA SIN CONEXION */
+body {
+    display: grid;
+    min-height: 100vh;
+    min-height: 100dvh;
+    margin: 0;
+    padding: 1.25rem;
+    box-sizing: border-box;
+    place-items: center;
+    background: #f7f7f7;
+    color: #1a1a1a;
+    font-family: sans-serif;
+}
+
+/* TITULO 2 CONTENEDOR SIN CONEXION VISITA */
+.contenedor_sin_conexion_visita {
+    max-width: 480px;
+    padding: 2rem;
+    border: 1px solid #e5ba31;
+    border-radius: 1rem;
+    background: #fff;
+    text-align: center;
+    line-height: 1.5;
+}
+
+/* TITULO 3 ICONO SIN CONEXION VISITA */
+.icono_sin_conexion_visita {
+    border-radius: 1rem;
+}
+
+/* TITULO 4 ENLACE REINTENTAR VISITA */
+.enlace_reintentar_visita {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: .85rem 1rem;
+    border-radius: .65rem;
+    background: #e5ba31;
+    color: #1a1a1a;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+/* TITULO 5 FOCO DEL ENLACE REINTENTAR VISITA */
+.enlace_reintentar_visita:focus-visible {
+    outline: 3px solid #806300;
+    outline-offset: 3px;
+}

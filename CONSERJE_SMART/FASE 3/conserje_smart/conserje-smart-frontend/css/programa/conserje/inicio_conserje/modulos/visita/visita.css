@@ -1,0 +1,299 @@
+/* TITULO 1 VARIABLES DE COLOR Y TIPOGRAFIA */
+:root {
+    --color-amarillo: #e5ba31;
+    --color-negro-texto: #1a1a1a;
+    --color-blanco: #fff;
+    --color-gris: #f7f8fa;
+    --color-borde: #dce0e5;
+    --color-texto-secundario: #59626b;
+    --fuente-principal: 'Syne', sans-serif;
+    --sombra-tarjeta-visita: 0 1.333vh 4vh #17212d0d, 0 0.222vh 0.667vh #17212d05;
+}
+
+/* TITULO 2 MODELO DE CAJA GENERAL */
+* {
+    box-sizing: border-box;
+}
+
+/* TITULO 3 ESTRUCTURA GENERAL DE LA PAGINA */
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: linear-gradient(#f7f8fae8, #f7f8fad9), url('/conserje_smart/conserje-smart-frontend/imagenes/programa/conserje/inicio_conserje/modulos/visita/background_visita.png') center / cover no-repeat;
+    font-family: var(--fuente-principal);
+    color: var(--color-negro-texto);
+}
+
+/* TITULO 4 PAGINA VISITA */
+.pagina_visita {
+    width: min(94%, 160vh);
+    margin: 3.556vh auto 7.111vh;
+    line-height: 1.5;
+}
+
+/* TITULO 5 CABECERA VISITA */
+.cabecera_visita {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2.667vh;
+    padding: 3.111vh 3.556vh;
+    margin-bottom: 2.667vh;
+    border: 0.111vh solid #e5ba314a;
+    border-left: 0.556vh solid var(--color-amarillo);
+    border-radius: 2.222vh;
+    background: linear-gradient(110deg, #fff 60%, #fffbeb);
+    box-shadow: var(--sombra-tarjeta-visita);
+}
+
+/* TITULO 6 TITULOS CABECERA VISITA */
+.cabecera_visita h1 {
+    margin: 0;
+    font-size: clamp(2.933vh, 2.4vw, 4.622vh);
+    line-height: 1.2;
+    letter-spacing: -0.062vh;
+}
+
+.descripcion_cabecera_visita {
+    margin: 1.067vh 0 0;
+    color: var(--color-texto-secundario);
+}
+
+/* TITULO 7 ETIQUETA SECCION */
+.etiqueta_seccion {
+    display: inline-block;
+    margin-bottom: 0.8vh;
+    color: #775b00;
+    font-size: 1.244vh;
+    font-weight: 800;
+    letter-spacing: 0.213vh;
+    text-transform: uppercase;
+}
+
+/* TITULO 8 RESUMEN VISITA */
+.resumen_visita {
+    display: flex;
+    flex-direction: column;
+    gap: 0.533vh;
+    max-width: 42%;
+    padding: 1.511vh 1.956vh;
+    border: 0.111vh solid #e5ba3159;
+    border-radius: 1.422vh;
+    background: #fff;
+}
+
+.resumen_visita_titulo {
+    color: var(--color-texto-secundario);
+    font-size: 1.244vh;
+    text-transform: uppercase;
+    letter-spacing: 0.142vh;
+}
+
+#resumen_departamento_visita {
+    font-size: 1.6vh;
+    overflow-wrap: anywhere;
+}
+
+/* TITULO 9 TITULOS SECUNDARIOS DE VISITA */
+.pagina_visita h2 {
+    margin: 0;
+    font-size: clamp(2.133vh, 1.5vw, 2.667vh);
+    line-height: 1.3;
+    letter-spacing: -0.044vh;
+}
+
+/* TITULO 10 AREA REGISTRO VISITA */
+.area_registro_visita {
+    display: grid;
+    grid-template-columns: minmax(0, .95fr) minmax(0, 1.15fr);
+    gap: 2.667vh;
+    align-items: start;
+    margin-bottom: 2.667vh;
+}
+
+.area_registro_visita > *, .panel_lectura_visita > * {
+    min-width: 0;
+}
+
+.panel_lectura_visita {
+    display: grid;
+    gap: 1.778vh;
+}
+
+.panel_lectura_visita > .contenedor_vincular_movil_visita, .panel_lectura_visita > .contenedor_escaner_visita, .area_registro_visita > .contenedor_formulario_visita {
+    margin-bottom: 0;
+}
+
+/* TITULO 11 ENLACE MODO VISITA */
+.enlace_modo_visita {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.444vh 1.333vh;
+    margin: 0 0.711vh;
+    font-size: 1.422vh;
+    color: var(--color-texto-secundario);
+}
+
+.enlace_modo_visita a {
+    display: inline-flex;
+    gap: 1.244vh;
+    align-items: center;
+    min-height: 4.889vh;
+    color: #775b00;
+    font-weight: 700;
+    text-underline-offset: 0.444vh;
+}
+
+/* TITULO 12 ESTRUCTURA DE BOTONES DE VISITA */
+.boton_principal_visita, .boton_secundario_visita {
+    min-height: 4.889vh;
+    padding: 1.333vh 1.867vh;
+    border: 0.111vh solid transparent;
+    border-radius: 1.333vh;
+    font: 700 1.511vh var(--fuente-principal);
+    line-height: 1.4;
+    cursor: pointer;
+    transition: background .18s ease, box-shadow .18s ease, transform .18s ease;
+}
+
+/* TITULO 13 BOTON PRINCIPAL VISITA */
+.boton_principal_visita {
+    background: var(--color-amarillo);
+    color: #201b0b;
+    box-shadow: 0 0.333vh 0 #a885171a;
+}
+
+/* TITULO 14 BOTON SECUNDARIO VISITA */
+.boton_secundario_visita {
+    background: #f2f4f6;
+    border-color: #e5e8ec;
+    color: #36414b;
+}
+
+/* TITULO 15 INTERACCION DE BOTONES DE VISITA */
+@media (hover: hover) {
+    .boton_principal_visita:hover:not(:disabled) {
+        background: #f0c83e;
+        box-shadow: 0 0.556vh 1.556vh #bd921c25;
+        transform: translateY(-0.111vh);
+    }
+
+    .boton_secundario_visita:hover:not(:disabled) {
+        background: #e9edf1;
+        transform: translateY(-0.111vh);
+    }
+
+}
+
+.pagina_visita button:active:not(:disabled) {
+    transform: translateY(0.111vh);
+}
+
+.pagina_visita button:disabled {
+    opacity: .55;
+    cursor: default;
+}
+
+/* TITULO 16 FOCO VISIBLE EN LOS CONTROLES DE VISITA */
+.pagina_visita :focus-visible {
+    outline: 0.333vh solid #896900;
+    outline-offset: 0.333vh;
+}
+
+/* TITULO 17 MENSAJE FORMULARIO VISITA */
+.mensaje_formulario_visita {
+    margin: 0;
+    font-size: 1.511vh;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+}
+
+.mensaje_formulario_visita:not(:empty) {
+    padding: 1.422vh 1.778vh;
+    border: 0.111vh solid #e4e8ed;
+    border-radius: 1.244vh;
+    background: #f6f8fa;
+}
+
+.mensaje_formulario_visita.error {
+    color: #9c2828;
+    background: #fff3f2;
+    border-color: #f2cfcb;
+}
+
+.mensaje_formulario_visita.exito {
+    color: #17633f;
+    background: #eff9f3;
+    border-color: #cfe8d8;
+}
+
+/* TITULO 18 ELEMENTOS OCULTOS DE VISITA */
+.pagina_visita [hidden] {
+    display: none !important;
+}
+
+/* TITULO 19 TRANSICION DE ENTRADA DE VISITA */
+@keyframes entrada_tarjeta_visita {
+    from {
+        opacity: 0;
+        transform: translateY(0.778vh);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+.cabecera_visita, .area_registro_visita, .contenedor_tablero_visita {
+    animation: entrada_tarjeta_visita .3s ease both;
+}
+
+/* TITULO 20 AJUSTES PARA PANTALLAS MEDIANAS */
+@media (max-width: 1200px) {
+    .area_registro_visita {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+}
+
+/* TITULO 21 AJUSTES PARA PANTALLAS MOVILES */
+@media (max-width: 768px) {
+    .pagina_visita {
+        margin-top: 1.778vh;
+    }
+
+    .cabecera_visita {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 2.311vh;
+        border-radius: 1.778vh;
+    }
+
+    .resumen_visita {
+        max-width: 100%;
+    }
+
+    .descripcion_cabecera_visita {
+        font-size: 1.6vh;
+    }
+
+    .area_registro_visita {
+        gap: 1.778vh;
+    }
+
+}
+
+/* TITULO 22 RESPETAR LA PREFERENCIA DE MOVIMIENTO REDUCIDO */
+@media (prefers-reduced-motion: reduce) {
+    .pagina_visita *, .pagina_visita *::before, .pagina_visita *::after {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+    }
+
+}
+

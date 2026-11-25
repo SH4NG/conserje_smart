@@ -1,0 +1,44 @@
+.nuestra_vision {
+    width: 100%;
+    height: 100%;
+    background: #ffffff;
+    font-family: 'Syne', sans-serif;
+}
+
+.titulo_nuestra_vision {
+    background: #000000;
+    color: #e5ba31;
+    text-align: center;
+    font-size: 1.8vw;
+    font-weight: 700;
+    padding: 6vh 5vw;
+}
+
+.contenido_nuestra_vision {
+    display: flex;
+    align-items: center;
+    gap: 4vw;
+}
+
+.texto_contenido_nuestra_vision {
+    width: 50%;
+    color: #1a1a1a;
+    font-size: 0.95vw;
+    line-height: 1.6;
+    border-left: 0.3vw solid #e5ba31;
+    padding-left: 2vw;
+}
+
+.texto_contenido_nuestra_vision p {
+    margin-bottom: 2vh;
+}
+
+.texto_contenido_nuestra_vision p:last-child {
+    margin-bottom: 0;
+}
+
+.texto_contenido_nuestra_vision .parrafo_intro {
+    font-size: 1.05vw;
+    font-weight: 700;
+    color: #000000;
+}

@@ -1,0 +1,63 @@
+/* TITULO 1 PAGINA VISITA EN MODO MOVIL */
+.modo_movil_visita .pagina_visita {
+    width: min(94%, 720px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* TITULO 2 CABECERA DE LA APLICACION MOVIL */
+.modo_movil_visita .cabecera {
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+/* TITULO 3 LOGO DE LA APLICACION MOVIL */
+.modo_movil_visita .contenedor_logo_cabecera {
+    width: 150px;
+    max-width: 45%;
+}
+
+/* TITULO 4 SESION DEL CONSERJE EN EL MOVIL */
+.modo_movil_visita .cabecera_programa {
+    flex-wrap: wrap;
+    gap: .75rem;
+    font-size: .85rem;
+}
+
+/* TITULO 5 CONTENEDOR INSTALACION VISITA */
+.contenedor_instalacion_visita {
+    margin-bottom: 1.5rem;
+    padding: 1.25rem;
+    border: 1px solid #e5ba3159;
+    border-radius: 1rem;
+    background: var(--color-blanco);
+}
+
+/* TITULO 6 ENCABEZADO INSTALACION VISITA */
+.encabezado_instalacion_visita {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+/* TITULO 7 MENSAJE INSTALACION VISITA */
+.mensaje_instalacion_visita {
+    color: var(--color-texto-secundario);
+    font-size: .95rem;
+    line-height: 1.5;
+}
+
+/* TITULO 8 ESTADO CONEXION VISITA */
+.estado_conexion_visita {
+    margin-bottom: 0;
+    color: #0f6f38;
+    font-size: .85rem;
+    line-height: 1.5;
+}
+
+/* TITULO 9 ESTADO CONEXION VISITA SIN RED */
+.estado_conexion_visita.error {
+    color: #a00000;
+}

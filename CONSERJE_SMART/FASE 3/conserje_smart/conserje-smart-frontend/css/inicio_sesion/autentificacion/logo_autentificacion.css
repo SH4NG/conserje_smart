@@ -1,0 +1,16 @@
+/*TITULO LOGO AUTENTIFICACION*/
+.logo_autentificacion{
+    width: 3.3vw;
+    height: 3.3vw;
+    background: #1a1a1a;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2.5vh;
+    
+}
+.imagen_logo_autentificacion{
+    width: 4.8vw;
+    height: auto;
+}

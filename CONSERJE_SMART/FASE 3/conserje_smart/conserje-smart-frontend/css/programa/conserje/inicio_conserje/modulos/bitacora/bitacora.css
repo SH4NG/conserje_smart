@@ -1,0 +1,39 @@
+/* TITULO 1 RESTABLECER ESPACIADO GENERAL */
+body{
+    margin: 0;/* quita el margen por defecto */
+    padding: 0;/* quita el relleno por defecto */
+}
+
+/* TITULO 2 DISTRIBUCION PRINCIPAL DE BITACORA */
+    .contenido_bitacora{
+        width: 100%;/* ancho completo */
+        height: 100%;/* alto completo */
+        display: flex;/* utiliza flexbox para el diseño */
+        flex-direction: row;/* organiza los elementos en fila */
+    }
+
+/* TITULO 3 PANEL DE VISTA PREVIA */
+    .panel_vista_previa_bitacora{
+        width: 70%;/* ancho completo */
+        min-height: 50vh;/* alto completo */
+    }
+
+/* TITULO 4 PANEL DE MENU */
+    .contenedor_menu_bitacora{
+        width: 30%;/* ancho completo */
+        min-height: 50vh;/* alto completo */
+        display: flex;/* utiliza flexbox para el diseño */
+    }
+
+/* TITULO 5 RESULTADO DEL ANALISIS */
+.resultado_analisis_bitacora {
+    box-sizing: border-box;
+    max-height: 28vh;
+    margin: 2vh;
+    overflow: auto;
+    color: #1a1a1a;
+    font-family: Consolas, monospace;
+    font-size: 0.85vw;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}

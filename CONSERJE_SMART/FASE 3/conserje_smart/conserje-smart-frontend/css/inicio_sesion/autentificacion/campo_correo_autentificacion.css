@@ -1,0 +1,34 @@
+/*TITULO CAMPO CORREO AUTENTIFICACION*/
+.campo_correo_autentificacion{
+    width: 100%;
+    margin-bottom: 1.3vh;
+    
+}
+/*TITULO ENTRADA CAMPO CORREO AUTENTIFICACION*/
+.entrada_campo_correo_autentificacion{
+    display: flex;
+    align-items: center;
+    gap: 0.5vw;
+    border: 0.05vw solid #dddddd;
+    border-radius: 0.4vw;
+    padding: 0.9vh 0.7vw;
+
+}
+
+/*TITULO IMAGEN CAMPO CORREO AUTENTIFICACION*/
+.imagen_campo_correo_autentificacion{
+    width: 0.9vw;
+    height: 0.9vw;
+}
+
+/*TITULO TEXTO ENTRADA DE TEXTO DEL CORREO*/
+.texto_entrada_campo_correo_autentificacion{
+    border: none;
+    outline: none;
+    flex: 1;
+    font-family: 'Syne', sans-serif;
+    font-size: 0.85vw;
+    color: #1a1a1a;
+    background: transparent;
+    
+}
