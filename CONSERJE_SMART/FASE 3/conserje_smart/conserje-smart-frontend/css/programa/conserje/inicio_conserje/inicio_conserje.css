@@ -45,7 +45,7 @@ body {
     background: black;
 }
 
-@media (max-width: 60vw) {
+@media (max-width: 768px) {
     .contenedor_contenido {
         flex-direction: column;
     }

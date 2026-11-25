@@ -1,3 +1,4 @@
+/* TITULO 1 CONTENEDOR CONTENIDO INICIO */
 .contenedor_contenido_inicio {
     width: 100%;
     display: flex;
@@ -7,11 +8,13 @@
     border-radius: 1vw;
 }
 
+/* TITULO 2 PARTE SUPERIOR CONTENIDO INICIO */
 .parte_superior_contenido_inicio,
 .parte_inferior_contenido_inicio {
     width: 100%;
 }
 
+/* TITULO 3 PARTE SUPERIOR CONTENIDO INICIO */
 .parte_superior_contenido_inicio {
     min-height: 15vh;
     padding: 2vh 2vw;
@@ -21,10 +24,12 @@
     box-shadow: 0 0.8vh 1.2vw rgba(26, 26, 26, 0.08);
 }
 
+/* TITULO 4 CONTENEDOR TITULO CONTENIDO */
 .contenedor_titulo_contenido {
     color: #1a1a1a;
 }
 
+/* TITULO 5 ETIQUETA SECCION */
 .etiqueta_seccion {
     color: #b78900;
     font-size: 0.8vw;
@@ -33,27 +38,32 @@
     text-transform: uppercase;
 }
 
+/* TITULO 6 CONTENEDOR TITULO CONTENIDO */
 .contenedor_titulo_contenido h1 {
     margin: 0.8vh 0;
     font-size: 2vw;
 }
 
+/* TITULO 7 CONTENEDOR FECHA CONTENIDO */
 .contenedor_fecha_contenido,
 .contenedor_subtitulo_contenido {
     color: #5f6368;
     font-size: 0.95vw;
 }
 
+/* TITULO 8 CONTENEDOR FECHA CONTENIDO */
 .contenedor_fecha_contenido {
     font-weight: 700;
 }
 
+/* TITULO 9 PARTE INFERIOR CONTENIDO INICIO */
 .parte_inferior_contenido_inicio {
     display: flex;
     flex-direction: row;
     gap: 2vw;
 }
 
+/* TITULO 10 CONTENEDOR ACTIVIDADES CONTENIDO */
 .contenedor_actividades_contenido,
 .contenedor_acceso_rapido,
 .contenedor_cronograma {
@@ -63,12 +73,14 @@
     box-shadow: 0 0.8vh 1.2vw rgba(26, 26, 26, 0.1);
 }
 
+/* TITULO 11 CONTENEDOR ACTIVIDADES CONTENIDO */
 .contenedor_actividades_contenido {
     width: 60%;
     min-height: 55vh;
     padding: 2vh 1.5vw;
 }
 
+/* TITULO 12 CONTENEDOR ATAJO CONTENIDO */
 .contenedor_atajo_contenido {
     width: 40%;
     display: flex;
@@ -76,6 +88,7 @@
     gap: 2vh;
 }
 
+/* TITULO 13 ENCABEZADO PANEL */
 .encabezado_panel {
     display: flex;
     justify-content: space-between;
@@ -83,12 +96,14 @@
     gap: 1vw;
 }
 
+/* TITULO 14 ENCABEZADO PANEL */
 .encabezado_panel > div {
     display: flex;
     align-items: center;
     gap: 0.8vw;
 }
 
+/* TITULO 15 ICONO PANEL */
 .icono_panel,
 .actividad_icono {
     width: 2.5vw;
@@ -102,18 +117,21 @@
     font-weight: 700;
 }
 
+/* TITULO 16 TITULOS DEL INICIO */
 h2 {
     margin: 0;
     color: #1a1a1a;
     font-size: 1.15vw;
 }
 
+/* TITULO 17 ENCABEZADO PANEL */
 .encabezado_panel p {
     margin: 0.5vh 0 0;
     color: #72777d;
     font-size: 0.8vw;
 }
 
+/* TITULO 18 CONTADOR PANEL */
 .contador_panel {
     padding: 0.8vh 0.8vw;
     border-radius: 1vw;
@@ -123,6 +141,7 @@ h2 {
     font-weight: 700;
 }
 
+/* TITULO 19 LISTA ACTIVIDADES */
 .lista_actividades {
     display: flex;
     flex-direction: column;
@@ -130,6 +149,7 @@ h2 {
     margin-top: 2vh;
 }
 
+/* TITULO 20 ACTIVIDAD ITEM */
 .actividad_item {
     display: grid;
     grid-template-columns: auto 1fr auto;
@@ -140,48 +160,57 @@ h2 {
     background: #f7f8fa;
 }
 
+/* TITULO 21 ACTIVIDAD ITEM */
 .actividad_item strong {
     font-size: 0.85vw;
 }
 
+/* TITULO 22 ACTIVIDAD ITEM */
 .actividad_item p {
     margin: 0.5vh 0 0;
     color: #737981;
     font-size: 0.75vw;
 }
 
+/* TITULO 23 ACTIVIDAD ITEM */
 .actividad_item time {
     color: #737981;
     font-size: 0.7vw;
 }
 
+/* TITULO 24 ACTIVIDAD VISITA */
 .actividad_visita {
     background: #e2f0ff;
     color: #2381cf;
 }
 
+/* TITULO 25 ACTIVIDAD TAREA */
 .actividad_tarea {
     background: #def5df;
     color: #29964a;
 }
 
+/* TITULO 26 CONTENEDOR ACCESO RAPIDO */
 .contenedor_acceso_rapido,
 .contenedor_cronograma {
     width: 100%;
     padding: 2vh 1.2vw;
 }
 
+/* TITULO 27 CONTENEDOR ACCESO RAPIDO */
 .contenedor_acceso_rapido {
     display: flex;
     flex-direction: column;
     gap: 1vh;
 }
 
+/* TITULO 28 CONTENEDOR ACCESO RAPIDO */
 .contenedor_acceso_rapido h2,
 .contenedor_cronograma h2 {
     margin-bottom: 1vh;
 }
 
+/* TITULO 29 CONTENEDOR ACCESO RAPIDO */
 .contenedor_acceso_rapido a {
     display: flex;
     justify-content: space-between;
@@ -193,11 +222,297 @@ h2 {
     text-decoration: none;
 }
 
+/* TITULO 30 CONTENEDOR ACCESO RAPIDO */
 .contenedor_acceso_rapido a span {
     color: #b78900;
     font-size: 1.2vw;
 }
 
+/* TITULO 31 ENCABEZADO ACCESO RAPIDO */
+.encabezado_acceso_rapido {
+    display: flex;
+    align-items: center;
+    gap: .65vw;
+    margin-bottom: .4vw;
+    color: #1a1a1a;
+}
+
+/* TITULO 32 TITULO ACCESO RAPIDO */
+.encabezado_acceso_rapido h2 {
+    margin: 0;
+    font-size: clamp(1vw, 1.15vw, 1.2vw);
+}
+
+/* TITULO 33 ICONOS ACCESO RAPIDO Y REGISTRAR VISITA INICIO */
+.icono_acceso_rapido,
+.icono_registrar_visita_inicio {
+    width: 1.4vw;
+    height: 1.4vw;
+    flex-shrink: 0;
+}
+
+/* TITULO 34 BOTON REGISTRAR VISITA INICIO */
+.contenedor_acceso_rapido .boton_registrar_visita_inicio {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: .75vw;
+    min-height: 3vw;
+    padding: .8vw;
+    border: 0.0625vw solid #e1e3e6;
+    border-radius: .5vw;
+    background: #fff;
+    color: #30343a;
+    font-size: clamp(.9vw, .85vw, 1vw);
+    transition: background-color .15s ease, border-color .15s ease;
+}
+
+/* TITULO 35 TEXTO REGISTRAR VISITA INICIO */
+.contenedor_acceso_rapido .texto_registrar_visita_inicio {
+    color: inherit;
+    font-size: inherit;
+}
+
+/* TITULO 36 FLECHA REGISTRAR VISITA INICIO */
+.flecha_registrar_visita_inicio {
+    width: 1vw;
+    height: 1vw;
+}
+
+/* TITULO 37 INTERACCION BOTON REGISTRAR VISITA INICIO */
+.boton_registrar_visita_inicio:hover {
+    border-color: #e5ba31;
+    background: #fff9e6;
+}
+
+/* TITULO 38 FOCO BOTON REGISTRAR VISITA INICIO */
+.boton_registrar_visita_inicio:focus-visible {
+    outline: 0.1875vw solid #b78900;
+    outline-offset: 0.1875vw;
+}
+
+/* TITULO 39 ENCABEZADO ACTIVIDADES INICIO */
+.encabezado_actividades_inicio,
+.titulos_actividades_inicio {
+    display: flex;
+    align-items: center;
+    gap: .75vw;
+}
+
+/* TITULO 40 ENCABEZADO ACTIVIDADES INICIO */
+.encabezado_actividades_inicio {
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+/* TITULO 41 ICONO ACTIVIDADES INICIO */
+.icono_actividades_inicio {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 2.5vw;
+    height: 2.5vw;
+    border-radius: 50%;
+    background: #fff0b5;
+    color: #1a1a1a;
+}
+
+/* TITULO 42 ICONO ACTIVIDADES INICIO */
+.icono_actividades_inicio svg,
+.actividad_visita_inicio .actividad_icono svg {
+    width: 1.5vw;
+    height: 1.5vw;
+}
+
+/* TITULO 43 DESCRIPCION ACTIVIDADES INICIO */
+.descripcion_actividades_inicio h2 {
+    font-size: clamp(1vw, 1.15vw, 1.2vw);
+}
+
+/* TITULO 44 DESCRIPCION ACTIVIDADES INICIO */
+.descripcion_actividades_inicio p {
+    margin: .35vw 0 0;
+    color: #72777d;
+    font-size: .8vw;
+}
+
+/* TITULO 45 CONTADOR ACTIVIDADES INICIO */
+.contador_actividades_inicio {
+    flex-shrink: 0;
+    padding: .4vw .65vw;
+    border-radius: 1vw;
+    background: #fff0b5;
+    color: #674c00;
+    font-size: .75vw;
+    font-weight: 700;
+}
+
+/* TITULO 46 CONTENEDOR ACTIVIDADES CONTENIDO */
+.contenedor_actividades_contenido [hidden] {
+    display: none !important;
+}
+
+/* TITULO 47 CONTROLES ACTIVIDADES INICIO */
+.controles_actividades_inicio {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1vw;
+    margin-top: .75vw;
+}
+
+/* TITULO 48 ACTUALIZAR ACTIVIDADES INICIO */
+.actualizar_actividades_inicio {
+    min-height: 2.75vw;
+    padding: .5vw .75vw;
+    border: 0.0625vw solid #e1e3e6;
+    border-radius: .5vw;
+    background: #fff;
+    color: #30343a;
+    font: inherit;
+    font-size: .8vw;
+    cursor: pointer;
+}
+
+/* TITULO 49 ACTUALIZAR ACTIVIDADES INICIO */
+.actualizar_actividades_inicio:disabled {
+    opacity: .6;
+    cursor: wait;
+}
+
+/* TITULO 50 MENSAJE ACTIVIDADES INICIO */
+.mensaje_actividades_inicio {
+    margin: 0;
+    color: #72777d;
+    font-size: .8vw;
+    line-height: 1.5;
+}
+
+/* TITULO 51 MENSAJE ACTIVIDADES INICIO */
+.mensaje_actividades_inicio.error {
+    color: #a00000;
+}
+
+/* TITULO 52 LISTA ACTIVIDADES DEL INICIO */
+#lista_actividades_inicio {
+    padding: 0;
+    margin: 1vw 0;
+    list-style: none;
+}
+
+/* TITULO 53 ACTIVIDAD VISITA INICIO */
+.contenedor_actividades_contenido .actividad_visita_inicio {
+    grid-template-columns: auto minmax(0, 1fr) auto auto;
+    gap: .8vw;
+    min-height: 5.5vw;
+    padding: .9vw;
+    border: 0.0625vw solid transparent;
+    border-radius: .7vw;
+    color: #30343a;
+    text-decoration: none;
+}
+
+/* TITULO 54 ACTIVIDAD VISITA INICIO */
+.actividad_visita_inicio .actividad_icono {
+    width: 2.75vw;
+    height: 2.75vw;
+    flex-shrink: 0;
+}
+
+/* TITULO 55 DETALLE ACTIVIDAD INICIO */
+.detalle_actividad_inicio {
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+
+/* TITULO 56 ACTIVIDAD VISITA INICIO */
+.actividad_visita_inicio strong {
+    font-size: .85vw;
+}
+
+/* TITULO 57 ACTIVIDAD VISITA INICIO */
+.actividad_visita_inicio p {
+    margin: .3vw 0 0;
+    font-size: .78vw;
+    line-height: 1.45;
+}
+
+/* TITULO 58 FECHA ACTIVIDAD INICIO */
+.fecha_actividad_inicio {
+    display: inline-flex;
+    align-items: center;
+    gap: .35vw;
+    color: #737981;
+}
+
+/* TITULO 59 FECHA ACTIVIDAD INICIO */
+.fecha_actividad_inicio svg {
+    width: .9vw;
+    height: .9vw;
+    flex-shrink: 0;
+}
+
+/* TITULO 60 ACTIVIDAD VISITA INICIO */
+.actividad_visita_inicio time {
+    font-size: .7vw;
+    white-space: nowrap;
+}
+
+/* TITULO 61 FLECHA ACTIVIDAD INICIO */
+.flecha_actividad_inicio {
+    width: 1vw;
+    height: 1vw;
+    color: #737981;
+}
+
+/* TITULO 62 ENLACE VISITAS INICIO */
+.enlace_visitas_inicio {
+    display: inline-flex;
+    align-items: center;
+    gap: .5vw;
+    min-height: 2.75vw;
+    color: #765b00;
+    font-size: .85vw;
+    font-weight: 700;
+}
+
+/* TITULO 63 INTERACCION DE LAS ACTIVIDADES DEL INICIO */
+.actividad_visita_inicio:hover,
+.actualizar_actividades_inicio:hover:not(:disabled) {
+    border-color: #e5ba31;
+    background: #fff9e6;
+}
+
+/* TITULO 64 CONTENEDOR ACTIVIDADES CONTENIDO */
+.contenedor_actividades_contenido :focus-visible {
+    outline: 0.1875vw solid #b78900;
+    outline-offset: 0.1875vw;
+}
+
+/* TITULO 65 ACTIVIDADES EN CONTENEDORES ESTRECHOS */
+@media (max-width: 1200px) {
+    .contenedor_actividades_contenido .actividad_visita_inicio {
+        grid-template-columns: auto minmax(0, 1fr) auto;
+        row-gap: .5vw;
+    }
+
+    .actividad_visita_inicio .actividad_icono {
+        grid-row: 1 / 3;
+    }
+
+    .fecha_actividad_inicio {
+        grid-column: 2;
+        grid-row: 2;
+    }
+
+    .flecha_actividad_inicio {
+        grid-column: 3;
+        grid-row: 1 / 3;
+    }
+}
+
+/* TITULO 66 CONTENEDOR CRONOGRAMA */
 .contenedor_cronograma p {
     display: flex;
     gap: 1vw;
@@ -206,12 +521,14 @@ h2 {
     font-size: 0.78vw;
 }
 
+/* TITULO 67 CONTENEDOR CRONOGRAMA */
 .contenedor_cronograma time {
     color: #b78900;
     font-weight: 700;
 }
 
-@media (max-width: 60vw) {
+/* TITULO 68 ADAPTACION DE PANTALLA */
+@media (max-width: 768px) {
     .parte_inferior_contenido_inicio {
         flex-direction: column;
     }
