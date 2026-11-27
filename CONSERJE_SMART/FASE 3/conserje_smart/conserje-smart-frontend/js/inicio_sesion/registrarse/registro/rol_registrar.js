@@ -15,8 +15,7 @@ function validarRolRegistrar() {
 
     // evita enviar el formulario con el rol vacio o no permitido
     if (!["admin", "conserje", "residente"].includes(rol)) {
-        alert("Debe seleccionar un rol.");
-        return false;
+        return mostrarErrorCampoRegistro('rol_registrar', 'Selecciona un perfil de acceso.');
     }
 
     return true;

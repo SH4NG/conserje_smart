@@ -1,6 +1,6 @@
 // TITULO 1 IMPORTAR LA VALIDACION DE RUT Y LOS MENSAJES
 import { validarRut, formatearRut } from '../rut_visita.js';
-import { solicitarVisita, mostrarMensajeVisita } from '../Backend_visita/api_visita.js';
+import { solicitarVisita, mostrarMensajeVisita } from '../backend_visita/api_visita.js';
 
 // TITULO 2 CARGAR LA BIBLIOTECA LOCAL DEL LECTOR QR
 // el archivo conserva el código original y la API de la biblioteca jsQR
@@ -65,7 +65,7 @@ export function extraerRutCarnet(contenido) {
             }
         }
     } catch {
-        // un QR sin URL ni RUT reconocible no completa el formulario
+        // un QR sin URL ni RUT reconocible no genera una lectura
     }
     return null;
 }
@@ -73,7 +73,7 @@ export function extraerRutCarnet(contenido) {
 // TITULO 5 INICIALIZAR LOS ELEMENTOS DEL ESCANER DE VISITA
 export function inicializarEscanerVisita() {
     const iniciar = document.getElementById('iniciar_escaner_visita');
-    if (!iniciar) {
+    if (!iniciar || !document.getElementById('estado_acceso_movil_visita')) {
         return;
     }
     const detener = document.getElementById('detener_escaner_visita');
@@ -215,43 +215,28 @@ export function inicializarEscanerVisita() {
                 const rut = extraerRutCarnet(contenido);
                 if (rut) {
                     // TITULO 10 ENVIAR LA LECTURA AL COMPUTADOR VINCULADO
-                    if (document.getElementById('estado_acceso_movil_visita')) {
-                        cerrarCamara();
-                        iniciar.disabled = true;
-                        mostrarMensajeVisita(mensaje, 'Enviando el RUT al computador...');
-                        try {
-                            const datos = new FormData();
-                            datos.set('rut_visitante', rut);
-                            const resultado = await solicitarVisita('vinculo_movil_visita.php', {
-                                parametros: { accion: 'leer_carnet' }, datos
-                            });
-                            document.getElementById('rut_enviado_movil_visita').textContent = rut;
-                            document.getElementById('estado_lectura_movil_visita').textContent = 'RUT enviado. Completa y confirma la visita desde el computador.';
-                            document.dispatchEvent(new CustomEvent('visita:lectura-enviada', { detail: resultado.datos }));
-                            mostrarMensajeVisita(mensaje, resultado.mensaje, 'exito');
-                        } catch (error) {
-                            mostrarMensajeVisita(mensaje, error.message, 'error');
-                            if (error.codigoHttp === 401) document.dispatchEvent(new CustomEvent('visita:acceso-revocado'));
-                        } finally {
-                            iniciar.disabled = false;
-                        }
-                        return;
-                    }
-                    const campo = document.getElementById('rut_visitante');
-                    if (campo.disabled) {
-                        cerrarCamara();
-                        mostrarMensajeVisita(mensaje, 'Espera a que termine el registro antes de escanear otro carnet.', 'error');
-                        return;
-                    }
-                    campo.value = rut;
-                    campo.dispatchEvent(new Event('input', { bubbles: true }));
                     cerrarCamara();
-                    mostrarMensajeVisita(mensaje, 'RUT leído. Completa nombre, departamento y motivo; luego pulsa Registrar visita.', 'exito');
-                    document.getElementById('nombre_visitante').focus({ preventScroll: true });
-                    document.getElementById('formulario_visita').scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    iniciar.disabled = true;
+                    mostrarMensajeVisita(mensaje, 'Enviando el RUT al computador...');
+                    try {
+                        const datos = new FormData();
+                        datos.set('rut_visitante', rut);
+                        const resultado = await solicitarVisita('vinculo_movil_visita.php', {
+                            parametros: { accion: 'leer_carnet' }, datos
+                        });
+                        document.getElementById('rut_enviado_movil_visita').textContent = rut;
+                        document.getElementById('estado_lectura_movil_visita').textContent = 'RUT enviado. Completa y confirma la visita desde el computador.';
+                        document.dispatchEvent(new CustomEvent('visita:lectura-enviada', { detail: resultado.datos }));
+                        mostrarMensajeVisita(mensaje, resultado.mensaje, 'exito');
+                    } catch (error) {
+                        mostrarMensajeVisita(mensaje, error.message, 'error');
+                        if (error.codigoHttp === 401) document.dispatchEvent(new CustomEvent('visita:acceso-revocado'));
+                    } finally {
+                        iniciar.disabled = false;
+                    }
                     return;
                 }
-                mostrarMensajeVisita(mensaje, 'El QR no contiene un RUN/RUT reconocible. Prueba con el carnet o ingresa el RUT manualmente.', 'error');
+                mostrarMensajeVisita(mensaje, 'El QR no contiene un RUN/RUT reconocible. Prueba nuevamente con el QR del carnet.', 'error');
             }
         }
         temporizador = window.setTimeout(() => ejecutarLectura(lector, idIntento), 100);
@@ -276,7 +261,7 @@ export function inicializarEscanerVisita() {
             return;
         }
         if (!contexto) {
-            mostrarMensajeVisita(mensaje, 'Este navegador no permite procesar la imagen. Ingresa el RUT manualmente.', 'error');
+            mostrarMensajeVisita(mensaje, 'Este navegador no permite procesar la imagen. Prueba otro navegador en el móvil.', 'error');
             return;
         }
         iniciar.disabled = true;
@@ -388,14 +373,12 @@ export function inicializarEscanerVisita() {
         mostrarMensajeVisita(mensaje, 'Cámara detenida.');
     });
 
-    // TITULO 16 CERRAR LA CAMARA AL SALIR O ENVIAR EL FORMULARIO
+    // TITULO 16 CERRAR LA CAMARA AL SALIR O DESVINCULAR EL TELEFONO
     window.addEventListener('pagehide', cerrarCamara);
     document.addEventListener('visibilitychange', () => {
         if (document.hidden) {
             cerrarCamara();
         }
     });
-    document.addEventListener('visita:editar', cerrarCamara);
     document.addEventListener('visita:sesion-cerrada', cerrarCamara);
-    document.getElementById('formulario_visita')?.addEventListener('submit', cerrarCamara);
 }

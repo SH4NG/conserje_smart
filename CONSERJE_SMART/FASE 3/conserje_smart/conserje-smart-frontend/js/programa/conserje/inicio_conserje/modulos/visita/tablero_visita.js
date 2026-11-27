@@ -1,8 +1,8 @@
 // TITULO 1 IMPORTAR LAS OPERACIONES DEL TABLERO
-import { listarVisitas, etiquetaDepartamento } from './Backend_visita/listar_visita.js';
-import { registrarSalidaVisita } from './Backend_visita/registrar_salida_visita.js';
-import { prepararEdicionVisita } from './Backend_visita/modificar_visita.js';
-import { mostrarMensajeVisita } from './Backend_visita/api_visita.js';
+import { listarVisitas, etiquetaDepartamento } from './backend_visita/listar_visita.js';
+import { registrarSalidaVisita } from './backend_visita/registrar_salida_visita.js';
+import { prepararEdicionVisita } from './backend_visita/modificar_visita.js';
+import { mostrarMensajeVisita } from './backend_visita/api_visita.js';
 
 // TITULO 2 FORMATEAR FECHAS Y HORAS DE VISITA
 // muestra la hora local de Santiago guardada por el backend

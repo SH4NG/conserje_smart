@@ -1,5 +1,5 @@
 // TITULO 1 IMPORTAR LAS PETICIONES DE VINCULACION
-import { solicitarVisita, mostrarMensajeVisita } from '../../Backend_visita/api_visita.js';
+import { solicitarVisita, mostrarMensajeVisita } from '../../backend_visita/api_visita.js';
 
 // TITULO 2 INICIALIZAR EL ACCESO PROPIO DEL TELEFONO
 export async function inicializarVinculoAppMovilVisita() {

@@ -1,5 +1,5 @@
 // TITULO 1 INICIALIZAR MODULOS DE VISITA
-// carga cada sección por separado para que un fallo de cámara no bloquee el formulario
+// el computador recibe los datos y registra; la cámara se inicia solo en la app móvil
 async function iniciarVisita() {
     if (!document.getElementById('pagina_visita')) {
         return;
@@ -13,12 +13,7 @@ async function iniciarVisita() {
             mensaje: 'mensaje_formulario_visita'
         },
         {
-            cargar: () => import('./escanerQR_visita/control_escanerQR_visita.js'),
-            iniciar: 'inicializarEscanerVisita',
-            mensaje: 'mensaje_escaner_visita'
-        },
-        {
-            cargar: () => import('./Backend_visita/registrar_visita.js'),
+            cargar: () => import('./backend_visita/registrar_visita.js'),
             iniciar: 'inicializarRegistroVisita',
             mensaje: 'mensaje_formulario_visita'
         },
@@ -48,7 +43,11 @@ async function iniciarVisita() {
         const instalacion = modulos.findIndex((modulo) => modulo.iniciar === 'inicializarVisitaAppMovil');
         if (instalacion >= 0) publicos.push(...modulos.splice(instalacion, 1));
         // el teléfono escanea; el formulario de registro se utiliza en el computador
-        const modulosMovil = modulos.filter((modulo) => modulo.iniciar === 'inicializarEscanerVisita');
+        const modulosMovil = [{
+            cargar: () => import('./escanerQR_visita/control_escanerQR_visita.js'),
+            iniciar: 'inicializarEscanerVisita',
+            mensaje: 'mensaje_escaner_visita'
+        }];
         document.addEventListener('visita:movil-autorizado', () => cargarModulos(modulosMovil), { once: true });
         await cargarModulos(publicos);
     } else {

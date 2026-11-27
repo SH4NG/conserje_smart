@@ -1,131 +1,96 @@
-// TITULO 1 BOTON REGISTRAR
-// obtiene el boton que inicia las validaciones y el envio del registro
-const botonRegistrar = document.getElementById("boton_registrar");
+// TITULO 1 PREPARAR EL ENVIO DEL FORMULARIO
+const botonRegistrar = document.getElementById('boton_registrar');
+let enviandoRegistro = false;
+let registroCompletado = false;
+document.getElementById('registro')?.addEventListener('submit', evento => {
+    evento.preventDefault();
+    abrirValidacionTemporal();
+});
 
-// TITULO 2 EVENTO BOTON REGISTRAR
-// escucha el clic del boton y evita el envio tradicional de la pagina
-if (botonRegistrar) {
-    botonRegistrar.addEventListener("click", function (evento) {
-        // evita la recarga de la pagina
-        evento.preventDefault();
-        // inicia las validaciones de los datos principales
-        abrirValidacionTemporal();
-    });
+// TITULO 2 VALIDAR LOS DATOS ANTES DE SOLICITAR LA CUENTA
+function validarDatosRegistro() {
+    return validarNombreRegistrar() && validarApellidoRegistrar() && validarRutRegistrar() &&
+        validarTelefonoRegistrar() && validarRolRegistrar() && validarCondominioRegistrar() && validarContraseñaRegistrar();
 }
-
-// TITULO 3 ABRIR VALIDACION TEMPORAL
-// valida los datos principales y abre el dialogo de autorización
 function abrirValidacionTemporal() {
-    // busca el dialogo al abrirlo, porque este script se carga antes de su include
-    const ventanaEmergente = document.getElementById("ventana_emergente");
-
-    if (!ventanaEmergente) {
-        console.error("No se encontró el elemento con ID 'ventana_emergente'.");
-        return;
-    }
-
-    // detiene el flujo si alguna validacion del formulario principal falla
-    if (
-        !validarNombreRegistrar() ||
-        !validarApellidoRegistrar() ||
-        !validarRutRegistrar() ||
-        !validarTelefonoRegistrar() ||
-        !validarRolRegistrar() ||
-        !validarCondominioRegistrar() ||
-        !validarContraseñaRegistrar()
-    ) {
-        return;
-    }
-
-    // abre el dialogo como una ventana modal
-    ventanaEmergente.showModal();
+    if (enviandoRegistro || registroCompletado || !validarDatosRegistro()) return;
+    if (obtenerRolRegistrar() === 'conserje') return registrarUsuario();
+    const dialogo = document.getElementById('ventana_emergente');
+    const mensaje = document.getElementById('mensaje_validacion_temporal');
+    if (mensaje) mensaje.hidden = true;
+    dialogo?.showModal();
 }
 
-// TITULO 4 CREAR CORREO REGISTRAR
-// construye el correo segun el nombre, apellido y rol seleccionados
+// TITULO 3 GENERAR EL CORREO SIN MODIFICAR LOS NOMBRES PERSONALES
 function crearCorreoRegistrar(nombre, apellido, rol) {
-    // elimina tildes y espacios para formar un correo limpio
-    const limpiarTextoCorreo = function (texto) {
-        return texto
-            .normalize("NFD")
-            .replace(/[\u0300-\u036f]/g, "")
-            .replace(/\s+/g, "");
-    };
-
-    // prepara las partes del nombre y apellido que formaran el correo
-    const nombreCorreo = limpiarTextoCorreo(nombre);
-    const apellidoLimpio = limpiarTextoCorreo(apellido);
-    const cantidadLetrasApellido = rol === "residente" ? 1 : 2;
-    const inicialesApellido = apellidoLimpio.slice(0, cantidadLetrasApellido);
-
-    // define el dominio correspondiente a cada rol
-    const dominios = {
-        conserje: "@conserje.smart.cl",
-        admin: "@admin.conserje.smart.cl",
-        residente: "@residente.conserje.smart.cl"
-    };
-
-    return `${nombreCorreo}${inicialesApellido}${dominios[rol]}`;
+    const limpiar = texto => texto.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]/g, '');
+    const dominios = { conserje: '@conserje.smart.cl', admin: '@admin.conserje.smart.cl', residente: '@residente.conserje.smart.cl' };
+    return limpiar(nombre) + limpiar(apellido).slice(0, rol === 'residente' ? 1 : 2) + dominios[rol];
 }
 
-// TITULO 5 REGISTRAR USUARIO
-// valida todos los campos, arma el POST y procesa la respuesta de PHP
-async function registrarUsuario(rutAdmin, codigoAdmin) {
-    // detiene el proceso cuando alguna validacion no es correcta
-    if (
-        !validarNombreRegistrar() ||
-        !validarApellidoRegistrar() ||
-        !validarRutRegistrar() ||
-        !validarTelefonoRegistrar() ||
-        !validarRolRegistrar() ||
-        !validarCondominioRegistrar() ||
-        !validarContraseñaRegistrar()
-    ) {
-        return;
-    }
+// TITULO 4 PRESENTAR RESPUESTAS DEL SERVIDOR SIN ALERTAS DEL NAVEGADOR
+function mensajeEnvioRegistro(texto, tipo = 'error') {
+    const dialogo = document.getElementById('ventana_emergente');
+    const mensaje = document.getElementById(dialogo?.open ? 'mensaje_validacion_temporal' : 'mensaje_registro');
+    if (!mensaje) return;
+    mensaje.textContent = texto;
+    mensaje.dataset.estado = tipo;
+    mensaje.hidden = !texto;
+    if (tipo === 'error') mensaje.focus();
+}
 
-    // obtiene los valores ya limpios desde los archivos de cada campo
-    const nombre = obtenerNombreRegistrar();
-    const apellido = obtenerApellidoRegistrar();
-    const rol = obtenerRolRegistrar();
+// TITULO 5 ENVIAR LOS DATOS Y PROTEGER LA SOLICITUD DE ENVIOS DUPLICADOS
+async function registrarUsuario() {
+    if (enviandoRegistro || registroCompletado || !validarDatosRegistro()) return;
+    const nombre = obtenerNombreRegistrar(), apellido = obtenerApellidoRegistrar(), rol = obtenerRolRegistrar();
     const correo = crearCorreoRegistrar(nombre, apellido, rol);
     const datos = new FormData();
-
-    // agrega cada dato al formulario que recibira PHP
-    datos.append("rut", obtenerRutRegistrar());
-    datos.append("nombre", nombre);
-    datos.append("apellido", apellido);
-    datos.append("telefono", obtenerTelefonoRegistrar());
-    datos.append("correo", correo);
-    datos.append("rol", rol);
-    datos.append("contraseña", obtenerContraseñaRegistrar());
-    datos.append("condominio", obtenerCondominioRegistrar());
-    datos.append("rut_admin", rutAdmin);
-    datos.append("codigo_auth_admin", codigoAdmin);
-
+    const valores = { rut: obtenerRutRegistrar(), nombre, apellido, telefono: obtenerTelefonoRegistrar(),
+        correo, rol, contraseña: obtenerContraseñaRegistrar(), condominio: obtenerCondominioRegistrar() };
+    for (const [campo, valor] of Object.entries(valores)) datos.set(campo, valor);
+    if (rol === 'conserje') datos.set('token_invitacion', obtenerInvitacionConserjeRegistrar());
+    else {
+        datos.set('rut_admin', document.getElementById('rut_admin_validacion_temporal')?.value || '');
+        datos.set('codigo_auth_admin', document.getElementById('codigo_auth_admin_validacion_temporal')?.value || '');
+    }
+    const formulario = document.getElementById('registro');
+    const controles = [botonRegistrar, document.getElementById('boton_validar_validacion_temporal'), document.getElementById('boton_cancelar_validacion_temporal')].filter(Boolean);
+    enviandoRegistro = true;
+    controles.forEach(boton => { boton.disabled = true; });
+    formulario.setAttribute('aria-busy', 'true');
+    document.getElementById('texto_boton_registrar').textContent = 'Enviando solicitud...';
+    mensajeEnvioRegistro('Enviando tus datos...', 'info');
     try {
-        // define el endpoint responsable de registrar el usuario
-        const respuesta = await fetch(
-            "/conserje_smart/conserje-smart-backend/php/inicio_sesion/registrarse/seguridad/registrar_usuario.php",
-            {
-                method: "POST",
-                body: datos
-            }
-        );
-
-        // lee primero el JSON para conservar los mensajes de error del servidor
-        const resultado = await respuesta.json();
-
+        const respuesta = await fetch('/conserje_smart/conserje-smart-backend/php/inicio_sesion/registrarse/seguridad/registrar_usuario.php',
+            { method: 'POST', body: datos, cache: 'no-store', headers: { Accept: 'application/json' } });
+        let resultado;
+        try { resultado = await respuesta.json(); }
+        catch { throw new Error('El servidor no devolvió una respuesta válida. Inténtalo nuevamente.'); }
         if (!respuesta.ok || resultado.exito !== true) {
-            throw new Error(resultado.mensaje || `Error HTTP ${respuesta.status}`);
+            const campo = resultado.datos?.campo;
+            if (['nombre', 'apellido', 'rut', 'telefono', 'contraseña', 'condominio', 'rol'].includes(campo)) {
+                document.getElementById('ventana_emergente')?.close();
+                mostrarErrorCampoRegistro(campo + '_registrar', resultado.mensaje);
+            }
+            mensajeEnvioRegistro(resultado.mensaje || 'No se pudo enviar la solicitud.');
+            return;
         }
-
-        // informa el exito y vuelve a la pantalla de inicio de sesion
-        alert("Usuario registrado correctamente.");
-        window.location.href = "/conserje_smart/conserje-smart-frontend/php/inicio_sesion/inicio_sesion.php";
+        registroCompletado = true;
+        document.getElementById('ventana_emergente')?.close();
+        if (rol === 'conserje') {
+            try { sessionStorage.removeItem('conserje.registro.invitacion'); } catch { /* el resultado se conserva en esta pantalla */ }
+        }
+        formulario.classList.add('registro_enviado');
+        formulario.querySelectorAll('input, select, button').forEach(control => { control.disabled = true; });
+        mensajeEnvioRegistro(resultado.mensaje + ' Tu correo de acceso: ' + (resultado.datos?.correo || correo), 'exito');
+        document.getElementById('mensaje_registro').focus();
+        document.getElementById('acceso_login_registro').textContent = 'Ir al inicio de sesión';
     } catch (error) {
-        // informa el rechazo concreto del servidor o el error de comunicacion
-        console.error("Error al registrar el usuario:", error);
-        alert(error.message || "Ocurrió un error al registrar el usuario.");
+        mensajeEnvioRegistro(error.message || 'No se pudo comunicar con el servidor. Revisa tu conexión.');
+    } finally {
+        enviandoRegistro = false;
+        formulario.removeAttribute('aria-busy');
+        if (!registroCompletado) controles.forEach(boton => { boton.disabled = false; });
+        document.getElementById('texto_boton_registrar').textContent = registroCompletado ? 'Solicitud enviada' : 'Crear cuenta';
     }
 }

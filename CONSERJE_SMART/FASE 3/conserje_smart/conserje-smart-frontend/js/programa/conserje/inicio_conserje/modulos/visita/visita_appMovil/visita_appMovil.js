@@ -82,7 +82,7 @@ export async function inicializarVisitaAppMovil() {
     // TITULO 7 REGISTRAR EL CONTROL DE CONEXION DE LA PWA
     const rutaVista = '/conserje_smart/conserje-smart-frontend/php/programa/conserje/inicio_conserje/modulos/visita/';
     try {
-        await navigator.serviceWorker.register('/conserje_smart/conserje-smart-backend/php/programa/conserje/inicio_conserje/modulos/visita/backend_visita/visita_appMovil_serviceWorker.php', {
+        await navigator.serviceWorker.register(rutaVista + 'backend_visita/visita_appMovil_serviceWorker.php', {
             scope: rutaVista,
             updateViaCache: 'none'
         });

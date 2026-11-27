@@ -1,5 +1,5 @@
 // TITULO 1 IMPORTAR LAS PETICIONES COMPARTIDAS
-import { solicitarVisita, mostrarMensajeVisita } from '../Backend_visita/api_visita.js';
+import { solicitarVisita, mostrarMensajeVisita } from '../backend_visita/api_visita.js';
 
 // TITULO 2 GENERAR EL QR EN EL COMPUTADOR SIN SERVICIOS EXTERNOS
 let bibliotecaQr;

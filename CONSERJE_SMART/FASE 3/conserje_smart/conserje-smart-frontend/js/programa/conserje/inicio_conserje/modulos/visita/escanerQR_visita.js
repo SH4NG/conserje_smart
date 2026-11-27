@@ -1,6 +1,6 @@
 // TITULO 1 IMPORTAR LA VALIDACION DE RUT Y LOS MENSAJES
 import { validarRut, formatearRut } from './rut_visita.js';
-import { mostrarMensajeVisita } from './Backend_visita/api_visita.js';
+import { mostrarMensajeVisita } from './backend_visita/api_visita.js';
 
 // TITULO 2 CARGAR LA BIBLIOTECA LOCAL DEL LECTOR QR
 // el archivo conserva el código original y la API de la biblioteca jsQR
