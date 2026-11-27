@@ -243,16 +243,20 @@ h2 {
     font-size: clamp(1vw, 1.15vw, 1.2vw);
 }
 
-/* TITULO 33 ICONOS ACCESO RAPIDO Y REGISTRAR VISITA INICIO */
+/* TITULO 33 ICONOS DE ACCESOS RAPIDOS INICIO */
 .icono_acceso_rapido,
-.icono_registrar_visita_inicio {
+.icono_registrar_visita_inicio,
+.icono_bitacora_inicio,
+.icono_paqueteria_inicio {
     width: 1.4vw;
     height: 1.4vw;
     flex-shrink: 0;
 }
 
-/* TITULO 34 BOTON REGISTRAR VISITA INICIO */
-.contenedor_acceso_rapido .boton_registrar_visita_inicio {
+/* TITULO 34 BOTONES DE ACCESO RAPIDO INICIO */
+.contenedor_acceso_rapido .boton_registrar_visita_inicio,
+.contenedor_acceso_rapido .boton_bitacora_inicio,
+.contenedor_acceso_rapido .boton_paqueteria_inicio {
     display: grid;
     grid-template-columns: auto minmax(0, 1fr) auto;
     align-items: center;
@@ -267,26 +271,34 @@ h2 {
     transition: background-color .15s ease, border-color .15s ease;
 }
 
-/* TITULO 35 TEXTO REGISTRAR VISITA INICIO */
-.contenedor_acceso_rapido .texto_registrar_visita_inicio {
+/* TITULO 35 TEXTOS DE ACCESO RAPIDO INICIO */
+.contenedor_acceso_rapido .texto_registrar_visita_inicio,
+.contenedor_acceso_rapido .texto_bitacora_inicio,
+.contenedor_acceso_rapido .texto_paqueteria_inicio {
     color: inherit;
     font-size: inherit;
 }
 
-/* TITULO 36 FLECHA REGISTRAR VISITA INICIO */
-.flecha_registrar_visita_inicio {
+/* TITULO 36 FLECHAS DE ACCESO RAPIDO INICIO */
+.flecha_registrar_visita_inicio,
+.flecha_bitacora_inicio,
+.flecha_paqueteria_inicio {
     width: 1vw;
     height: 1vw;
 }
 
-/* TITULO 37 INTERACCION BOTON REGISTRAR VISITA INICIO */
-.boton_registrar_visita_inicio:hover {
+/* TITULO 37 INTERACCION DE ACCESOS RAPIDOS INICIO */
+.boton_registrar_visita_inicio:hover,
+.boton_bitacora_inicio:hover,
+.boton_paqueteria_inicio:hover {
     border-color: #e5ba31;
     background: #fff9e6;
 }
 
-/* TITULO 38 FOCO BOTON REGISTRAR VISITA INICIO */
-.boton_registrar_visita_inicio:focus-visible {
+/* TITULO 38 FOCO DE ACCESOS RAPIDOS INICIO */
+.boton_registrar_visita_inicio:focus-visible,
+.boton_bitacora_inicio:focus-visible,
+.boton_paqueteria_inicio:focus-visible {
     outline: 0.1875vw solid #b78900;
     outline-offset: 0.1875vw;
 }
