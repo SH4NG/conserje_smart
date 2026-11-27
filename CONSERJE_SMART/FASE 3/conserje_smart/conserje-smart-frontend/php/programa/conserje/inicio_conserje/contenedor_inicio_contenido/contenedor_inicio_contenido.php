@@ -106,9 +106,32 @@ $fechaActual = date('d/m/Y');
                                         <path d="m9 5 7 7-7 7" />
                                     </svg>
                                 </a>
+
+                                <!-- TITULO 10 BOTON BITACORA INICIO -->
+                                <a class="boton_bitacora_inicio" id="boton_bitacora_inicio" href="/conserje_smart/conserje-smart-frontend/php/programa/conserje/inicio_conserje/modulos/bitacora/bitacora.php">
+                                    <svg class="icono_bitacora_inicio" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                                        <path d="M12 7v14M3 18V5a2 2 0 0 1 2-2h3a4 4 0 0 1 4 4 4 4 0 0 1 4-4h3a2 2 0 0 1 2 2v13h-5a4 4 0 0 0-4 2 4 4 0 0 0-4-2H3Z" />
+                                    </svg>
+                                    <span class="texto_bitacora_inicio">Bitácora</span>
+                                    <svg class="flecha_bitacora_inicio" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                                        <path d="m9 5 7 7-7 7" />
+                                    </svg>
+                                </a>
+
+                                <!-- TITULO 11 BOTON PAQUETERIA INICIO -->
+                                <a class="boton_paqueteria_inicio" id="boton_paqueteria_inicio" href="/conserje_smart/conserje-smart-frontend/php/programa/conserje/inicio_conserje/modulos/paqueteria/paqueteria.php">
+                                    <svg class="icono_paqueteria_inicio" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                                        <path d="m3 7 9-4 9 4v10l-9 4-9-4V7Z" />
+                                        <path d="m3 7 9 4 9-4M12 11v10M7.5 5.2 16.5 9.4" />
+                                    </svg>
+                                    <span class="texto_paqueteria_inicio">Paquetería</span>
+                                    <svg class="flecha_paqueteria_inicio" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                                        <path d="m9 5 7 7-7 7" />
+                                    </svg>
+                                </a>
                             </div>
 
-                        <!-- TITULO 10 CONTENEDOR CRONOGRAMA -->
+                        <!-- TITULO 12 CONTENEDOR CRONOGRAMA -->
 
                             <!-- contenedor que recibe cronograma.php -->
                             <div class="contenedor_cronograma" id="contenedor_cronograma">
