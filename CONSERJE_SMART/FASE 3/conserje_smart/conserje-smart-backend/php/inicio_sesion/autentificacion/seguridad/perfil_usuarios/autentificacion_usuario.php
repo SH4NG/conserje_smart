@@ -58,6 +58,39 @@ require_once dirname(__DIR__, 4) . '/base_datos/conexion_postgresql.php';
         // verifica la contraseña contra el hash almacenado
         if (is_string($usuario['contraseña']) && password_verify($contraseña, $usuario['contraseña'])) {
 
+            if ($usuario['rol_usuario'] === 'conserje') {
+                try {
+                    $solicitud = $pdo->prepare(
+                        'SELECT estado FROM solicitud_registro_conserje
+                         WHERE id_usuario_fk = ? AND id_condominio_fk = ?
+                         ORDER BY id_solicitud DESC LIMIT 1'
+                    );
+                    $solicitud->execute([
+                        (int) $usuario['id_usuario'],
+                        (int) $usuario['id_condominio_fk']
+                    ]);
+                    $estadoSolicitud = $solicitud->fetchColumn();
+                } catch (Throwable $error) {
+                    error_log('No se pudo comprobar la autorización de la cuenta de conserje: ' . $error->getMessage());
+                    http_response_code(500);
+                    echo json_encode([
+                        'exito' => false,
+                        'mensaje' => 'No se pudo completar el inicio de sesión.'
+                    ], JSON_UNESCAPED_UNICODE);
+                    exit;
+                }
+
+                if ($estadoSolicitud !== false && $estadoSolicitud !== 'aprobada') {
+                    echo json_encode([
+                        'exito' => false,
+                        'mensaje' => $estadoSolicitud === 'pendiente'
+                            ? 'Tu solicitud de acceso aún está pendiente de aprobación.'
+                            : 'Tu solicitud de acceso no fue aprobada. Contacta al administrador del condominio.'
+                    ], JSON_UNESCAPED_UNICODE);
+                    exit;
+                }
+            }
+
             if (password_needs_rehash($usuario['contraseña'], PASSWORD_DEFAULT)) {
                 $hashActualizado = password_hash($contraseña, PASSWORD_DEFAULT);
                 if ($hashActualizado === false) {

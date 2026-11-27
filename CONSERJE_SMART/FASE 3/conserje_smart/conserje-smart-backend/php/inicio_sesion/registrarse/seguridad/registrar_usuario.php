@@ -1,232 +1,215 @@
 <?php
 
-// TITULO 1 RESPUESTA JSON
-// define el formato de salida del endpoint de registro
 header('Content-Type: application/json; charset=utf-8');
+header('Cache-Control: no-store');
+require_once dirname(__DIR__, 3) . '/programa/admin/inicio_admin/modulos/autorizaciones/backend_autorizaciones/comun_admin.php';
 
-// TITULO 2 RESPONDER REGISTRO
-// devuelve una respuesta uniforme y finaliza la ejecucion del endpoint
-/** @return never */
-function responderRegistro(bool $exito, string $mensaje, int $codigoHttp = 200): void
+if (($_SERVER['REQUEST_METHOD'] ?? '') !== 'POST') {
+    header('Allow: POST');
+    responderAdmin(false, 'Método no permitido.', 405);
+}
+
+function rutRegistroAdmin(string $valor): ?string
 {
-    // establece el codigo HTTP que recibira el navegador
-    http_response_code($codigoHttp);
-    // devuelve el resultado y el mensaje en formato JSON
-    echo json_encode([
-        'exito' => $exito,
-        'mensaje' => $mensaje
-    ], JSON_UNESCAPED_UNICODE);
-    exit;
+    $rut = strtoupper((string) preg_replace('/[.\s-]/u', '', $valor));
+    if (!preg_match('/^([0-9]{1,8})([0-9K])$/D', $rut, $partes) || (int) $partes[1] < 1) {
+        return null;
+    }
+    $base = ltrim($partes[1], '0');
+    $suma = 0;
+    $factor = 2;
+    for ($i = strlen($base) - 1; $i >= 0; $i--) {
+        $suma += (int) $base[$i] * $factor;
+        $factor = $factor === 7 ? 2 : $factor + 1;
+    }
+    $resto = 11 - ($suma % 11);
+    $digito = $resto === 11 ? '0' : ($resto === 10 ? 'K' : (string) $resto);
+    return $partes[2] === $digito ? $base . '-' . $digito : null;
 }
 
-// TITULO 3 VALIDAR METODO
-// permite solamente peticiones POST provenientes del formulario
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    responderRegistro(false, 'Método de solicitud no permitido.', 405);
+$rut = rutRegistroAdmin(textoAdmin('rut', 20, true));
+$nombre = preg_replace('/\s+/u', ' ', textoAdmin('nombre', 100, true));
+$apellido = preg_replace('/\s+/u', ' ', textoAdmin('apellido', 100, true));
+$telefono = textoAdmin('telefono', 32);
+$correo = textoAdmin('correo', 100, true);
+$rol = textoAdmin('rol', 50, true);
+$clave = $_POST['contraseña'] ?? '';
+$condominio = enteroAdmin($_POST['condominio'] ?? null);
+
+if (!$rut) {
+    responderAdmin(false, 'El RUT o su dígito verificador no es válido.', 400, ['campo' => 'rut']);
 }
-
-// TITULO 4 CONEXION BASE DE DATOS
-// establece la conexion PostgreSQL mediante la configuracion del servidor
-require_once dirname(__DIR__, 3) . '/base_datos/conexion_postgresql.php';
-try {
-    $pdo = conectarBasePostgreSQL();
-} catch (Throwable $error) {
-    error_log('No se pudo conectar para registrar un usuario: ' . $error->getMessage());
-    responderRegistro(false, 'No se pudo conectar con la base de datos.', 500);
+foreach (['nombre' => $nombre, 'apellido' => $apellido] as $campo => $valor) {
+    if (!preg_match("/^[\p{L}\p{M}]+(?:[ '\\x{2019}-][\p{L}\p{M}]+)*$/uD", $valor)) {
+        responderAdmin(false, 'El nombre y los apellidos admiten letras, espacios, apóstrofes y guiones.', 400, [
+            'campo' => $campo
+        ]);
+    }
 }
-
-// TITULO 5 RECIBIR DATOS
-// obtiene y limpia los valores enviados por el formulario
-$rut = trim($_POST['rut'] ?? '');
-$nombre = trim($_POST['nombre'] ?? '');
-$apellido = trim($_POST['apellido'] ?? '');
-$telefono = trim($_POST['telefono'] ?? '');
-$correo = trim($_POST['correo'] ?? '');
-$rol = trim($_POST['rol'] ?? '');
-$contraseñaRecibida = $_POST['contraseña'] ?? '';
-$contraseña = is_string($contraseñaRecibida) ? $contraseñaRecibida : '';
-$idCondominio = filter_var($_POST['condominio'] ?? null, FILTER_VALIDATE_INT);
-$rutAdmin = trim($_POST['rut_admin'] ?? '');
-$codigoAuthAdmin = trim($_POST['codigo_auth_admin'] ?? '');
-
-// TITULO 6 VALIDAR CAMPOS OBLIGATORIOS
-// comprueba que todos los datos necesarios hayan sido enviados
-if (
-    $rut === '' ||
-    $nombre === '' ||
-    $apellido === '' ||
-    $correo === '' ||
-    $rol === '' ||
-    $contraseña === '' ||
-    $rutAdmin === '' ||
-    $codigoAuthAdmin === '' ||
-    $idCondominio === false ||
-    $idCondominio === null ||
-    $idCondominio < 1
-) {
-    responderRegistro(false, 'Faltan datos obligatorios por ingresar.', 400);
-}
-
-// valida el formato general del correo recibido
-if (!filter_var($correo, FILTER_VALIDATE_EMAIL)) {
-    responderRegistro(false, 'El correo electrónico no es válido.', 400);
-}
-
-// TITULO 7 VALIDAR ROL
-// limita el registro a los roles definidos por el sistema
-$rolesPermitidos = ['admin', 'conserje', 'residente'];
-if (!in_array($rol, $rolesPermitidos, true)) {
-    responderRegistro(false, 'El rol seleccionado no es válido.', 400);
-}
-
-// TITULO 8 VALIDAR LONGITUDES
-// evita superar los tamaños definidos en la estructura de la base de datos
-if (
-    mb_strlen($rut) > 20 ||
-    mb_strlen($nombre) > 100 ||
-    mb_strlen($apellido) > 100 ||
-    mb_strlen($telefono) > 20 ||
-    mb_strlen($correo) > 100 ||
-    mb_strlen($rol) > 50 ||
-    mb_strlen($rutAdmin) > 20 ||
-    mb_strlen($codigoAuthAdmin) > 255
-) {
-    responderRegistro(false, 'Uno o más datos superan la longitud permitida.', 400);
-}
-
-if (
-    mb_strlen($contraseña, 'UTF-8') < 8 ||
-    strlen($contraseña) > 72 ||
-    !preg_match('/[A-Z]/', $contraseña) ||
-    !preg_match('/[a-z]/', $contraseña) ||
-    !preg_match('/\d/', $contraseña)
-) {
-    responderRegistro(false, 'La contraseña debe tener al menos 8 caracteres, máximo 72 bytes UTF-8 e incluir mayúscula, minúscula y número.', 400);
-}
-
-// TITULO 9 VALIDAR CONDOMINIO
-// comprueba que el id recibido exista en la tabla condominio
-$consultaCondominio = $pdo->prepare(
-    'SELECT id_condominio FROM condominio WHERE id_condominio = ?'
-);
-
-try {
-    $consultaCondominio->execute([$idCondominio]);
-} catch (PDOException $error) {
-    error_log('No se pudo validar el condominio del registro: ' . $error->getMessage());
-    responderRegistro(false, 'No se pudo validar el condominio.', 500);
-}
-
-if (!$consultaCondominio->fetchColumn()) {
-    responderRegistro(false, 'El condominio seleccionado no existe.', 400);
-}
-
-// TITULO 10 VALIDAR AUTORIZACION DEL ADMINISTRADOR
-// acepta solo un administrador del mismo condominio con RUT y código coincidentes
-$rutAdminNormalizado = strtoupper((string) preg_replace('/[^0-9kK]/', '', $rutAdmin));
-$consultaAdmin = $pdo->prepare(
-    'SELECT rut_usuario, codigo_auth_usuario
-     FROM usuario
-     WHERE id_condominio_fk = ? AND rol_usuario = \'admin\''
-);
-
-try {
-    $consultaAdmin->execute([$idCondominio]);
-    $administradores = $consultaAdmin->fetchAll();
-} catch (PDOException $error) {
-    error_log('No se pudo validar la autorización del administrador: ' . $error->getMessage());
-    responderRegistro(false, 'No se pudo validar la autorización del administrador.', 500);
-}
-
-$adminAutorizado = false;
-
-foreach ($administradores as $administrador) {
-    $rutGuardadoNormalizado = strtoupper(
-        (string) preg_replace('/[^0-9kK]/', '', $administrador['rut_usuario'])
-    );
-
+if ($telefono !== '') {
     if (
-        $rutAdminNormalizado !== '' &&
-        hash_equals($rutGuardadoNormalizado, $rutAdminNormalizado) &&
-        hash_equals($administrador['codigo_auth_usuario'], $codigoAuthAdmin)
+        !preg_match('/^[+0-9\s().-]+$/uD', $telefono) ||
+        substr_count($telefono, '+') > 1 ||
+        (strpos($telefono, '+') !== false && $telefono[0] !== '+')
     ) {
-        $adminAutorizado = true;
-        break;
+        responderAdmin(false, 'El teléfono no tiene un formato válido.', 400, ['campo' => 'telefono']);
     }
-}
-
-if (!$adminAutorizado) {
-    responderRegistro(false, 'El RUT o el código no corresponde a un administrador de este condominio.', 403);
-}
-
-// TITULO 11 VALIDAR DUPLICADOS
-// comprueba que el RUT y el correo no esten registrados
-$consultaDuplicado = $pdo->prepare(
-    'SELECT rut_usuario, correo FROM usuario WHERE rut_usuario = ? OR correo = ? LIMIT 1'
-);
-
-try {
-    $consultaDuplicado->execute([$rut, $correo]);
-    $usuarioDuplicado = $consultaDuplicado->fetch();
-} catch (PDOException $error) {
-    error_log('No se pudo comprobar si el usuario ya existe: ' . $error->getMessage());
-    responderRegistro(false, 'No se pudieron validar los datos del usuario.', 500);
-}
-
-if ($usuarioDuplicado !== false) {
-    if ($usuarioDuplicado['rut_usuario'] === $rut) {
-        responderRegistro(false, 'El RUT ya está registrado.', 409);
+    $digitos = preg_replace('/\D/', '', $telefono);
+    if ($telefono[0] !== '+' && preg_match('/^[0-9]{8}$/D', $digitos)) {
+        $digitos = '569' . $digitos;
+    } elseif ($telefono[0] !== '+' && preg_match('/^[2-9][0-9]{8}$/D', $digitos)) {
+        $digitos = '56' . $digitos;
     }
-
-    responderRegistro(false, 'El correo ya está registrado.', 409);
+    if (!preg_match('/^56[2-9][0-9]{8}$/D', $digitos)) {
+        responderAdmin(false, 'Ingresa un teléfono chileno de 9 dígitos o con prefijo +56.', 400, [
+            'campo' => 'telefono'
+        ]);
+    }
+    $telefono = '+' . $digitos;
 }
-
-// TITULO 12 GENERAR CODIGO DE AUTENTICACION
-// crea un codigo aleatorio para identificar el registro
-$codigoAuth = bin2hex(random_bytes(32));
-$hashContraseña = password_hash($contraseña, PASSWORD_DEFAULT);
-
-if ($hashContraseña === false) {
-    responderRegistro(false, 'No se pudo proteger la contraseña del usuario.', 500);
-}
-
-// TITULO 13 INSERTAR USUARIO
-// inicia una transaccion para mantener consistente el registro
-try {
-    $pdo->beginTransaction();
-    $insertarUsuario = $pdo->prepare(
-        'INSERT INTO usuario
-            (rut_usuario, nombre_usuario, apellido_usuario, telefono_usuario, correo, rol_usuario, codigo_auth_usuario, contraseña, id_condominio_fk)
-         VALUES (?, ?, ?, NULLIF(?, \'\'), ?, ?, ?, ?, ?)
-         RETURNING id_usuario'
-    );
-    $insertarUsuario->execute([
-        $rut,
-        $nombre,
-        $apellido,
-        $telefono,
-        $correo,
-        $rol,
-        $codigoAuth,
-        $hashContraseña,
-        $idCondominio
+if (
+    !is_string($clave) ||
+    mb_strlen($clave, 'UTF-8') < 8 ||
+    strlen($clave) > 72 ||
+    strpos($clave, "\0") !== false ||
+    !preg_match('/\p{Lu}/u', $clave) ||
+    !preg_match('/\p{Ll}/u', $clave) ||
+    !preg_match('/[0-9]/', $clave)
+) {
+    responderAdmin(false, 'La contraseña necesita al menos 8 caracteres, una mayúscula, una minúscula y un número.', 400, [
+        'campo' => 'contraseña'
     ]);
-
-    $idUsuario = (int) $insertarUsuario->fetchColumn();
-    $pdo->commit();
-} catch (PDOException $error) {
-    if ($pdo->inTransaction()) {
-        $pdo->rollBack();
-    }
-    error_log('No se pudo registrar el usuario: ' . $error->getMessage());
-    if ($error->getCode() === '23505') {
-        responderRegistro(false, 'El RUT o el correo ya está registrado.', 409);
-    }
-    responderRegistro(false, 'No se pudo registrar el usuario.', 500);
+}
+if (
+    !filter_var($correo, FILTER_VALIDATE_EMAIL) ||
+    !in_array($rol, ['admin', 'conserje', 'residente'], true) ||
+    ($rol !== 'conserje' && !$condominio)
+) {
+    responderAdmin(false, 'Revisa correo, rol y condominio.', 400);
 }
 
-// TITULO 14 RESPUESTA EXITOSA
-// informa al navegador que el usuario fue registrado
-responderRegistro(true, 'Usuario registrado correctamente.');
+$bd = null;
+try {
+    $bd = abrirBaseAdmin();
+    $bd->beginTransaction();
+    $invitacion = null;
+    if ($rol === 'conserje') {
+        $token = textoAdmin('token_invitacion', 64, true);
+        $invitacion = consultarInvitacionAdmin($bd, $token, true);
+        $condominioAsignado = (int) $invitacion['id_condominio_fk'];
+        if ($condominio && $condominio !== $condominioAsignado) {
+            $bd->rollBack();
+            responderAdmin(false, 'El condominio lo fija la invitación del administrador. No puedes cambiarlo.', 400);
+        }
+        $condominio = $condominioAsignado;
+    }
 
-?>
+    $existeCondominio = consultarAdmin(
+        $bd,
+        'SELECT 1 FROM condominio WHERE id_condominio = ?',
+        [$condominio]
+    )->fetchColumn();
+    if ($existeCondominio === false) {
+        $bd->rollBack();
+        responderAdmin(false, 'El condominio no existe.', 400);
+    }
+
+    if ($rol !== 'conserje') {
+        $rutAdmin = rutRegistroAdmin(textoAdmin('rut_admin', 20, true));
+        $codigo = textoAdmin('codigo_auth_admin', 255, true);
+        if (!$rutAdmin) {
+            $bd->rollBack();
+            responderAdmin(false, 'El RUT o su dígito verificador no es válido.', 400, ['campo' => 'rut']);
+        }
+        $autorizador = consultarAdmin(
+            $bd,
+            "SELECT codigo_auth_usuario
+             FROM usuario
+             WHERE rol_usuario = 'admin' AND id_condominio_fk = ?
+               AND upper(regexp_replace(rut_usuario, '[.[:space:]-]', '', 'g')) = ?",
+            [$condominio, str_replace('-', '', $rutAdmin)]
+        )->fetchColumn();
+        $autorizador = is_string($autorizador) ? $autorizador : '';
+        $esHash = password_get_info($autorizador)['algoName'] !== 'unknown';
+        $autorizado = $autorizador !== '' &&
+            ($esHash ? password_verify($codigo, $autorizador) : hash_equals($autorizador, $codigo));
+        unset($codigo, $autorizador);
+        if (!$autorizado) {
+            $bd->rollBack();
+            responderAdmin(false, 'La autorización del administrador del condominio no es válida.', 403);
+        }
+    }
+
+    $duplicado = consultarAdmin(
+        $bd,
+        "SELECT 1 FROM usuario
+         WHERE correo = ?
+            OR upper(regexp_replace(rut_usuario, '[.[:space:]-]', '', 'g')) = ?
+         LIMIT 1",
+        [$correo, str_replace('-', '', $rut)]
+    )->fetchColumn();
+    if ($duplicado !== false) {
+        $bd->rollBack();
+        responderAdmin(false, 'El RUT o correo ya está registrado.', 409);
+    }
+
+    $hash = password_hash($clave, PASSWORD_BCRYPT);
+    if ($hash === false) {
+        $bd->rollBack();
+        responderAdmin(false, 'No se pudo proteger la contraseña del usuario.', 500);
+    }
+    $codigoAuth = bin2hex(random_bytes(32));
+    $idUsuario = (int) consultarAdmin(
+        $bd,
+        "INSERT INTO usuario
+            (rut_usuario, nombre_usuario, apellido_usuario, telefono_usuario, correo,
+             rol_usuario, codigo_auth_usuario, contraseña, id_condominio_fk)
+         VALUES (?, ?, ?, NULLIF(?, ''), ?, ?, ?, ?, ?)
+         RETURNING id_usuario",
+        [$rut, $nombre, $apellido, $telefono, $correo, $rol, $codigoAuth, $hash, $condominio]
+    )->fetchColumn();
+
+    if ($rol === 'conserje') {
+        consultarAdmin(
+            $bd,
+            "INSERT INTO solicitud_registro_conserje
+                (id_usuario_fk, id_condominio_fk, id_invitacion_fk, estado)
+             VALUES (?, ?, ?, 'pendiente')",
+            [$idUsuario, $condominio, (int) $invitacion['id_invitacion']]
+        );
+        $actualizarInvitacion = consultarAdmin(
+            $bd,
+            "UPDATE invitacion_conserje
+             SET estado = 'usada', id_usuario_fk = ?, usada_en = timezone('UTC', now())
+             WHERE id_invitacion = ? AND id_condominio_fk = ?
+                AND estado = 'activa' AND vence_en > timezone('UTC', now())",
+            [$idUsuario, (int) $invitacion['id_invitacion'], $condominio]
+        );
+        if ($actualizarInvitacion->rowCount() !== 1) {
+            $bd->rollBack();
+            responderAdmin(false, 'La invitación ya no está vigente. Solicita otra al administrador.', 410);
+        }
+    }
+
+    $bd->commit();
+    responderAdmin(
+        true,
+        $rol === 'conserje'
+            ? 'Solicitud enviada. Podrás iniciar sesión cuando el administrador de tu condominio la apruebe.'
+            : 'Usuario registrado correctamente.',
+        201,
+        ['estado' => $rol === 'conserje' ? 'pendiente' : 'activo', 'correo' => $correo]
+    );
+} catch (Throwable $error) {
+    if ($bd instanceof PDO && $bd->inTransaction()) {
+        $bd->rollBack();
+    }
+    if ($error instanceof PDOException && $error->getCode() === '23505') {
+        responderAdmin(false, 'El RUT o correo ya está registrado.', 409);
+    }
+    if ($error instanceof PDOException && $error->getCode() === '23503') {
+        responderAdmin(false, 'El condominio o la invitación ya no están disponibles.', 409);
+    }
+    error_log('Registro de usuario: ' . $error->getMessage());
+    responderAdmin(false, 'No se pudo registrar la solicitud. Comprueba la conexión y la migración de Administración.', 503);
+}
