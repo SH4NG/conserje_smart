@@ -1,2 +1,27 @@
-/* TITULO CONDOMINIO REGISTRAR */
-/* sin diseño */
+/* TITULO 1 CONDOMINIO REGISTRAR */
+.registro .condominio_registrar:disabled {
+    border-color: #cbdcd5;
+}
+
+/* TITULO 2 ESTADO INVITACION REGISTRO */
+.estado_invitacion_registro {
+    margin: .7rem 0 0;
+    padding: .8rem .9rem;
+    border: 1px solid #e6d9a8;
+    border-radius: .7rem;
+    color: #725916;
+    background: #fff9e8;
+    font-size: .78rem;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+}
+.estado_invitacion_registro[data-estado="ok"] {
+    border-color: #c3ddcc;
+    color: #245e3d;
+    background: #eff8f2;
+}
+.estado_invitacion_registro[data-estado="error"] {
+    border-color: #edc9c4;
+    color: #9d3429;
+    background: #fff3f1;
+}

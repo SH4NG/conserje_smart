@@ -1,2 +1,9 @@
-/* TITULO ROL REGISTRAR */
-/* sin diseño */
+/* TITULO 1 ROL REGISTRAR */
+.registro .rol_registrar {
+    cursor: pointer;
+}
+
+/* TITULO 2 PERFIL FIJADO POR INVITACION */
+.registro .rol_registrar:disabled {
+    border-color: #cbdcd5;
+}

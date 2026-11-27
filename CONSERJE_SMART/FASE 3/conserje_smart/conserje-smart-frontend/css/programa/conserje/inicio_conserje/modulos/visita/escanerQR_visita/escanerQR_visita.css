@@ -1,9 +1,9 @@
 /* TITULO 1 CONTENEDOR ESCANER VISITA */
 .contenedor_escaner_visita {
-    margin-bottom: 2.667vh;
-    padding: 2.667vh;
-    border: 0.111vh solid #e4e7eb;
-    border-radius: 2.222vh;
+    margin-bottom: 1.5rem;
+    padding: 1.5rem;
+    border: 1px solid #e4e7eb;
+    border-radius: 1.25rem;
     background: #fff;
     box-shadow: var(--sombra-tarjeta-visita);
 }
@@ -14,45 +14,45 @@
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
-    gap: 1.778vh;
+    gap: 1rem;
 }
 
 /* TITULO 3 ACCIONES ESCANER VISITA */
 .acciones_escaner_visita {
     display: flex;
     flex-wrap: wrap;
-    gap: 1.156vh;
+    gap: .65rem;
 }
 
 /* TITULO 4 INSTRUCCIONES ESCANER VISITA */
 .instrucciones_escaner_visita {
     color: var(--color-texto-secundario);
-    font-size: 1.511vh;
+    font-size: .85rem;
     line-height: 1.7;
-    margin: 1.778vh 0;
+    margin: 1rem 0;
 }
 
 /* TITULO 5 VISOR ESCANER VISITA */
 .visor_escaner_visita {
     position: relative;
-    width: min(100%, 60vh);
+    width: min(100%, 540px);
     margin: 0 auto;
     overflow: hidden;
-    border-radius: 1.778vh;
+    border-radius: 1rem;
 }
 
 .visor_escaner_visita:has(video:not([hidden])) {
-    margin: 1.778vh auto;
+    margin: 1rem auto;
     background: #131b23;
-    border: 0.111vh solid #283441;
+    border: 1px solid #283441;
 }
 
 .visor_escaner_visita:has(video:not([hidden]))::after {
     content: '';
     position: absolute;
     inset: 18%;
-    border: 0.222vh solid #e5ba31d9;
-    border-radius: 1.6vh;
+    border: 2px solid #e5ba31d9;
+    border-radius: .9rem;
     box-shadow: 0 0 0 100vmax #00000018;
     pointer-events: none;
 }
@@ -73,10 +73,10 @@
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 1.778vh;
-    padding: 1.333vh;
-    margin-bottom: 1.778vh;
-    border-radius: 1.333vh;
+    gap: 1rem;
+    padding: .75rem;
+    margin-bottom: 1rem;
+    border-radius: .75rem;
     background: #f6f8fa;
 }
 
@@ -85,23 +85,23 @@
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    gap: 1.333vh;
+    gap: .75rem;
     max-width: 100%;
-    font-size: 1.511vh;
+    font-size: .85rem;
 }
 
 #zoom_camara_visita {
-    width: 17.778vh;
+    width: 160px;
     max-width: 100%;
-    min-height: 4.889vh;
+    min-height: 44px;
     accent-color: #896900;
 }
 
 /* TITULO 9 AJUSTES PARA PANTALLAS MOVILES */
-@media (max-width: 768px) {
+@media (max-width: 650px) {
     .contenedor_escaner_visita {
-        padding: 2.222vh;
-        border-radius: 1.778vh;
+        padding: 1.25rem;
+        border-radius: 1rem;
     }
 
     .encabezado_escaner_visita {

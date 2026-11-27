@@ -1,2 +1,24 @@
-/* TITULO TITULO REGISTRAR */
-/* sin diseño */
+/* TITULO 1 TITULO REGISTRAR */
+.titulo_registrar h1 {
+    margin: .55rem 0 .65rem;
+    color: #20272e;
+    font-size: clamp(1.7rem, 4vw, 2.2rem);
+    line-height: 1.2;
+    letter-spacing: -.04em;
+}
+.titulo_registrar p {
+    max-width: 58ch;
+    margin: 0;
+    color: #697681;
+    font-size: .9rem;
+    line-height: 1.65;
+}
+
+/* TITULO 2 ETIQUETA REGISTRAR */
+.etiqueta_registrar {
+    color: #826514;
+    font-size: .68rem;
+    font-weight: 800;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}

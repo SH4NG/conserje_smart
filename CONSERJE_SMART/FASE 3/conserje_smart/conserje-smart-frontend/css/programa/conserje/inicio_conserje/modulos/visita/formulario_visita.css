@@ -2,11 +2,11 @@
 .contenedor_formulario_visita {
     display: flex;
     flex-direction: column;
-    gap: 2.222vh;
-    margin-bottom: 2.667vh;
-    padding: 3.111vh;
-    border: 0.111vh solid #e4e7eb;
-    border-radius: 2.222vh;
+    gap: 1.25rem;
+    margin-bottom: 1.5rem;
+    padding: 1.75rem;
+    border: 1px solid #e4e7eb;
+    border-radius: 1.25rem;
     background: #fff;
     box-shadow: var(--sombra-tarjeta-visita);
 }
@@ -16,51 +16,51 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 1.778vh;
-    padding-bottom: 1.778vh;
-    border-bottom: 0.111vh solid #edf0f3;
+    gap: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #edf0f3;
 }
 
 /* TITULO 3 BADGE ESTADO VISITA */
 .badge_estado_visita {
     flex-shrink: 0;
-    padding: 0.711vh 1.244vh;
-    border: 0.111vh solid #e5ba315e;
-    border-radius: 3.556vh;
+    padding: .4rem .7rem;
+    border: 1px solid #e5ba315e;
+    border-radius: 2rem;
     background: #fff9e6;
     color: #775b00;
-    font-size: 1.244vh;
+    font-size: .7rem;
     font-weight: 700;
 }
 
 /* TITULO 4 AYUDA FORMULARIO VISITA */
 .ayuda_formulario_visita {
-    margin: -0.622vh 0 0;
+    margin: -.35rem 0 0;
     color: var(--color-texto-secundario);
-    font-size: 1.511vh;
+    font-size: .85rem;
 }
 
 /* TITULO 5 FORMULARIO VISITA */
 .formulario_visita {
     display: flex;
     flex-direction: column;
-    gap: 2.311vh;
+    gap: 1.3rem;
 }
 
 /* TITULO 6 GRUPO CAMPOS VISITA */
 .grupo_campos_visita {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 2.133vh;
+    gap: 1.2rem;
 }
 
 /* TITULO 7 CAMPO VISITA */
 .campo_visita {
     display: flex;
     flex-direction: column;
-    gap: 0.889vh;
+    gap: .5rem;
     min-width: 0;
-    font-size: 1.458vh;
+    font-size: .82rem;
     font-weight: 700;
 }
 
@@ -70,32 +70,32 @@
 
 .campo_visita > span small {
     color: #707983;
-    font-size: 1.244vh;
+    font-size: .7rem;
     font-weight: 400;
-    margin-left: 0.533vh;
+    margin-left: .3rem;
 }
 
 /* TITULO 8 CAMPOS DE ENTRADA DEL FORMULARIO VISITA */
 .campo_visita input, .campo_visita select, .campo_visita textarea {
     width: 100%;
-    min-height: 5.333vh;
-    padding: 1.422vh 1.6vh;
-    border: 0.111vh solid var(--color-borde);
-    border-radius: 1.244vh;
+    min-height: 48px;
+    padding: .8rem .9rem;
+    border: 1px solid var(--color-borde);
+    border-radius: .7rem;
     background: #fafbfc;
     color: var(--color-negro-texto);
-    font: 1.778vh var(--fuente-principal);
+    font: 1rem var(--fuente-principal);
     transition: border-color .18s, background .18s, box-shadow .18s;
 }
 
 .campo_visita input::placeholder, .campo_visita textarea::placeholder {
     color: #7a838d;
-    font-size: 1.511vh;
+    font-size: .85rem;
 }
 
 /* TITULO 9 AREA DE OBSERVACIONES DE VISITA */
 .campo_visita textarea {
-    min-height: 11.667vh;
+    min-height: 105px;
     resize: vertical;
     line-height: 1.6;
 }
@@ -109,7 +109,7 @@
 .campo_visita input:focus, .campo_visita select:focus, .campo_visita textarea:focus {
     border-color: #b28b18;
     background: #fff;
-    box-shadow: 0 0 0 0.333vh #e5ba311a;
+    box-shadow: 0 0 0 3px #e5ba311a;
 }
 
 /* TITULO 12 IDENTIDAD RECUPERADA DE VISITA */
@@ -121,15 +121,15 @@
 
 .origen_nombre_visitante {
     color: #576c60;
-    font-size: 1.298vh;
+    font-size: .73rem;
     line-height: 1.5;
     font-weight: 400;
 }
 
 #corregir_nombre_visitante {
     align-self: flex-start;
-    padding: 0.889vh 1.333vh;
-    font-size: 1.28vh;
+    padding: .5rem .75rem;
+    font-size: .72rem;
 }
 
 /* TITULO 13 CAMPOS DE VISITA CON DATOS INVALIDOS */
@@ -147,19 +147,19 @@
 .acciones_formulario_visita {
     display: flex;
     justify-content: flex-end;
-    gap: 1.333vh;
-    padding-top: 0.711vh;
+    gap: .75rem;
+    padding-top: .4rem;
 }
 
 .acciones_formulario_visita .boton_principal_visita {
-    min-width: 18.889vh;
+    min-width: 170px;
 }
 
 /* TITULO 16 AJUSTES PARA PANTALLAS MOVILES */
-@media (max-width: 768px) {
+@media (max-width: 650px) {
     .contenedor_formulario_visita {
-        padding: 2.222vh;
-        border-radius: 1.778vh;
+        padding: 1.25rem;
+        border-radius: 1rem;
     }
 
     .encabezado_formulario_visita {
@@ -168,7 +168,7 @@
 
     .grupo_campos_visita {
         grid-template-columns: 1fr;
-        gap: 1.956vh;
+        gap: 1.1rem;
     }
 
     .acciones_formulario_visita {

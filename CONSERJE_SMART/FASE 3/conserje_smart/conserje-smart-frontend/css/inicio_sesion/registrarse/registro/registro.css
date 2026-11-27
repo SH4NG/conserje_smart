@@ -1,111 +1,225 @@
 /* TITULO 1 REGISTRO */
-/* organiza la tarjeta principal del formulario */
 .registro {
-    width: 38vw;
-    min-height: 58vh;
-    margin: 0 auto;
-    padding: 4vh 3vw;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #ffffff;
-    border-radius: 1vw;
-    box-shadow: 0 1vh 2vw rgba(0, 0, 0, 0.14);
-    gap: 1.2vh;
+    width: min(100%, 860px);
+    margin: 0;
+    padding: clamp(1.3rem, 4vw, 2.5rem);
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem 1.5rem;
+    border: 1px solid #e5e8ec;
+    border-top: 4px solid #e5ba31;
+    border-radius: 1.4rem;
+    background: #fff;
+    box-shadow: 0 18px 60px #18263118;
+    animation: entrada_registro .45s ease-out both;
+}
+.registro > div {
+    min-width: 0;
+}
+.registro .contenedor_titulo_registrar,
+.registro .progreso_registro,
+.registro .contenedor_contraseña_registrar,
+.registro .contenedor_boton_registrar {
+    grid-column: 1 / -1;
 }
 
-.registro > div:not(.ventana_emergente) {
-    width: 100%;
-}
-
-.titulo_registrar {
-    margin-bottom: 1vh;
-    color: #1a1a1a;
-    font-size: 1.5vw;
+/* TITULO 2 CAMPOS DEL REGISTRO */
+.registro label {
+    display: block;
+    margin-bottom: .5rem;
+    font-size: .86rem;
     font-weight: 700;
-    text-align: center;
+    color: #35424d;
 }
-
 .registro input,
 .registro select {
+    display: block;
     width: 100%;
-    min-height: 5vh;
-    padding: 1vh 1vw;
-    border: 0.1vw solid #d8dadd;
-    border-radius: 0.6vw;
-    background: #ffffff;
-    color: #1a1a1a;
+    min-width: 0;
+    min-height: 48px;
+    padding: .8rem .9rem;
+    border: 1px solid #dbe1e6;
+    border-radius: .7rem;
+    background: #f9fafb;
+    color: #20272e;
     font: inherit;
-    font-size: 0.9vw;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    font-size: 1rem;
+    transition: border-color .18s, background .18s, box-shadow .18s;
 }
-
 .registro input::placeholder {
-    color: #757a80;
+    color: #87919b;
 }
-
 .registro input:focus,
 .registro select:focus {
     outline: none;
-    border-color: #e5ba31;
-    box-shadow: 0 0 0 0.25vw rgba(229, 186, 49, 0.2);
+    border-color: #c59c20;
+    background: #fff;
+    box-shadow: 0 0 0 3px #e5ba3129;
+}
+.registro [aria-invalid="true"] {
+    border-color: #b9473a;
+    box-shadow: 0 0 0 3px #b9473a12;
+}
+.registro :disabled {
+    cursor: not-allowed;
+}
+.registro input:disabled,
+.registro select:disabled {
+    opacity: 1;
+    background: #edf2f2;
+    color: #405c55;
+}
+.ayuda_campo_registro {
+    display: block;
+    margin-top: .45rem;
+    color: #697681;
+    font-size: .75rem;
+    line-height: 1.6;
+}
+.error_campo_registro {
+    margin: .45rem 0 0;
+    color: #a3362b;
+    font-size: .79rem;
+    line-height: 1.5;
+    animation: entrada_registro .18s ease-out;
 }
 
-.boton_registrar {
-    width: 100%;
-    min-height: 5.5vh;
-    border: none;
-    border-radius: 0.6vw;
-    background: #e5ba31;
-    color: #1a1a1a;
-    font: inherit;
-    font-size: 0.95vw;
-    font-weight: 700;
-    cursor: pointer;
-    transition: background-color 0.2s ease, transform 0.2s ease;
+/* TITULO 3 PROGRESO REGISTRO */
+.progreso_registro {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-bottom: 1.2rem;
+    border-bottom: 1px solid #edf0f3;
+    color: #697681;
+    font-size: .75rem;
+}
+.progreso_registro progress {
+    width: 140px;
+    height: 6px;
+    border: 0;
+    border-radius: 10px;
+    background: #edf0f3;
+    accent-color: #ba9116;
+}
+.progreso_registro progress::-webkit-progress-bar {
+    border-radius: 10px;
+    background: #edf0f3;
+}
+.progreso_registro progress::-webkit-progress-value {
+    border-radius: 10px;
+    background: #d8ad28;
+    transition: width .25s ease;
 }
 
-.boton_registrar:hover {
-    background: #d6aa20;
-    transform: translateY(-0.2vh);
+/* TITULO 4 MENSAJES Y ACCESO AL LOGIN */
+.mensaje_registro {
+    padding: 1rem;
+    margin: 1rem 0 0;
+    border: 1px solid #edc9c4;
+    border-radius: .8rem;
+    background: #fff3f1;
+    color: #9d3429;
+    font-size: .86rem;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+    animation: entrada_registro .25s ease-out;
+}
+.mensaje_registro[data-estado="info"] {
+    border-color: #e5d597;
+    background: #fff9e8;
+    color: #725916;
+}
+.mensaje_registro[data-estado="exito"] {
+    border-color: #badbc9;
+    background: #eff9f3;
+    color: #20613e;
+}
+.acceso_login_registro {
+    display: block;
+    width: fit-content;
+    margin: 1rem auto 0;
+    color: #5e4c18;
+    font-size: .85rem;
+    text-underline-offset: 4px;
+}
+.acceso_login_registro:focus-visible {
+    outline: 2px solid #b79022;
+    outline-offset: 5px;
 }
 
-/* TITULO 2 VENTANA EMERGENTE */
-/* define la apariencia general del dialogo de autorización */
+/* TITULO 5 VENTANA EMERGENTE */
 .ventana_emergente {
-    width: 38vw;
-    padding: 2.5vh 2vw;
-    border: none;
-    border-radius: 1vw;
-    box-shadow: 0 0.4vw 1.6vw rgba(0, 0, 0, 0.25);
+    width: min(92vw, 510px);
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 1.8rem;
+    border: 1px solid #e5dcb6;
+    border-radius: 1.2rem;
+    color: #20272e;
+    background: #fff;
+    box-shadow: 0 24px 90px #111d2f40;
 }
-
-/* TITULO 3 FONDO VENTANA EMERGENTE */
-/* oscurece el contenido de fondo mientras el dialogo esta abierto */
+.ventana_emergente[open] {
+    animation: entrada_registro .2s ease-out;
+}
 .ventana_emergente::backdrop {
-    background-color: rgba(0, 0, 0, 0.45);
+    background: #14233288;
 }
 
-@media (orientation: portrait) {
+/* TITULO 6 ANIMACION DE ENTRADA */
+@keyframes entrada_registro {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* TITULO 7 REGISTRO EN MOVIL */
+@media (max-width: 600px) {
     .registro {
-        width: 88vw;
-        min-height: auto;
-        padding: 4vh 6vw;
-        border-radius: 2vw;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 1.15rem;
+        border-radius: 1.1rem;
     }
+    .progreso_registro {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: .6rem;
+    }
+    .progreso_registro progress {
+        width: 100%;
+    }
+}
 
-    .titulo_registrar {
-        font-size: 3vw;
+/* TITULO 8 RESPETAR EL MOVIMIENTO REDUCIDO */
+@media (prefers-reduced-motion: reduce) {
+    .pagina_registrarse *,
+    .pagina_registrarse *::before,
+    .pagina_registrarse *::after {
+        animation: none !important;
+        transition: none !important;
     }
+}
 
-    .registro input,
-    .registro select,
-    .boton_registrar {
-        font-size: 2vw;
-    }
-
-    .ventana_emergente {
-        width: 84vw;
-    }
+/* TITULO 9 CAMPOS PERSONALES REVISADOS */
+.registro input[data-validado="true"] {
+    border-color: #a5cbb5;
+    background: #fbfefc;
+}
+.registro input[data-validado="true"]:focus {
+    border-color: #5d9978;
+    box-shadow: 0 0 0 3px #5d997818;
+}
+.registro input:hover:not(:focus):not(:disabled),
+.registro select:hover:not(:focus):not(:disabled) {
+    border-color: #b6c1ca;
+}
+.registro_enviado .mensaje_registro {
+    scroll-margin-top: 1rem;
 }

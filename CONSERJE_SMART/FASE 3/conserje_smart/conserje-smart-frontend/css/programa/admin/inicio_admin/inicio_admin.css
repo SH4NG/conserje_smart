@@ -1,28 +1,730 @@
-<?php
-// inicia o reanuda la sesion existente
-session_start();
-
-// comprueba si la variable de estado no existe o no esta iniciada
-if (!isset($_SESSION['estado']) || $_SESSION['estado'] !== 'sesion_iniciada') {
-    
-    // destruye cualquier resto de sesion residual
-    session_destroy();
-    
-    // redirige inmediatamente al formulario de login si intentan entrar a la fuerza
-    header("Location: /conserje_smart/conserje-smart-frontend/php/inicio_sesion/inicio_sesion.php");
-    exit;
+/* TITULO 1 VARIABLES DE COLOR DEL ADMINISTRADOR */
+.modo_admin {
+    --amarillo-admin: #e5ba31;
+    --texto-admin: #20272e;
+    --secundario-admin: #626e79;
+    --borde-admin: #e0e5ea;
+    --sombra-admin: 0 10px 32px #17212d09;
+    margin: 0;
+    min-height: 100vh;
+    /* TITULO FONDO INICIO ADMIN */
+    background-color: #f4f6f8;
+    background-image: linear-gradient(rgba(244, 246, 248, .65), rgba(244, 246, 248, .8)),
+        url('/conserje_smart/conserje-smart-frontend/imagenes/programa/admin/inicio_admin/inicio_admin.png');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: var(--texto-admin);
+    font-family: 'Syne', system-ui, sans-serif;
 }
-?>
+
+.modo_admin * {
+    box-sizing: border-box;
+}
+
+.modo_admin .cabecera {
+    padding: 1.1rem max(3vw, 1rem);
+}
+
+.modo_admin .contenedor_logo_cabecera {
+    width: clamp(150px, 18vw, 230px);
+}
+
+.modo_admin .cabecera_programa {
+    gap: 1rem;
+    font-size: .9rem;
+}
+
+.modo_admin .cabecera_cerrar_sesion {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    padding: .6rem 1rem;
+}
 
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    HOLA ADMIN
-</body>
-</html>
+/* TITULO 2 PAGINA ADMIN */
+.pagina_admin {
+    width: min(94%, 1360px);
+    margin: 2rem auto;
+    line-height: 1.55;
+}
+
+.pagina_admin [hidden] {
+    display: none !important;
+}
+
+.pagina_admin h1, .pagina_admin h2, .pagina_admin h3 {
+    margin: 0;
+    line-height: 1.25;
+    letter-spacing: -.035em;
+}
+
+.pagina_admin h1 {
+    font-size: clamp(1.7rem, 2.6vw, 2.6rem);
+}
+
+.pagina_admin h2 {
+    font-size: clamp(1.15rem, 1.7vw, 1.5rem);
+}
+
+
+/* TITULO 3 CABECERA ADMIN */
+.cabecera_admin {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+    padding: 1.8rem 2rem;
+    border: 1px solid #ead897;
+    border-left: 5px solid var(--amarillo-admin);
+    border-radius: 1.15rem;
+    background: linear-gradient(110deg, #fff 60%, #fffbec);
+    box-shadow: var(--sombra-admin);
+}
+
+.titulos_cabecera_admin p {
+    margin: .6rem 0 0;
+    color: var(--secundario-admin);
+    font-size: .95rem;
+}
+
+.etiqueta_admin {
+    display: block;
+    margin-bottom: .6rem;
+    color: #806317;
+    font-size: .7rem;
+    font-weight: 800;
+    letter-spacing: .13em;
+    text-transform: uppercase;
+}
+
+.fecha_cabecera_admin {
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+    gap: .7rem;
+    font-size: .8rem;
+    color: var(--secundario-admin);
+    text-align: right;
+}
+
+.perfil_admin {
+    padding: .35rem .7rem;
+    border: 1px solid #ead897;
+    border-radius: 2rem;
+    color: #765a0b;
+    background: #fff;
+    font-weight: 700;
+}
+
+
+/* TITULO 4 NAVEGACION ADMIN */
+.navegacion_admin {
+    display: flex;
+    align-items: center;
+    gap: .35rem;
+    overflow-x: auto;
+    padding: .4rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid var(--borde-admin);
+    border-radius: .9rem;
+    background: #fff;
+}
+
+.navegacion_admin a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    min-height: 46px;
+    padding: .65rem 1.1rem;
+    border-radius: .6rem;
+    color: #596570;
+    text-decoration: none;
+    font-size: .85rem;
+    font-weight: 700;
+    white-space: nowrap;
+    transition: background .18s, color .18s;
+}
+
+.navegacion_admin a:hover {
+    background: #f5f6f8;
+}
+
+.navegacion_admin a[aria-current="page"] {
+    background: #20272e;
+    color: #fff;
+}
+
+.contador_admin {
+    display: inline-grid;
+    place-items: center;
+    min-width: 23px;
+    height: 23px;
+    border-radius: 50%;
+    padding: 0 .3rem;
+    font-size: .7rem;
+    background: var(--amarillo-admin);
+    color: #27210f;
+}
+
+
+/* TITULO 5 ACCESOS ADMIN */
+.accesos_admin {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1.25rem;
+    margin-bottom: 1.5rem;
+}
+
+.tarjeta_acceso_admin {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1.6rem;
+    border: 1px solid var(--borde-admin);
+    border-radius: 1rem;
+    color: inherit;
+    background: #fff;
+    text-decoration: none;
+    box-shadow: var(--sombra-admin);
+    transition: transform .18s, border-color .18s, box-shadow .18s;
+}
+
+.tarjeta_acceso_admin:hover {
+    transform: translateY(-3px);
+    border-color: #d2b55b;
+    box-shadow: 0 12px 32px #17212d10;
+}
+
+.icono_acceso_admin {
+    display: grid;
+    place-items: center;
+    width: 45px;
+    height: 45px;
+    margin-bottom: 1rem;
+    border-radius: .8rem;
+    background: #fff7dc;
+    color: #7d6013;
+}
+
+.icono_acceso_admin svg {
+    width: 26px;
+    height: 26px;
+}
+
+.tarjeta_acceso_admin h2 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.tarjeta_acceso_admin h2 > span {
+    color: #8e98a1;
+    font-size: 1.1rem;
+}
+
+.tarjeta_acceso_admin p {
+    margin: .6rem 0 1.2rem;
+    font-size: .85rem;
+    color: var(--secundario-admin);
+}
+
+.tarjeta_acceso_admin > strong {
+    font-size: 2.2rem;
+    line-height: 1.1;
+    font-variant-numeric: tabular-nums;
+}
+
+.detalle_acceso_admin {
+    font-size: .75rem;
+    color: var(--secundario-admin);
+    margin-top: .4rem;
+}
+
+
+/* TITULO 6 TARJETA ADMIN */
+.tarjeta_admin {
+    min-width: 0;
+    padding: 1.75rem;
+    border: 1px solid var(--borde-admin);
+    border-radius: 1rem;
+    background: #fff;
+    box-shadow: var(--sombra-admin);
+}
+
+.encabezado_seccion_admin {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+}
+
+.titulos_seccion_admin p {
+    margin: .5rem 0 0;
+    color: var(--secundario-admin);
+    font-size: .85rem;
+}
+
+.nota_admin {
+    margin: 1rem 0 0;
+    color: var(--secundario-admin);
+    font-size: .78rem;
+    line-height: 1.7;
+}
+
+.estado_vacio_admin {
+    text-align: center;
+    padding: 2rem 1rem;
+    margin: 0;
+    color: var(--secundario-admin);
+    font-size: .9rem;
+    border: 1px dashed #d9dfe5;
+    border-radius: .8rem;
+    background: #fafbfc;
+}
+
+
+/* TITULO 7 BOTONES ADMIN */
+.boton_admin {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    min-height: 44px;
+    padding: .7rem 1rem;
+    border: 1px solid transparent;
+    border-radius: .65rem;
+    font: 700 .8rem 'Syne', system-ui, sans-serif;
+    line-height: 1.4;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background .18s, transform .18s;
+}
+
+.principal_admin {
+    background: var(--amarillo-admin);
+    color: #29220d;
+}
+
+.principal_admin:hover:not(:disabled) {
+    background: #f1c640;
+}
+
+.secundario_admin {
+    background: #f4f6f8;
+    border-color: #e1e6eb;
+    color: #3e4b57;
+}
+
+.secundario_admin:hover:not(:disabled) {
+    background: #e9edf1;
+}
+
+.boton_admin:active:not(:disabled) {
+    transform: translateY(1px);
+}
+
+.boton_admin:disabled {
+    opacity: .5;
+    cursor: default;
+}
+
+.pagina_admin :focus-visible {
+    outline: 3px solid #97741c;
+    outline-offset: 3px;
+}
+
+
+/* TITULO 8 MENSAJES ADMIN */
+.mensaje_admin {
+    margin: 0;
+    font-size: .85rem;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+}
+
+.mensaje_admin:not(:empty) {
+    margin-bottom: 1rem;
+    padding: .8rem 1rem;
+    border: 1px solid #dce3ea;
+    border-radius: .7rem;
+    background: #f4f7fa;
+    color: #465769;
+}
+
+.error_admin:not(:empty) {
+    background: #fff3f1;
+    border-color: #f0cbc6;
+    color: #9a3029;
+}
+
+.exito_admin:not(:empty) {
+    background: #f0f9f3;
+    border-color: #cce5d5;
+    color: #226040;
+}
+
+
+/* TITULO 9 FILTROS Y CAMPOS ADMIN */
+.filtros_admin {
+    display: flex;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: .85rem;
+    margin: 0 0 1.25rem;
+}
+
+.campo_admin {
+    display: flex;
+    flex-direction: column;
+    gap: .45rem;
+    min-width: 0;
+    font-size: .8rem;
+    font-weight: 700;
+    color: #4a5661;
+}
+
+.filtros_admin .campo_admin:first-child {
+    flex: 1;
+    min-width: min(100%, 230px);
+}
+
+.campo_admin input, .campo_admin select, .campo_admin textarea {
+    min-height: 46px;
+    width: 100%;
+    padding: .75rem .85rem;
+    border: 1px solid #d9e0e6;
+    border-radius: .65rem;
+    background: #fafbfc;
+    color: #20272e;
+    font: 1rem 'Syne', system-ui, sans-serif;
+}
+
+.campo_admin textarea {
+    resize: vertical;
+    line-height: 1.55;
+}
+
+.campo_admin input:focus, .campo_admin select:focus, .campo_admin textarea:focus {
+    background: #fff;
+    border-color: #ba951f;
+}
+
+.campo_admin input::placeholder {
+    font-size: .85rem;
+    color: #7b8690;
+}
+
+
+/* TITULO 10 TABLA ADMIN */
+.tabla_desplazable_admin {
+    overflow-x: auto;
+    max-width: 100%;
+    border: 1px solid #edf0f3;
+    border-radius: .75rem;
+}
+
+.tabla_admin {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: .85rem;
+}
+
+.tabla_admin th, .tabla_admin td {
+    padding: 1rem .9rem;
+    border-bottom: 1px solid #edf0f3;
+    vertical-align: top;
+}
+
+.tabla_admin th {
+    background: #f6f8fa;
+    color: #64717d;
+    font-size: .68rem;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    white-space: nowrap;
+}
+
+.tabla_admin td {
+    min-width: 120px;
+    max-width: 330px;
+    overflow-wrap: anywhere;
+}
+
+.tabla_admin td small {
+    display: block;
+    margin-top: .35rem;
+    font-size: .75rem;
+    color: var(--secundario-admin);
+    white-space: pre-wrap;
+    font-weight: 400;
+}
+
+.tabla_admin tbody tr:hover {
+    background: #fcfcfd;
+}
+
+.tabla_admin tr:last-child td {
+    border-bottom: 0;
+}
+
+.tabla_admin td[colspan] {
+    text-align: center;
+    padding: 2rem;
+    color: var(--secundario-admin);
+}
+
+.tabla_admin [aria-busy="true"] {
+    opacity: .5;
+    pointer-events: none;
+}
+
+.tabla_admin td button {
+    margin: 0 .4rem .4rem 0;
+    white-space: nowrap;
+}
+
+
+/* TITULO 11 ESTADOS Y PAGINACION ADMIN */
+.estado_registro_admin {
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+    padding: .35rem .6rem;
+    border-radius: 2rem;
+    background: #eef2f5;
+    color: #526373;
+    font-size: .68rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.estado_registro_admin::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+}
+
+.pendiente_admin {
+    background: #fff5d8;
+    color: #85610c;
+}
+
+.aprobada_admin {
+    background: #eaf6ef;
+    color: #216442;
+}
+
+.rechazada_admin {
+    background: #fff0ef;
+    color: #a13a32;
+}
+
+.paginacion_admin {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1.25rem;
+    font-size: .8rem;
+    color: var(--secundario-admin);
+}
+
+
+/* TITULO 12 DIALOGOS Y FORMULARIOS ADMIN */
+.dialogo_admin {
+    width: min(94vw, 730px);
+    max-height: 90vh;
+    padding: 1.75rem;
+    border: 1px solid var(--borde-admin);
+    border-radius: 1rem;
+    color: var(--texto-admin);
+    box-shadow: 0 24px 80px #10182040;
+}
+
+.dialogo_admin::backdrop {
+    background: #14202db3;
+}
+
+.formulario_admin {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.formulario_admin .nota_admin {
+    margin: 0;
+}
+
+.formulario_admin .encabezado_seccion_admin {
+    margin: 0;
+}
+
+.grupo_campos_admin {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.acciones_formulario_admin {
+    display: flex;
+    justify-content: flex-end;
+    gap: .75rem;
+    margin-top: .5rem;
+}
+
+
+/* TITULO 13 PIE ADMIN */
+.pie_admin {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: .5rem;
+    margin: 2rem .25rem;
+    color: #717c86;
+    font-size: .75rem;
+}
+
+
+/* TITULO 14 ENTRADA DE SECCIONES ADMIN */
+@keyframes entrada_admin {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+[data-panel-admin]:not([hidden]) {
+    animation: entrada_admin .22s ease both;
+}
+
+
+/* TITULO 15 ADMINISTRADOR EN PANTALLAS MOVILES */
+@media (max-width: 760px) {
+    .pagina_admin {
+        margin-top: 1rem;
+    }
+
+    .cabecera_admin {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 1.25rem;
+        gap: 1rem;
+    }
+
+    .fecha_cabecera_admin {
+        align-items: flex-start;
+        text-align: left;
+    }
+
+    .accesos_admin {
+        grid-template-columns: 1fr;
+        gap: .8rem;
+    }
+
+    .tarjeta_acceso_admin {
+        display: grid;
+        grid-template-columns: 45px 1fr auto;
+        gap: .4rem 1rem;
+        align-items: center;
+        padding: 1.2rem;
+    }
+
+    .icono_acceso_admin {
+        grid-row: 1/3;
+        margin: 0;
+    }
+
+    .tarjeta_acceso_admin h2 {
+        grid-column: 2;
+    }
+
+    .tarjeta_acceso_admin p {
+        grid-column: 2;
+        font-size: .78rem;
+        margin: 0;
+    }
+
+    .tarjeta_acceso_admin > strong {
+        grid-column: 3;
+        grid-row: 1/3;
+        font-size: 1.8rem;
+    }
+
+    .detalle_acceso_admin {
+        grid-column: 2/4;
+        font-size: .7rem;
+    }
+
+    .tarjeta_admin {
+        padding: 1.15rem;
+    }
+
+    .encabezado_seccion_admin {
+        align-items: flex-start;
+        flex-wrap: wrap;
+    }
+
+    .filtros_admin .campo_admin {
+        flex: 1;
+    }
+
+    .paginacion_admin {
+        justify-content: center;
+        gap: .65rem;
+    }
+
+    .grupo_campos_admin {
+        grid-template-columns: 1fr;
+    }
+
+    .dialogo_admin {
+        padding: 1.25rem;
+    }
+
+    .modo_admin .cabecera {
+        gap: .8rem;
+        flex-wrap: wrap;
+    }
+
+    .modo_admin .cabecera_programa {
+        flex-wrap: wrap;
+        gap: .6rem;
+        font-size: .8rem;
+    }
+
+}
+
+
+/* TITULO 16 RESPETAR EL MOVIMIENTO REDUCIDO */
+@media (prefers-reduced-motion: reduce) {
+    .modo_admin *, .modo_admin *::before, .modo_admin *::after {
+        animation: none !important;
+        transition: none !important;
+    }
+
+}
+
+/* TITULO 17 ACCESOS DEL ADMINISTRADOR EN TABLET */
+@media (min-width: 761px) and (max-width: 1100px) {
+    .accesos_admin {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}

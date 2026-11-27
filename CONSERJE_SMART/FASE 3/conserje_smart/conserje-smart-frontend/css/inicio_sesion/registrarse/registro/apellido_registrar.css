@@ -1,2 +1,9 @@
-/* TITULO APELLIDO REGISTRAR */
-/* sin diseño */
+/* TITULO 1 APELLIDO REGISTRAR */
+.registro .apellido_registrar {
+    text-transform: none;
+}
+
+/* TITULO 2 FOCO DEL APELLIDO */
+.contenedor_apellido_registrar:focus-within > label {
+    color: #8a6914;
+}

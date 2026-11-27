@@ -1,2 +1,9 @@
-/* TITULO NOMBRE REGISTRAR */
-/* sin diseño */
+/* TITULO 1 NOMBRE REGISTRAR */
+.registro .nombre_registrar {
+    text-transform: none;
+}
+
+/* TITULO 2 FOCO DEL NOMBRE */
+.contenedor_nombre_registrar:focus-within > label {
+    color: #8a6914;
+}

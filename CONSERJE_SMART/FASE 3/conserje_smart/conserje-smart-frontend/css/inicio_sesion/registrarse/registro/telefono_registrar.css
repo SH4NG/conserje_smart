@@ -1,2 +1,10 @@
-/* TITULO TELEFONO REGISTRAR */
-/* sin diseño */
+/* TITULO 1 TELEFONO REGISTRAR */
+.registro .telefono_registrar {
+    font-variant-numeric: tabular-nums;
+    letter-spacing: .02em;
+}
+
+/* TITULO 2 FOCO DEL TELEFONO */
+.contenedor_telefono_registrar:focus-within > label {
+    color: #8a6914;
+}

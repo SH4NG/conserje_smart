@@ -1,0 +1,19 @@
+/* TITULO 1 DESCRIPCIONES DE BITACORA ADMIN */
+.seccion_bitacora_admin .tabla_admin td:nth-child(2) {
+    min-width: 260px;
+}
+
+.seccion_bitacora_admin .tabla_admin td:nth-child(2) small {
+    max-height: 9rem;
+    overflow-y: auto;
+}
+
+
+/* TITULO 2 EDICION DE BITACORA ADMIN */
+.dialogo_bitacora_admin textarea[name="descripcion"] {
+    min-height: 130px;
+}
+
+.dialogo_bitacora_admin .encabezado_seccion_admin h2 {
+    font-size: 1.35rem;
+}

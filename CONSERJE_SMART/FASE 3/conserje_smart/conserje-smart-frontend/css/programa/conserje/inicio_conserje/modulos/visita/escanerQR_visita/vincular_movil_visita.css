@@ -1,10 +1,10 @@
 /* TITULO 1 CONTENEDOR VINCULAR MOVIL VISITA */
 .contenedor_vincular_movil_visita {
-    margin-bottom: 2.667vh;
-    padding: 3.111vh;
-    border: 0.111vh solid #e4e7eb;
-    border-top: 0.333vh solid var(--color-amarillo);
-    border-radius: 2.222vh;
+    margin-bottom: 1.5rem;
+    padding: 1.75rem;
+    border: 1px solid #e4e7eb;
+    border-top: 3px solid var(--color-amarillo);
+    border-radius: 1.25rem;
     background: #fff;
     box-shadow: var(--sombra-tarjeta-visita);
 }
@@ -15,22 +15,22 @@
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
-    gap: 1.778vh;
+    gap: 1rem;
 }
 
 .encabezado_vincular_movil_visita > button {
-    font-size: 1.387vh;
+    font-size: .78rem;
 }
 
 /* TITULO 3 ESTADO VINCULO VISUAL VISITA */
 .estado_vinculo_visual_visita {
     display: inline-flex;
     align-items: center;
-    gap: 0.889vh;
-    margin: 1.778vh 0;
-    padding: 0.622vh 1.156vh;
-    border-radius: 3.556vh;
-    font-size: 1.28vh;
+    gap: .5rem;
+    margin: 1rem 0;
+    padding: .35rem .65rem;
+    border-radius: 2rem;
+    font-size: .72rem;
     font-weight: 700;
     color: #68727b;
     background: #f1f3f5;
@@ -38,8 +38,8 @@
 
 .estado_vinculo_visual_visita::before {
     content: '';
-    width: 0.778vh;
-    height: 0.778vh;
+    width: 7px;
+    height: 7px;
     border-radius: 50%;
     background: currentColor;
 }
@@ -59,19 +59,19 @@
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     list-style: none;
-    padding: 1.6vh 0.889vh;
-    margin: 0 0 1.778vh;
-    border: 0.111vh solid #edf0f3;
+    padding: .9rem .5rem;
+    margin: 0 0 1rem;
+    border: 1px solid #edf0f3;
     background: #fafbfc;
-    border-radius: 1.422vh;
+    border-radius: .8rem;
 }
 
 .pasos_registro_movil_visita li {
     display: flex;
-    gap: 0.889vh;
+    gap: .5rem;
     align-items: center;
     justify-content: center;
-    font-size: 1.333vh;
+    font-size: .75rem;
     color: #66717a;
     font-weight: 700;
 }
@@ -79,12 +79,12 @@
 .pasos_registro_movil_visita li > span {
     display: grid;
     place-items: center;
-    width: 2.778vh;
-    height: 2.778vh;
+    width: 25px;
+    height: 25px;
     border-radius: 50%;
     background: #e9edf1;
     color: #59626b;
-    font-size: 1.244vh;
+    font-size: .7rem;
 }
 
 /* TITULO 5 PASO ACTUAL DEL REGISTRO MOVIL */
@@ -95,7 +95,7 @@
 [data-etapa="vincular"] .pasos_registro_movil_visita li:nth-child(1) > span, [data-etapa="escanear"] .pasos_registro_movil_visita li:nth-child(2) > span, [data-etapa="confirmar"] .pasos_registro_movil_visita li:nth-child(3) > span {
     background: var(--color-amarillo);
     color: #251f0c;
-    box-shadow: 0 0 0 0.333vh #e5ba3120;
+    box-shadow: 0 0 0 3px #e5ba3120;
 }
 
 [data-etapa="registrada"] .pasos_registro_movil_visita li > span {
@@ -106,20 +106,20 @@
 /* TITULO 6 INSTRUCCIONES VINCULAR MOVIL VISITA */
 .instrucciones_vincular_movil_visita {
     color: var(--color-texto-secundario);
-    font-size: 1.511vh;
+    font-size: .85rem;
     line-height: 1.7;
-    margin: 0 0 1.778vh;
+    margin: 0 0 1rem;
 }
 
 /* TITULO 7 QR VINCULAR MOVIL VISITA */
 .qr_vincular_movil_visita {
-    width: min(100%, 28.889vh);
-    margin: 2.222vh auto;
-    padding: 1.244vh;
+    width: min(100%, 260px);
+    margin: 1.25rem auto;
+    padding: .7rem;
     background: #fff;
-    border: 0.111vh solid #e5e8ec;
-    border-radius: 1.6vh;
-    box-shadow: 0 0.556vh 2.222vh #17212d09;
+    border: 1px solid #e5e8ec;
+    border-radius: .9rem;
+    box-shadow: 0 5px 20px #17212d09;
 }
 
 .qr_vincular_movil_visita svg {
@@ -133,55 +133,55 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    gap: 1.778vh;
-    margin: 1.778vh 0;
-    padding: 2.222vh;
-    border: 0.111vh solid #ead48d;
-    border-radius: 1.6vh;
+    gap: 1rem;
+    margin: 1rem 0;
+    padding: 1.25rem;
+    border: 1px solid #ead48d;
+    border-radius: .9rem;
     background: #fffbec;
     text-align: center;
-    font-size: 1.511vh;
+    font-size: .85rem;
 }
 
 .codigo_vincular_movil_visita {
-    font-size: 3.556vh;
-    letter-spacing: 0.356vh;
+    font-size: 2rem;
+    letter-spacing: .2rem;
     font-variant-numeric: tabular-nums;
 }
 
 /* TITULO 9 AYUDA VINCULAR MOVIL VISITA */
 .ayuda_vincular_movil_visita {
-    padding-top: 1.511vh;
-    border-top: 0.111vh solid #edf0f3;
+    padding-top: .85rem;
+    border-top: 1px solid #edf0f3;
     color: #68727b;
-    font-size: 1.28vh;
+    font-size: .72rem;
     line-height: 1.7;
-    margin: 1.778vh 0 0;
+    margin: 1rem 0 0;
 }
 
 #mensaje_vincular_movil_visita {
-    margin-top: 1.778vh;
+    margin-top: 1rem;
 }
 
 #revocar_movil_visita {
-    margin-top: 1.778vh;
-    font-size: 1.333vh;
+    margin-top: 1rem;
+    font-size: .75rem;
 }
 
 /* TITULO 10 LECTURA RECIBIDA MOVIL VISITA */
 .lectura_recibida_movil_visita {
-    margin: 1.778vh 0;
-    padding: 2.222vh;
-    border: 0.111vh solid #e7d18b;
-    border-left: 0.444vh solid var(--color-amarillo);
-    border-radius: 1.511vh;
+    margin: 1rem 0;
+    padding: 1.25rem;
+    border: 1px solid #e7d18b;
+    border-left: 4px solid var(--color-amarillo);
+    border-radius: .85rem;
     background: #fffdf5;
     overflow-wrap: anywhere;
     animation: entrada_tarjeta_visita .25s ease both;
 }
 
 .lectura_recibida_movil_visita h3 {
-    font-size: 1.956vh;
+    font-size: 1.1rem;
     margin: 0;
 }
 
@@ -192,27 +192,27 @@
 
 #estado_lectura_recibida_visita {
     color: #59626b;
-    font-size: 1.422vh;
-    margin: 1.511vh 0 0;
+    font-size: .8rem;
+    margin: .85rem 0 0;
 }
 
 /* TITULO 11 IDENTIDAD RECIBIDA VISITA */
 .identidad_recibida_visita {
     display: grid;
-    gap: 1.511vh;
-    margin: 1.778vh 0;
+    gap: .85rem;
+    margin: 1rem 0;
 }
 
 .dato_identidad_visita dt {
     color: #68727b;
-    font-size: 1.244vh;
-    letter-spacing: 0.071vh;
+    font-size: .7rem;
+    letter-spacing: .04em;
     text-transform: uppercase;
 }
 
 .dato_identidad_visita dd {
-    margin: 0.356vh 0 0;
-    font-size: 1.778vh;
+    margin: .2rem 0 0;
+    font-size: 1rem;
     font-weight: 700;
 }
 
@@ -223,20 +223,20 @@
 /* TITULO 12 ACCIONES LECTURA MOVIL VISITA */
 .acciones_lectura_movil_visita {
     display: flex;
-    gap: 1.156vh;
+    gap: .65rem;
     flex-wrap: wrap;
-    margin-top: 1.778vh;
+    margin-top: 1rem;
 }
 
 .acciones_lectura_movil_visita button {
-    font-size: 1.333vh;
+    font-size: .75rem;
 }
 
 /* TITULO 13 AJUSTES PARA PANTALLAS MOVILES */
-@media (max-width: 768px) {
+@media (max-width: 650px) {
     .contenedor_vincular_movil_visita {
-        padding: 2.222vh;
-        border-radius: 1.778vh;
+        padding: 1.25rem;
+        border-radius: 1rem;
     }
 
     .encabezado_vincular_movil_visita > button {
@@ -245,7 +245,7 @@
 
     .pasos_registro_movil_visita li {
         flex-direction: column;
-        gap: 0.622vh;
+        gap: .35rem;
     }
 
 }

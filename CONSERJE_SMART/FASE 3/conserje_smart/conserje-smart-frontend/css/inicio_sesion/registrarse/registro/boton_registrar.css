@@ -1,0 +1,62 @@
+/* TITULO 1 BOTON REGISTRAR */
+.boton_registrar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .7rem;
+    width: 100%;
+    min-height: 50px;
+    padding: .85rem 1.2rem;
+    border: 1px solid #dfb32a;
+    border-radius: .75rem;
+    background: #e5ba31;
+    color: #30270d;
+    font: inherit;
+    font-size: .95rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 12px #b98b1720;
+    transition: transform .18s, background .18s, box-shadow .18s;
+}
+.boton_registrar:hover:not(:disabled) {
+    transform: translateY(-2px);
+    background: #efd069;
+    box-shadow: 0 7px 18px #b98b172b;
+}
+.boton_registrar:focus-visible {
+    outline: 2px solid #886b17;
+    outline-offset: 4px;
+}
+.boton_registrar:disabled {
+    opacity: .75;
+}
+.registro_enviado .boton_registrar {
+    border-color: #bed9ca;
+    color: #256141;
+    background: #edf7f1;
+}
+
+/* TITULO 2 CARGA BOTON REGISTRAR */
+.carga_boton_registrar {
+    display: none;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #77601f55;
+    border-top-color: #514116;
+    border-radius: 50%;
+}
+.registro[aria-busy="true"] .carga_boton_registrar {
+    display: block;
+    animation: giro_registro .7s linear infinite;
+}
+@keyframes giro_registro {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* TITULO 3 RESPUESTA AL PULSAR EL BOTON */
+.boton_registrar:active:not(:disabled) {
+    transform: translateY(0);
+    box-shadow: 0 2px 6px #b98b171a;
+}

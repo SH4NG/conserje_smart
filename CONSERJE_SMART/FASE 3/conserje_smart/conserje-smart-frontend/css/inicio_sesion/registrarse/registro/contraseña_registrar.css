@@ -1,2 +1,80 @@
-/* TITULO CONTRASEÑA REGISTRAR */
-/* sin diseño */
+/* TITULO 1 ENTRADA CONTRASEÑA REGISTRO */
+.entrada_contraseña_registro {
+    position: relative;
+}
+.registro .entrada_contraseña_registro input {
+    padding-right: 5.5rem;
+}
+.entrada_contraseña_registro button {
+    position: absolute;
+    top: 7px;
+    right: 7px;
+    min-height: 34px;
+    padding: .4rem .7rem;
+    border: 0;
+    border-radius: .4rem;
+    color: #6e581d;
+    background: #f1ede1;
+    font: inherit;
+    font-size: .78rem;
+    cursor: pointer;
+}
+.entrada_contraseña_registro button:focus-visible {
+    outline: 2px solid #b79022;
+    outline-offset: 2px;
+}
+
+/* TITULO 2 REQUISITOS CONTRASEÑA REGISTRAR */
+.requisitos_contraseña_registrar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem .8rem;
+    padding: 0;
+    margin: .8rem 0 0;
+    list-style: none;
+    color: #697681;
+    font-size: .73rem;
+}
+.requisitos_contraseña_registrar li {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    transition: color .2s;
+}
+.requisitos_contraseña_registrar li::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border: 1px solid currentColor;
+    border-radius: 50%;
+}
+.requisitos_contraseña_registrar [data-cumple="true"] {
+    color: #267148;
+}
+.requisitos_contraseña_registrar [data-cumple="true"]::before {
+    background: currentColor;
+}
+
+/* TITULO 3 TEXTO PARA LECTOR DE PANTALLA */
+.texto_lector_registro {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+/* TITULO 4 ETIQUETAS DE REQUISITOS DE CONTRASEÑA */
+.requisitos_contraseña_registrar li {
+    padding: .4rem .6rem;
+    border: 1px solid #e4e9ed;
+    border-radius: .55rem;
+    background: #f7f9fa;
+    transition: color .18s, border-color .18s, background .18s;
+}
+.requisitos_contraseña_registrar [data-cumple="true"] {
+    border-color: #c9e0d3;
+    background: #eff8f2;
+}

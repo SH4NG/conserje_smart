@@ -1,2 +1,10 @@
-/* TITULO RUT REGISTRAR */
-/* sin diseño */
+/* TITULO 1 RUT REGISTRAR */
+.registro .rut_registrar {
+    font-variant-numeric: tabular-nums;
+    letter-spacing: .035em;
+}
+
+/* TITULO 2 FOCO DEL RUT */
+.contenedor_rut_registrar:focus-within > label {
+    color: #8a6914;
+}

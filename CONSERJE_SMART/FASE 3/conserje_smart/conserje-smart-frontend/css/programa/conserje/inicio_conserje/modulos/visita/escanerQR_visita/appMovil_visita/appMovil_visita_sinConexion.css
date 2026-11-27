@@ -4,7 +4,7 @@ body {
     min-height: 100vh;
     min-height: 100dvh;
     margin: 0;
-    padding: 2.222vh;
+    padding: 1.25rem;
     box-sizing: border-box;
     place-items: center;
     background-color: #f7f7f7;
@@ -18,10 +18,10 @@ body {
 
 /* TITULO 2 CONTENEDOR SIN CONEXION VISITA */
 .contenedor_sin_conexion_visita {
-    max-width: 46vh;
-    padding: 3.556vh;
-    border: 0.111vh solid #e5ba31;
-    border-radius: 1.778vh;
+    max-width: 480px;
+    padding: 2rem;
+    border: 1px solid #e5ba31;
+    border-radius: 1rem;
     background: #fff;
     text-align: center;
     line-height: 1.5;
@@ -29,15 +29,15 @@ body {
 
 /* TITULO 3 ICONO SIN CONEXION VISITA */
 .icono_sin_conexion_visita {
-    border-radius: 1.778vh;
+    border-radius: 1rem;
 }
 
 /* TITULO 4 ENLACE REINTENTAR VISITA */
 .enlace_reintentar_visita {
     display: inline-block;
-    margin-top: 1.778vh;
-    padding: 1.511vh 1.778vh;
-    border-radius: 1.156vh;
+    margin-top: 1rem;
+    padding: .85rem 1rem;
+    border-radius: .65rem;
     background: #e5ba31;
     color: #1a1a1a;
     font-weight: 700;
@@ -46,6 +46,6 @@ body {
 
 /* TITULO 5 FOCO DEL ENLACE REINTENTAR VISITA */
 .enlace_reintentar_visita:focus-visible {
-    outline: 0.333vh solid #806300;
-    outline-offset: 0.333vh;
+    outline: 3px solid #806300;
+    outline-offset: 3px;
 }

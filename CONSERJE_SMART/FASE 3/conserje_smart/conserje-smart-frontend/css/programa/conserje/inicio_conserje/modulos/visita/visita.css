@@ -7,7 +7,7 @@
     --color-borde: #dce0e5;
     --color-texto-secundario: #59626b;
     --fuente-principal: 'Syne', sans-serif;
-    --sombra-tarjeta-visita: 0 1.333vh 4vh #17212d0d, 0 0.222vh 0.667vh #17212d05;
+    --sombra-tarjeta-visita: 0 12px 36px #17212d0d, 0 2px 6px #17212d05;
 }
 
 /* TITULO 2 MODELO DE CAJA GENERAL */
@@ -26,8 +26,8 @@ body {
 
 /* TITULO 4 PAGINA VISITA */
 .pagina_visita {
-    width: min(94%, 160vh);
-    margin: 3.556vh auto 7.111vh;
+    width: min(94%, 1440px);
+    margin: 2rem auto 4rem;
     line-height: 1.5;
 }
 
@@ -36,12 +36,12 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 2.667vh;
-    padding: 3.111vh 3.556vh;
-    margin-bottom: 2.667vh;
-    border: 0.111vh solid #e5ba314a;
-    border-left: 0.556vh solid var(--color-amarillo);
-    border-radius: 2.222vh;
+    gap: 1.5rem;
+    padding: 1.75rem 2rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid #e5ba314a;
+    border-left: 5px solid var(--color-amarillo);
+    border-radius: 1.25rem;
     background: linear-gradient(110deg, #fff 60%, #fffbeb);
     box-shadow: var(--sombra-tarjeta-visita);
 }
@@ -49,24 +49,24 @@ body {
 /* TITULO 6 TITULOS CABECERA VISITA */
 .cabecera_visita h1 {
     margin: 0;
-    font-size: clamp(2.933vh, 2.4vw, 4.622vh);
+    font-size: clamp(1.65rem, 2.4vw, 2.6rem);
     line-height: 1.2;
-    letter-spacing: -0.062vh;
+    letter-spacing: -.035em;
 }
 
 .descripcion_cabecera_visita {
-    margin: 1.067vh 0 0;
+    margin: .6rem 0 0;
     color: var(--color-texto-secundario);
 }
 
 /* TITULO 7 ETIQUETA SECCION */
 .etiqueta_seccion {
     display: inline-block;
-    margin-bottom: 0.8vh;
+    margin-bottom: .45rem;
     color: #775b00;
-    font-size: 1.244vh;
+    font-size: .7rem;
     font-weight: 800;
-    letter-spacing: 0.213vh;
+    letter-spacing: .12em;
     text-transform: uppercase;
 }
 
@@ -74,41 +74,41 @@ body {
 .resumen_visita {
     display: flex;
     flex-direction: column;
-    gap: 0.533vh;
+    gap: .3rem;
     max-width: 42%;
-    padding: 1.511vh 1.956vh;
-    border: 0.111vh solid #e5ba3159;
-    border-radius: 1.422vh;
+    padding: .85rem 1.1rem;
+    border: 1px solid #e5ba3159;
+    border-radius: .8rem;
     background: #fff;
 }
 
 .resumen_visita_titulo {
     color: var(--color-texto-secundario);
-    font-size: 1.244vh;
+    font-size: .7rem;
     text-transform: uppercase;
-    letter-spacing: 0.142vh;
+    letter-spacing: .08em;
 }
 
 #resumen_departamento_visita {
-    font-size: 1.6vh;
+    font-size: .9rem;
     overflow-wrap: anywhere;
 }
 
 /* TITULO 9 TITULOS SECUNDARIOS DE VISITA */
 .pagina_visita h2 {
     margin: 0;
-    font-size: clamp(2.133vh, 1.5vw, 2.667vh);
+    font-size: clamp(1.2rem, 1.5vw, 1.5rem);
     line-height: 1.3;
-    letter-spacing: -0.044vh;
+    letter-spacing: -.025em;
 }
 
 /* TITULO 10 AREA REGISTRO VISITA */
 .area_registro_visita {
     display: grid;
     grid-template-columns: minmax(0, .95fr) minmax(0, 1.15fr);
-    gap: 2.667vh;
+    gap: 1.5rem;
     align-items: start;
-    margin-bottom: 2.667vh;
+    margin-bottom: 1.5rem;
 }
 
 .area_registro_visita > *, .panel_lectura_visita > * {
@@ -117,78 +117,56 @@ body {
 
 .panel_lectura_visita {
     display: grid;
-    gap: 1.778vh;
+    gap: 1rem;
 }
 
-.panel_lectura_visita > .contenedor_vincular_movil_visita, .panel_lectura_visita > .contenedor_escaner_visita, .area_registro_visita > .contenedor_formulario_visita {
+.panel_lectura_visita > .contenedor_vincular_movil_visita, .area_registro_visita > .contenedor_formulario_visita {
     margin-bottom: 0;
 }
 
-/* TITULO 11 ENLACE MODO VISITA */
-.enlace_modo_visita {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 0.444vh 1.333vh;
-    margin: 0 0.711vh;
-    font-size: 1.422vh;
-    color: var(--color-texto-secundario);
-}
-
-.enlace_modo_visita a {
-    display: inline-flex;
-    gap: 1.244vh;
-    align-items: center;
-    min-height: 4.889vh;
-    color: #775b00;
-    font-weight: 700;
-    text-underline-offset: 0.444vh;
-}
-
-/* TITULO 12 ESTRUCTURA DE BOTONES DE VISITA */
+/* TITULO 11 ESTRUCTURA DE BOTONES DE VISITA */
 .boton_principal_visita, .boton_secundario_visita {
-    min-height: 4.889vh;
-    padding: 1.333vh 1.867vh;
-    border: 0.111vh solid transparent;
-    border-radius: 1.333vh;
-    font: 700 1.511vh var(--fuente-principal);
+    min-height: 44px;
+    padding: .75rem 1.05rem;
+    border: 1px solid transparent;
+    border-radius: .75rem;
+    font: 700 .85rem var(--fuente-principal);
     line-height: 1.4;
     cursor: pointer;
     transition: background .18s ease, box-shadow .18s ease, transform .18s ease;
 }
 
-/* TITULO 13 BOTON PRINCIPAL VISITA */
+/* TITULO 12 BOTON PRINCIPAL VISITA */
 .boton_principal_visita {
     background: var(--color-amarillo);
     color: #201b0b;
-    box-shadow: 0 0.333vh 0 #a885171a;
+    box-shadow: 0 3px 0 #a885171a;
 }
 
-/* TITULO 14 BOTON SECUNDARIO VISITA */
+/* TITULO 13 BOTON SECUNDARIO VISITA */
 .boton_secundario_visita {
     background: #f2f4f6;
     border-color: #e5e8ec;
     color: #36414b;
 }
 
-/* TITULO 15 INTERACCION DE BOTONES DE VISITA */
+/* TITULO 14 INTERACCION DE BOTONES DE VISITA */
 @media (hover: hover) {
     .boton_principal_visita:hover:not(:disabled) {
         background: #f0c83e;
-        box-shadow: 0 0.556vh 1.556vh #bd921c25;
-        transform: translateY(-0.111vh);
+        box-shadow: 0 5px 14px #bd921c25;
+        transform: translateY(-1px);
     }
 
     .boton_secundario_visita:hover:not(:disabled) {
         background: #e9edf1;
-        transform: translateY(-0.111vh);
+        transform: translateY(-1px);
     }
 
 }
 
 .pagina_visita button:active:not(:disabled) {
-    transform: translateY(0.111vh);
+    transform: translateY(1px);
 }
 
 .pagina_visita button:disabled {
@@ -196,24 +174,24 @@ body {
     cursor: default;
 }
 
-/* TITULO 16 FOCO VISIBLE EN LOS CONTROLES DE VISITA */
+/* TITULO 15 FOCO VISIBLE EN LOS CONTROLES DE VISITA */
 .pagina_visita :focus-visible {
-    outline: 0.333vh solid #896900;
-    outline-offset: 0.333vh;
+    outline: 3px solid #896900;
+    outline-offset: 3px;
 }
 
-/* TITULO 17 MENSAJE FORMULARIO VISITA */
+/* TITULO 16 MENSAJE FORMULARIO VISITA */
 .mensaje_formulario_visita {
     margin: 0;
-    font-size: 1.511vh;
+    font-size: .85rem;
     line-height: 1.6;
     overflow-wrap: anywhere;
 }
 
 .mensaje_formulario_visita:not(:empty) {
-    padding: 1.422vh 1.778vh;
-    border: 0.111vh solid #e4e8ed;
-    border-radius: 1.244vh;
+    padding: .8rem 1rem;
+    border: 1px solid #e4e8ed;
+    border-radius: .7rem;
     background: #f6f8fa;
 }
 
@@ -229,16 +207,16 @@ body {
     border-color: #cfe8d8;
 }
 
-/* TITULO 18 ELEMENTOS OCULTOS DE VISITA */
+/* TITULO 17 ELEMENTOS OCULTOS DE VISITA */
 .pagina_visita [hidden] {
     display: none !important;
 }
 
-/* TITULO 19 TRANSICION DE ENTRADA DE VISITA */
+/* TITULO 18 TRANSICION DE ENTRADA DE VISITA */
 @keyframes entrada_tarjeta_visita {
     from {
         opacity: 0;
-        transform: translateY(0.778vh);
+        transform: translateY(7px);
     }
 
     to {
@@ -252,25 +230,25 @@ body {
     animation: entrada_tarjeta_visita .3s ease both;
 }
 
-/* TITULO 20 AJUSTES PARA PANTALLAS MEDIANAS */
-@media (max-width: 1200px) {
+/* TITULO 19 AJUSTES PARA PANTALLAS MEDIANAS */
+@media (max-width: 1100px) {
     .area_registro_visita {
         grid-template-columns: minmax(0, 1fr);
     }
 
 }
 
-/* TITULO 21 AJUSTES PARA PANTALLAS MOVILES */
-@media (max-width: 768px) {
+/* TITULO 20 AJUSTES PARA PANTALLAS MOVILES */
+@media (max-width: 650px) {
     .pagina_visita {
-        margin-top: 1.778vh;
+        margin-top: 1rem;
     }
 
     .cabecera_visita {
         flex-direction: column;
         align-items: stretch;
-        padding: 2.311vh;
-        border-radius: 1.778vh;
+        padding: 1.3rem;
+        border-radius: 1rem;
     }
 
     .resumen_visita {
@@ -278,16 +256,16 @@ body {
     }
 
     .descripcion_cabecera_visita {
-        font-size: 1.6vh;
+        font-size: .9rem;
     }
 
     .area_registro_visita {
-        gap: 1.778vh;
+        gap: 1rem;
     }
 
 }
 
-/* TITULO 22 RESPETAR LA PREFERENCIA DE MOVIMIENTO REDUCIDO */
+/* TITULO 21 RESPETAR LA PREFERENCIA DE MOVIMIENTO REDUCIDO */
 @media (prefers-reduced-motion: reduce) {
     .pagina_visita *, .pagina_visita *::before, .pagina_visita *::after {
         animation: none !important;
@@ -296,4 +274,3 @@ body {
     }
 
 }
-
