@@ -7,9 +7,9 @@ $carpetaJsVisita = __DIR__ . '/../../../../../../js/programa/conserje/inicio_con
 $importacionesVisita = [];
 foreach ([
     'visita.js', 'rut_visita.js', 'escanerQR_visita/control_escanerQR_visita.js', 'tablero_visita.js',
-    'Backend_visita/api_visita.js', 'Backend_visita/listar_visita.js',
-    'Backend_visita/registrar_visita.js', 'Backend_visita/modificar_visita.js',
-    'Backend_visita/registrar_salida_visita.js', 'escanerQR_visita/appMovil_visita/appMovil_visita.js',
+    'backend_visita/api_visita.js', 'backend_visita/listar_visita.js',
+    'backend_visita/registrar_visita.js', 'backend_visita/modificar_visita.js',
+    'backend_visita/registrar_salida_visita.js', 'escanerQR_visita/appMovil_visita/appMovil_visita.js',
     'escanerQR_visita/vincular_movil_visita.js', 'escanerQR_visita/appMovil_visita/vinculo_appMovil_visita.js'
 ] as $archivoJsVisita) {
     $urlJsVisita = $rutaJsVisita . $archivoJsVisita;

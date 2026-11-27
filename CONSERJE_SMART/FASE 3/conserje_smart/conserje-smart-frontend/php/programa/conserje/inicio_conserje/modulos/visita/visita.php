@@ -39,7 +39,6 @@ header('Referrer-Policy: no-referrer');
     <link rel="stylesheet" href="/conserje_smart/conserje-smart-frontend/css/programa/conserje/inicio_conserje/modulos/visita/visita.css?v=<?= filemtime(__DIR__ . '/../../../../../../css/programa/conserje/inicio_conserje/modulos/visita/visita.css'); ?>">
     <link rel="stylesheet" href="/conserje_smart/conserje-smart-frontend/css/programa/conserje/inicio_conserje/modulos/visita/formulario_visita.css?v=<?= filemtime(__DIR__ . '/../../../../../../css/programa/conserje/inicio_conserje/modulos/visita/formulario_visita.css'); ?>">
     <link rel="stylesheet" href="/conserje_smart/conserje-smart-frontend/css/programa/conserje/inicio_conserje/modulos/visita/escanerQR_visita/vincular_movil_visita.css?v=<?= filemtime(__DIR__ . '/../../../../../../css/programa/conserje/inicio_conserje/modulos/visita/escanerQR_visita/vincular_movil_visita.css'); ?>">
-    <link rel="stylesheet" href="/conserje_smart/conserje-smart-frontend/css/programa/conserje/inicio_conserje/modulos/visita/escanerQR_visita/escanerQR_visita.css?v=<?= filemtime(__DIR__ . '/../../../../../../css/programa/conserje/inicio_conserje/modulos/visita/escanerQR_visita/escanerQR_visita.css'); ?>">
     <link rel="stylesheet" href="/conserje_smart/conserje-smart-frontend/css/programa/conserje/inicio_conserje/modulos/visita/tablero_visita.css?v=<?= filemtime(__DIR__ . '/../../../../../../css/programa/conserje/inicio_conserje/modulos/visita/tablero_visita.css'); ?>">
     <link rel="stylesheet" href="/conserje_smart/conserje-smart-frontend/css/programa/conserje/inicio_conserje/pie_pagina/pie_pagina.css">
     <link rel="stylesheet" href="/conserje_smart/conserje-smart-frontend/css/programa/conserje/inicio_conserje/pie_pagina/navegacion_pie_pagina.css">
@@ -78,14 +77,6 @@ header('Referrer-Policy: no-referrer');
                 <!-- TITULO CONTENEDOR VINCULAR MOVIL VISITA -->
                 <?php include __DIR__ . '/escanerQR_visita/vincular_movil_visita.php'; ?>
 
-                <!-- TITULO ENLACE MODO VISITA -->
-                <p class="enlace_modo_visita">
-                    <a href="escanerQR_visita/appMovil_visita/appMovil_visita.php">Abrir app móvil <span aria-hidden="true">↗</span></a>
-                    <span>También puedes usar la cámara de este equipo.</span>
-                </p>
-
-                <!-- TITULO CONTENEDOR ESCANER VISITA -->
-                <?php include __DIR__ . '/escanerQR_visita/escanerQR_visita.php'; ?>
             </div>
             <!-- TITULO CONTENEDOR FORMULARIO VISITA -->
             <?php include __DIR__ . '/formulario_visita.php'; ?>
@@ -102,4 +93,3 @@ header('Referrer-Policy: no-referrer');
     <script type="module" src="<?= htmlspecialchars($importacionesVisita[$rutaJsVisita . 'visita.js'], ENT_QUOTES, 'UTF-8'); ?>"></script>
 </body>
 </html>
-

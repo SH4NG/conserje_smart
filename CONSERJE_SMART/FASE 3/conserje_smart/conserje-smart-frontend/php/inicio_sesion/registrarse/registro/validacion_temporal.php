@@ -22,10 +22,8 @@
             id="rut_admin_validacion_temporal"
             name="rut_admin"
             type="text"
-            placeholder="RUT"
-            maxlength="20"
-            autocomplete="off"
-            required
+            placeholder="Ej.: 12.345.678-5"
+            maxlength="12"
         >
 
         <!-- TITULO 5 ENTRADA CODIGO ADMINISTRADOR -->
@@ -38,11 +36,12 @@
             type="password"
             placeholder="Código de autorización"
             maxlength="255"
-            autocomplete="off"
-            required
         >
 
-        <!-- TITULO 6 BOTONES VALIDACION TEMPORAL -->
+        <!-- TITULO MENSAJE VALIDACION TEMPORAL -->
+    <p class="mensaje_registro" id="mensaje_validacion_temporal" role="status" tabindex="-1" hidden></p>
+
+    <!-- TITULO 6 BOTONES VALIDACION TEMPORAL -->
         <!-- permite confirmar o cancelar la validacion temporal -->
         <div class="botones_validacion_temporal" id="botones_validacion_temporal">
             <button
@@ -65,4 +64,4 @@
     </div>
 
     <!-- carga las funciones propias de la validacion temporal -->
-    <script src="/conserje_smart/conserje-smart-frontend/js/inicio_sesion/registrarse/registro/validacion_temporal.js?v=20261015-2"></script>
+    <script src="/conserje_smart/conserje-smart-frontend/js/inicio_sesion/registrarse/registro/validacion_temporal.js?v=<?= filemtime(dirname(__DIR__, 4) . '/js/inicio_sesion/registrarse/registro/validacion_temporal.js'); ?>"></script>

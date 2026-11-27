@@ -28,8 +28,7 @@ $directorioCssAppMovil = dirname($directorioModuloVisita, 6) . '/css/programa/co
         <link rel="stylesheet" href="<?= $rutaCssAppMovil . $estilo; ?>?v=<?= filemtime($directorioCssAppMovil . $estilo); ?>">
     <?php endforeach; ?>
     <!-- TITULO IMPORTACIONES JS DE VISITA -->
-    <?php $importacionesVisita = []; ?>
-    <?php include $directorioModuloVisita . '/recursos_visita.php'; ?>
+    <?php include __DIR__ . '/../../recursos_visita.php'; ?>
 </head>
 <body class="modo_movil_visita">
     <!-- TITULO PAGINA VISITA -->
